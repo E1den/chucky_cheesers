@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  web:
+    image: httpd:2.4-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./web/data:/www:ro
+      - ./web/config/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
+    depends_on:
+      - node
+  sql:
+    image: mysql
+    volumes:
+      - ./sql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 'rootPassword'
+      MYSQL_USER: 'user'
+      MYSQL_PASS: 'password'
+  node:
+    image:  node:current-alpine
+    working_dir: /www
+    command: node server
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./node/data:/www:ro
