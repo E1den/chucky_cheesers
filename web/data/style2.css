@@ -1,0 +1,463 @@
+html,body{
+  margin: 0;
+}
+body {
+  /*background: url("wood1.png");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;*/
+  margin: inherit;
+}
+
+.main-content
+{
+  display: flex;
+  flex-direction: column;
+  position:relative;
+  height: 100%;
+}
+.content-pane
+{
+  background: url("dark-brick-wall.jpg");
+  height:100vh;
+  width:inherit;
+  display:flex;
+  flex-direction: column;
+  align-content: start;
+  justify-content: start;
+  align-items: center;
+  height: calc(100vh -200px);
+  overflow-y: scroll;
+}
+
+.comic-gallery
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width:100%;
+}
+
+.search-bar
+{
+  position: sticky;
+  top:0;
+  display:flex;
+  min-width: 40%;
+  min-height:10%;
+  justify-content: center;
+  align-content: center;
+  align-self:center;
+  z-index: 1;
+  transform: skew(-10deg, 0);
+  font-family: 'Happy Monkey', cursive;
+}
+
+.search-bar input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  height:90%;
+  /*border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;*/
+}
+
+.search-btn {
+  float: right;
+  display:flex;
+  justify-content: center;
+  padding: 10px 15px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  left:-1em;
+  border: none;
+  height: 90%;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px grey;
+  /*border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;*/
+}
+
+.search-btn:hover
+{background: #ccc;}
+
+.login-poster
+{
+  margin-top: 30px;
+  height: 70%;
+  width: 40%;
+  background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #bd2d10 0, #f4502f 30%, #ff6e51 50%, #f4502f 70%, #bd2d10 100%);
+  background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
+  border: 5px solid red;
+  box-shadow: 5px 5px 5px black;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-poster
+{
+  margin-top: 30px;
+  background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #bd2d10 0, #f4502f 30%, #ff6e51 50%, #f4502f 70%, #bd2d10 100%);
+  background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
+  border: 5px solid red;
+  height: 70%;
+  width: 40%;
+  box-shadow: 5px 5px 5px black;
+  display:none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Login/Sign Up Poster Form Styles*/
+.login-poster form, .signup-poster form
+{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login-poster input[type=text], .signup-poster input[type=text]
+{
+  background-color:white;
+  padding:5px;
+  border-radius: 5px;
+  border:none;
+  box-shadow: 2px 2px 4px grey;
+  font-family: 'Happy-Monkey',cursive;
+}
+
+.login-poster input[type=text]:hover, .signup-poster input[type=text]:hover
+{
+  background:#ddd;
+  transition-duration: 0.5s;
+}
+
+.submit
+{
+  background-color:white;
+  border-radius: 5px;
+  border:none;
+  box-shadow: 2px 2px 4px grey;
+  font-family: 'Happy-Monkey',cursive;
+}
+
+.submit:hover
+{
+  background:#ddd;
+  transition-duration: 0.5s;
+}
+
+/*END Login/Sign Up Poster Form Styles*/
+
+.loginbtn
+{
+  font-weight: bold;
+  background: inherit;
+  border:none;
+  color: blue;
+  text-decoration: underline;
+}
+
+h2
+{
+  font-family: 'Bangers', cursive;
+   transform: rotate(-10deg) skew(-10deg, 0);
+  font-size: 60px;
+  text-shadow: 1px 1px yellow;
+}
+
+.speech-box {
+        display:flex;
+        justify-content: center;
+        width: 39%;
+        height: 10%;
+        position: relative;
+        transform: skew(-15deg);
+        background: white;
+        box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        border-right: 3px solid;
+        }
+.speech-box:before {
+          content: "";
+          position: absolute;
+          height: 100%;
+          width: 4em;
+          left: -0.5em;
+          transform: skew(15deg);
+          background: white;
+          border-left: 1px solid rgba(0, 0, 0, 0.05);
+          -webkit-backface-visibility: hidden;
+          z-index: 0;
+}
+
+.speech-box p{
+  z-index: 1;
+  transform: skew(0deg);
+  font-size: 14px;
+  font-family: 'Happy Monkey', cursive;
+}
+
+.nav-bar
+{
+  background-color: lightblue;
+  height:15%;
+  color:white;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-items:center;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  font-family: 'Bangers', cursive;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+button
+{
+  cursor:pointer;
+}
+
+.menu {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+.nav-link
+{
+  grid-column: 3/3;
+  font-family:'Bangers',cursive;
+  font-size: 25px;
+  color: black;
+}
+
+.logo {
+  grid-column: 2/2;
+  height: auto;
+}
+
+.logo b{
+  font: 400 19vh "Vibur";
+  color: #fee;
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #ff4444, 0 0 0.5em #ff4444, 0 0 0.1em #ff4444, 0 10px 3px #000;
+  font-size: 3.5em;
+}
+.logo b span{
+  animation: blink linear infinite 2s;
+}
+.logo b span:nth-of-type(2){
+  animation: blink linear infinite 3s;
+}
+@keyframes blink {
+  78% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  79%{
+     color: #333;
+  }
+  80% {
+
+    text-shadow: none;
+  }
+  81% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  82% {
+    color: #333;
+    text-shadow: none;
+  }
+  83% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  92% {
+    color: #333;
+    text-shadow: none;
+  }
+  92.5% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+}
+
+.login-poster, .signup-poster {
+	-webkit-animation: swing-in-top-fwd 1.5s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+	        animation: swing-in-top-fwd 1.5s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+}
+
+.swing-out-top-bck {
+	-webkit-animation: swing-out-top-bck 0.45s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+	        animation: swing-out-top-bck 0.45s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2019-9-21 9:23:1
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info.
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation swing-in-top-fwd
+ * ----------------------------------------
+ */
+@-webkit-keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+}
+@keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2019-9-21 9:24:16
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info.
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation swing-out-top-bck
+ * ----------------------------------------
+ */
+@-webkit-keyframes swing-out-top-bck {
+  0% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+    display:none;
+  }
+}
+@keyframes swing-out-top-bck {
+  0% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+    display:none;
+  }
+}
+
+.bookcontainer
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+  width:inherit;
+  height:31vw;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.book
+{
+  background: darkgrey;
+  margin-left:10px;
+  margin-right:10px;
+  width: 30vw;
+  height:30.03vw;
+  align-self: end;
+}
