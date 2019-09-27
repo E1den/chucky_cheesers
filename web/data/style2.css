@@ -18,7 +18,7 @@ body {
 }
 .content-pane
 {
-  background: url("dark-brick-wall.jpg");
+  background: /*url("dark-brick-wall.jpg");*/ white;
   height:100vh;
   width:inherit;
   display:flex;
@@ -61,6 +61,8 @@ body {
   font-size: 17px;
   border: none;
   height:90%;
+  background: #ddd;
+  box-shadow: -3px 0 10px -10px black, 0px 3px 10px -10px black, 0px -3px 10px -10px black;
   /*border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;*/
 }
@@ -78,7 +80,7 @@ body {
   border: none;
   height: 90%;
   cursor: pointer;
-  box-shadow: 2px 2px 4px grey;
+  box-shadow: 3px 0 10px -10px black, 0px 3px 10px -10px black, 0px -3px 10px -10px black;
   /*border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;*/
 }
@@ -93,7 +95,7 @@ body {
   width: 40%;
   background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #bd2d10 0, #f4502f 30%, #ff6e51 50%, #f4502f 70%, #bd2d10 100%);
   background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
-  border: 5px solid red;
+  border: 5px solid #222;
   box-shadow: 5px 5px 5px black;
   display:flex;
   flex-direction: column;
@@ -106,7 +108,7 @@ body {
   margin-top: 30px;
   background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #bd2d10 0, #f4502f 30%, #ff6e51 50%, #f4502f 70%, #bd2d10 100%);
   background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
-  border: 5px solid red;
+  border: 5px solid #222;
   height: 70%;
   width: 40%;
   box-shadow: 5px 5px 5px black;
@@ -208,7 +210,7 @@ h2
 
 .nav-bar
 {
-  background-color: lightblue;
+  background-color: #222;
   height:15%;
   color:white;
   box-sizing: border-box;
@@ -273,7 +275,7 @@ button
 .bar1, .bar2, .bar3 {
   width: 35px;
   height: 5px;
-  background-color: #333;
+  background-color: white;
   margin: 6px 0;
   transition: 0.4s;
 }
@@ -282,7 +284,7 @@ button
   grid-column: 3/3;
   font-family:'Bangers',cursive;
   font-size: 25px;
-  color: black;
+  color: white;
 }
 
 .logo {
