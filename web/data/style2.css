@@ -61,6 +61,7 @@ body {
   font-size: 17px;
   border: none;
   height:90%;
+  max-height: 38.3px;
   background: #ddd;
   box-shadow: -3px 0 10px -10px black, 0px 3px 10px -10px black, 0px -3px 10px -10px black;
   /*border-top-left-radius: 5px;
@@ -81,6 +82,7 @@ body {
   height: 90%;
   cursor: pointer;
   box-shadow: 3px 0 10px -10px black, 0px 3px 10px -10px black, 0px -3px 10px -10px black;
+  max-height: 38.3px;
   /*border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;*/
 }
