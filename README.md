@@ -1,4 +1,4 @@
-# -chucky_cheesers-
+# chucky_cheesers
 Project
 =======
 
