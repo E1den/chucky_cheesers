@@ -10,4 +10,4 @@ app.get('/srv/api_time_test.js',testing.time_test)
 app.get('/srv/err.js', error_handler.error)
 app.use(error_handler.quick_404)
 
-app.listen("9000", "node")
+app.listen("9000", "0.0.0.0")
