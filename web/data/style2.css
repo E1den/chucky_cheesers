@@ -18,7 +18,7 @@ body {
 }
 .content-pane
 {
-  background: url("dark-brick-wall.jpg");
+  background: /*url("dark-brick-wall.jpg");*/ white;
   height:100vh;
   width:inherit;
   display:flex;
@@ -38,6 +38,8 @@ body {
   align-content: center;
   align-items: center;
   width:100%;
+  margin-left:20px;
+  margin-right:20px;
 }
 
 .search-bar
@@ -61,6 +63,9 @@ body {
   font-size: 17px;
   border: none;
   height:90%;
+  max-height: 38.3px;
+  background: #ddd;
+  box-shadow: -3px 0 10px -10px black, 0px 3px 10px -10px black, 0px -3px 10px -10px black;
   /*border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;*/
 }
@@ -78,7 +83,8 @@ body {
   border: none;
   height: 90%;
   cursor: pointer;
-  box-shadow: 2px 2px 4px grey;
+  box-shadow: 3px 0 10px -10px black, 0px 3px 10px -10px black, 0px -3px 10px -10px black;
+  max-height: 38.3px;
   /*border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;*/
 }
@@ -93,9 +99,24 @@ body {
   width: 40%;
   background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #bd2d10 0, #f4502f 30%, #ff6e51 50%, #f4502f 70%, #bd2d10 100%);
   background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
-  border: 5px solid red;
+  border: 5px solid #222;
   box-shadow: 5px 5px 5px black;
   display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.forgotpass-poster
+{
+  margin-top: 30px;
+  height: 70%;
+  width: 40%;
+  background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #bd2d10 0, #f4502f 30%, #ff6e51 50%, #f4502f 70%, #bd2d10 100%);
+  background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
+  border: 5px solid #222;
+  box-shadow: 5px 5px 5px black;
+  display:none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -106,7 +127,7 @@ body {
   margin-top: 30px;
   background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #bd2d10 0, #f4502f 30%, #ff6e51 50%, #f4502f 70%, #bd2d10 100%);
   background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
-  border: 5px solid red;
+  border: 5px solid #222;
   height: 70%;
   width: 40%;
   box-shadow: 5px 5px 5px black;
@@ -117,14 +138,14 @@ body {
 }
 
 /*Login/Sign Up Poster Form Styles*/
-.login-poster form, .signup-poster form
+.login-poster form, .signup-poster form, .forgotpass-poster form
 {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-.login-poster input[type=text], .signup-poster input[type=text]
+.login-poster input[type=text], .signup-poster input[type=text], .forgotpass-poster input[type=text]
 {
   background-color:white;
   padding:5px;
@@ -134,13 +155,13 @@ body {
   font-family: 'Happy-Monkey',cursive;
 }
 
-.login-poster input[type=text]:hover, .signup-poster input[type=text]:hover
+.login-poster input[type=text]:hover, .signup-poster input[type=text]:hover, .forgotpass-poster input[type=text]:hover
 {
   background:#ddd;
   transition-duration: 0.5s;
 }
 
-.submit
+.submit, .recover
 {
   background-color:white;
   border-radius: 5px;
@@ -177,8 +198,10 @@ h2
 .speech-box {
         display:flex;
         justify-content: center;
+        flex-direction: column;
+        align-content: center;
         width: 39%;
-        height: 10%;
+        height: 15%;
         position: relative;
         transform: skew(-15deg);
         background: white;
@@ -204,11 +227,24 @@ h2
   transform: skew(0deg);
   font-size: 14px;
   font-family: 'Happy Monkey', cursive;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  align-self: center;
+  text-align: center;
+}
+
+.forgotpass
+{
+  font-weight: bold;
+  background: inherit;
+  border:none;
+  color: blue;
+  text-decoration: underline;
 }
 
 .nav-bar
 {
-  background-color: lightblue;
+  background-color: #222;
   height:15%;
   color:white;
   box-sizing: border-box;
@@ -273,7 +309,7 @@ button
 .bar1, .bar2, .bar3 {
   width: 35px;
   height: 5px;
-  background-color: #333;
+  background-color: white;
   margin: 6px 0;
   transition: 0.4s;
 }
@@ -282,7 +318,7 @@ button
   grid-column: 3/3;
   font-family:'Bangers',cursive;
   font-size: 25px;
-  color: black;
+  color: white;
 }
 
 .logo {
@@ -336,7 +372,7 @@ button
   }
 }
 
-.login-poster, .signup-poster {
+.login-poster, .signup-poster, .forgotpass-poster {
 	-webkit-animation: swing-in-top-fwd 1.5s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
 	        animation: swing-in-top-fwd 1.5s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
 }
@@ -457,7 +493,14 @@ button
   background: darkgrey;
   margin-left:10px;
   margin-right:10px;
-  width: 30vw;
+  width: 18vw;
   height:30.03vw;
   align-self: end;
+  transition: all 0.3s ease-in-out;
+}
+
+.book:hover
+{
+  transform: scale(1.1);
+  box-shadow: 2px 2px 8px black;
 }
