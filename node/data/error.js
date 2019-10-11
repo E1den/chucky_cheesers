@@ -1,8 +1,8 @@
 //Handle error pages
 exports.error = function(req, res) {
-    err = 200
+    err = 200;
     if (req.query.e) {
-        err = req.query.e
+        err = req.query.e;
     }
 
     res.contentType("html").write("<html><head><title>")
@@ -122,5 +122,5 @@ exports.error = function(req, res) {
 }
 //Handles a quick 404 error without the larger function
 exports.quick_404 = function(req, res){
-    res.contentType("html").status(404).send("<html><head><title>404 (Not Found)</title><body style='margin: 7% auto 0;margin-top: 7%; margin-right: auto; margin-bottom: 0;margin-left: auto;max-width: 390px;min-height: 180px;padding: 30px 0 15px;'><center><i><b>\"There's nothing out there; absolutely nothing\"</b></i><p/>The requested page does not exist. 404 (Not Found)")
+    res.contentType("html").status(404).send("<html><head><title>404 (Not Found)</title><body style='margin: 7% auto 0;margin-top: 7%; margin-right: auto; margin-bottom: 0;margin-left: auto;max-width: 390px;min-height: 180px;padding: 30px 0 15px;'><center><i><b>\"There's nothing out there; absolutely nothing\"</b></i><p/>The requested page does not exist. 404 (Not Found)");
 }
