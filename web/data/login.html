@@ -27,14 +27,20 @@
             <a href="index.html" style="text-decoration: none"><div class="logo"><b>Com<span>i</span>ca<span>l</span>ity</b></div></a>
           </div>
           <div style="justify-self:end">
-            <a href="login.html" class="nav-link">Login/Signup</a>
+            <div class="account-session-off">
+              <a href="login.html" class="nav-link">Login/Signup</a>
+            </div>
+            <div class="account-session-on">
+              <a href="accounts.html" class="nav-link" id="AccName">###</a>
+              <button onclick="SignOut()" class="sign-out-btn">(<c>Sign Out</c>)</button>
+            </div>
           </div>
       </div>
 
       <div class="content-pane">
         <div class="login-poster">
           <h2> Login </h2>
-          <form>
+          <form onsubmit="login()" method="post">
             <input type="text" name="email" placeholder="Email" class="login_text"><br>
             <input type="text" name="password" placeholder="Password" class="login_text"><br>
             <input type="submit" Value="Login" class="submit">
@@ -46,11 +52,11 @@
         </div>
         <div class="signup-poster">
           <h2> Sign Up </h2>
-          <form>
-            <input type="text" name="username" placeholder="Diaplay Name" class="login_text"><br>
+          <form onsubmit="signup()" method="post">
+            <input type="text" name="username" placeholder="Display Name" class="login_text"><br>
             <input type="text" name="email" placeholder="Email" class="login_text"><br>
             <input type="text" name="password" placeholder="Password" class="login_text"><br>
-            <input type="submit" Value="Login" class="submit">
+            <input type="submit" Value="Sign Up" class="submit">
           </form>
           <div class="speech-box">
           <p>Have an account? <button class="loginbtn" onclick="myFunction()">Login!</button></p>
@@ -58,9 +64,8 @@
         </div>
         <div class="forgotpass-poster">
           <h2> Recover Password </h2>
-          <form>
+          <form onsubmit="recover()" method="post">
             <input type="text" name="email" placeholder="Email" class="login_text"><br>
-            <input type="text" name="password" placeholder="Password" class="login_text"><br>
             <input type="submit" Value="Recover" class="recover">
           </form>
           <div class="speech-box">
