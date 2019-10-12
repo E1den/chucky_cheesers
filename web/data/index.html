@@ -1,10 +1,13 @@
 <html>
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Vibur&display=swap" rel="stylesheet">
     <link href="style2.css" rel="stylesheet">
     <script src="temp.js"></script>
+    <script src="accounts.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bangers|Happy+Monkey&display=swap" rel="stylesheet">
+    <title>Comicality</title>
   </head>
   <body>
     <div class="main-content">
@@ -26,14 +29,7 @@
           <div>
             <a href="index.html" style="text-decoration: none"><div class="logo"><b>Com<span>i</span>ca<span>l</span>ity</b></div></a>
           </div>
-          <div style="justify-self:end">
-            <div class="account-session-on">
-              <a href="login.html" class="nav-link">Login/Signup</a>
-            </div>
-            <div class="account-session-off">
-              <a href="accounts.html" class="nav-link" id="AccName">###</a>
-              <button onclick="SignOut()" class="sign-out-btn">(<c>Sign Out</c>)</button>
-            </div>
+          <div id="acctSess"style="justify-self:end">
           </div>
       </div>
 

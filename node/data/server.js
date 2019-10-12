@@ -1,30 +1,33 @@
 const express = require('express');
-const yaml = require('js-yaml');
-const fs = require('fs');
-
-const config = yaml.safeLoad(fs.readFileSync('./sql_cred.yml', 'utf8'));
-
-var error_handler = require('./error.js');
-var testing = require('./api_test.js');
-var accounts = require('./accounts.js');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+//Load in custom pages
+const error_handler = require('./error.js');
+const testing = require('./api_test.js');
+const accounts = require('./accounts.js');
+const config = require('./config.js')
 
 var app = express();
 
-//Load in SQL credential
-//sql creds at
-//  user        -> config.credentials.user
-//  password    -> config.credentials.password
+//Setup sessions
+app.use(cookieParser());
+app.use(session({
+    secret: config.meta.session.secret,
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(express.json());
 
-//Test the timing (not the best measurement because it will very by machine)
 app.get('/srv/api_time_test.js', testing.timeTest);
 
 //Handle account controls
-app.get('/srv/acct/login.js', accounts.login);
+app.post('/srv/acct/login.js', accounts.login);
+app.post('/srv/acct/logout.js', accounts.logout);
 app.get('/srv/acct/update.js', accounts.update);
+app.get('/srv/acct/getSess.js', accounts.getAccountSession)
 
 //Handle bad status code error pages
 app.get('/srv/err.js', error_handler.error);
 app.use(error_handler.quick_404);
-app.use(express.json());
 
 app.listen("9000", "0.0.0.0");

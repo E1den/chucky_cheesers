@@ -9,7 +9,9 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
+    "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "js-yaml": "^3.13.1",
     "mysql": "^2.17.1"
   }

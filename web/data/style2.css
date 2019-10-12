@@ -289,7 +289,7 @@
       font-family: 'Happy Monkey', cursive;
     }
 
-    .search-bar input[type=text]
+    .search-bar input
     {
       padding: 6px;
       margin-top: 8px;
@@ -393,7 +393,6 @@
     {
       display:inline;
       bottom:0;
-      height: 100%;
       cursor: pointer;
     }
 
@@ -468,7 +467,7 @@
       flex-direction: column;
     }
 
-    .login-poster input[type=text], .signup-poster input[type=text], .forgotpass-poster input[type=text]
+    .login-poster input, .signup-poster input, .forgotpass-poster input
     {
       background-color:white;
       padding:5px;
@@ -478,7 +477,7 @@
       font-family: 'Happy-Monkey',cursive;
     }
 
-    .login-poster input[type=text]:hover, .signup-poster input[type=text]:hover, .forgotpass-poster input[type=text]:hover
+    .login-poster input:hover, .signup-poster input:hover, .forgotpass-poster input:hover
     {
       background:#ddd;
       transition-duration: 0.5s;
@@ -545,7 +544,7 @@
               transform: skew(15deg);
               background: white;
               border-left: 1px solid rgba(0, 0, 0, 0.05);
-              -webkit-backface-visibility: hidden;
+              backface-visibility: hidden;
               z-index: 0;
     }
 

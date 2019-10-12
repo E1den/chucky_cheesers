@@ -11,4 +11,8 @@ Locations
 *   The server backend is in node/data
 *   The static pages (html,css,js,etc.) should be in web/data
 
+Setting Up
+----------
+*   Populate config.yml in node/data, all values are placeholders for the git
+
 We just needed someplace to actually start collaborating

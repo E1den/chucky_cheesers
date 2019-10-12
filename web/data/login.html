@@ -1,10 +1,14 @@
 <html>
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Vibur&display=swap" rel="stylesheet">
     <!--<link href="styles.css" rel="stylesheet">-->
     <link href="style2.css" rel="stylesheet">
     <script src="temp.js"></script>
+    <script src="login.js"></script>
+    <script src="accounts.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bangers|Happy+Monkey&display=swap" rel="stylesheet">
+    <title>Comicality</title>
   </head>
   <body>
     <div class="main-content">
@@ -26,23 +30,15 @@
           <div>
             <a href="index.html" style="text-decoration: none"><div class="logo"><b>Com<span>i</span>ca<span>l</span>ity</b></div></a>
           </div>
-          <div style="justify-self:end">
-            <div class="account-session-off">
-              <a href="login.html" class="nav-link">Login/Signup</a>
-            </div>
-            <div class="account-session-on">
-              <a href="accounts.html" class="nav-link" id="AccName">###</a>
-              <button onclick="SignOut()" class="sign-out-btn">(<c>Sign Out</c>)</button>
-            </div>
-          </div>
+          <div id="acctSess"style="justify-self:end"></div>
       </div>
 
       <div class="content-pane">
         <div class="login-poster">
           <h2> Login </h2>
-          <form onsubmit="login()" method="post">
+          <form id="signin">
             <input type="text" name="email" placeholder="Email" class="login_text"><br>
-            <input type="text" name="password" placeholder="Password" class="login_text"><br>
+            <input type="password" name="password" placeholder="Password" class="login_text"><br>
             <input type="submit" Value="Login" class="submit">
           </form>
           <div class="speech-box">
@@ -52,10 +48,10 @@
         </div>
         <div class="signup-poster">
           <h2> Sign Up </h2>
-          <form onsubmit="signup()" method="post">
+          <form id="signup">
             <input type="text" name="username" placeholder="Display Name" class="login_text"><br>
             <input type="text" name="email" placeholder="Email" class="login_text"><br>
-            <input type="text" name="password" placeholder="Password" class="login_text"><br>
+            <input type="password" name="password" placeholder="Password" class="login_text"><br>
             <input type="submit" Value="Sign Up" class="submit">
           </form>
           <div class="speech-box">
