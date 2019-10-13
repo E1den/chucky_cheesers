@@ -46,6 +46,29 @@ $(document).ready(function() {
     }),
     $("#signup").submit(function(n){
         n.preventDefault();
-        //TODO
+        $.ajax({
+          type: "POST",
+          datatype: 'json',
+          url: "/srv/acct/signup.js",
+          contentType: 'application/json',
+          data: JSON.stringify($("#signup").serializeArray()),
+          success: function(n) {
+              if(n.startsWith("success"))
+              {
+                  //good info
+                  $(location).attr("href","/");
+              }
+              else if(n.startsWith("failure"))
+              {
+                  //bad info
+                  $(".login-poster h2").html("Invalid or Existing");
+              }
+              else
+              {
+                  //error
+                  $(".login-poster h2").html("Error during signup");
+              }
+          }
+      })
     });
 });

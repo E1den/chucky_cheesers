@@ -4,7 +4,8 @@ const cookieParser = require('cookie-parser');
 //Load in custom pages
 const error_handler = require('./error.js');
 const accounts = require('./accounts.js');
-const config = require('./config.js')
+const config = require('./config.js');
+const comic = require('./comic.js');
 
 var app = express();
 
@@ -22,7 +23,10 @@ app.post('/srv/acct/login.js', accounts.login);
 app.post('/srv/acct/logout.js', accounts.logout);
 app.post('/srv/acct/signup.js', accounts.signup);
 app.get('/srv/acct/update.js', accounts.update);
-app.get('/srv/acct/getSess.js', accounts.getAccountSession)
+app.get('/srv/acct/getSess.js', accounts.getAccountSession);
+
+//Handle comic data
+app.post('/srv/comic/gallery.js', comic.gallery);
 
 //Handle bad status code error pages
 app.get('/srv/err.js', error_handler.error);

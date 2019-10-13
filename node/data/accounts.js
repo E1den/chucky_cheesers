@@ -16,11 +16,13 @@ exports.login = function(req, res) {
     const password = req.body[1].value;
 
     //quick validate, html, and function check
-    if(email==""|email.includes("<")|email.includes(")")|email.includes("'")|email.includes("\""))
+    if(email==""|email.includes("<")|email.includes(")")|email.includes("'")|email.includes("\"")|!email.includes("@")|!email.includes("."))
     {
         res.send("failure");
         return;
     }
+
+
 
     con.connect(function (err) {
         //validate
@@ -38,7 +40,25 @@ exports.logout = function(req,res) {
 
 //Handles user signing up for a new account
 exports.signup = function(req, res) {
-    //TODO
+    const user = req.body[0].value;
+    const email = req.body[1].value;
+    const password = req.body[2].value;
+
+    //quick validate, html, and function check
+    if(email==""|email.includes("<")|email.includes(")")|email.includes("'")|email.includes("\"")|!email.includes("@")|!email.includes(".")|user==""|user.includes("<")|user.includes(")")|user.includes("'")|user.includes("\""))
+    {
+        res.send("failure");
+        return;
+    }
+
+
+
+    con.connect(function (err) {
+        //validate
+    });
+
+    req.session.user = user;
+    res.send("success");
 }
 
 //Handles user updating data, eg password
