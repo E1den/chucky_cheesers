@@ -18,10 +18,10 @@ function adjustPosterStyles() {
 
 $(document).ready(function() {
   $(".menu").click(function() {
-    $("#mySidenav").width(250);
+    $(".sidenav").width(250);
   })
   $(".closebtn").click(function() {
-    $("#mySidenav").width(0);
+    $(".sidenav").width(0);
   })
 })
 
