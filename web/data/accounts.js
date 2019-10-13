@@ -2,7 +2,7 @@ $.ajax({
     type: "GET",
     url: "/srv/acct/getSess.js",
     success: function(n) {  $("#acctSess").html(n)  }
-}).fail(function() {    $("#acctSess").html("<a href='login.html' class='nav-link'>Login/Signup</a>")   })
+}).fail(function() {    $("#acctSess").html("<a href='/login' class='nav-link'>Login/Signup</a>")   })
 function signOut() {
     $.ajax({
         type: "POST",

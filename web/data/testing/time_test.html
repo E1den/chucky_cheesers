@@ -1,8 +1,0 @@
-<html>
-<head>
-<title>Time Test</title>
-<script>
-window.setInterval(function(){var e=new XMLHttpRequest;e.onreadystatechange=function(){if(4==this.readyState&&200==this.status){var e=(new Date).getTime()-this.responseText;document.getElementById("time_delta").innerHTML=e.toString()+" ms latency"}},e.open("GET","/srv/api_time_test.js",!0),e.send()},1e3);
-</script>
-</head>
-<div id="time_delta">Wait 1 second for content to update.</div>

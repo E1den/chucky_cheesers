@@ -1,0 +1,80 @@
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Vibur&display=swap" rel="stylesheet">
+  <link href="/style.css" rel="stylesheet">
+  <script src="/interface.js"></script>
+  <script src="/accounts.js"></script>
+  <script src="login.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Bangers|Happy+Monkey&display=swap" rel="stylesheet">
+  <title>Comicality</title>
+</head>
+
+<body>
+  <div class="main-content">
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn">&times;</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="nav-bar">
+      <div style="justify-self:start">
+        <div class="menu">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+      <div>
+        <a href="/" style="text-decoration: none">
+          <div class="logo"><b>Com<span>i</span>ca<span>l</span>ity</b></div>
+        </a>
+      </div>
+      <div id="acctSess" style="justify-self:end">
+      </div>
+    </div>
+
+    <div class="content-pane">
+      <div class="login-poster">
+        <h2> Login </h2>
+        <form id="signin">
+          <input type="text" name="email" placeholder="Email" class="login_text"><br>
+          <input type="password" name="password" placeholder="Password" class="login_text"><br>
+          <input type="submit" Value="Login" class="submit">
+        </form>
+        <div class="speech-box">
+          <p> Don't have an account? <button class="loginbtn" onclick="adjustPosterStyles()">Sign Up!</button></p>
+          <p> Forgot your <button class="forgotpass" onclick="forgotPass()">password</button>? </p>
+        </div>
+      </div>
+      <div class="signup-poster">
+        <h2> Sign Up </h2>
+        <form id="signup">
+          <input type="text" name="username" placeholder="Display Name" class="login_text"><br>
+          <input type="text" name="email" placeholder="Email" class="login_text"><br>
+          <input type="password" name="password" placeholder="Password" class="login_text"><br>
+          <input type="submit" Value="Sign Up" class="submit">
+        </form>
+        <div class="speech-box">
+          <p>Have an account? <button class="loginbtn" onclick="adjustPosterStyles()">Login!</button></p>
+        </div>
+      </div>
+      <div class="forgotpass-poster">
+        <h2> Recover Password </h2>
+        <form onsubmit="recover()" method="post">
+          <input type="text" name="email" placeholder="Email" class="login_text"><br>
+          <input type="submit" Value="Recover" class="recover">
+        </form>
+        <div class="speech-box">
+          <p> Remember your Password? <button class="loginbtn" onclick="forgotPass()">Login!</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
