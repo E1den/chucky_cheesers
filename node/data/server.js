@@ -1,13 +1,35 @@
-var express = require('express')
-var error_handler = require('./error.js')
-var testing = require('./api_test.js')
-var app = express()
+const express = require('express');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+//Load in custom pages
+const error_handler = require('./error.js');
+const accounts = require('./accounts.js');
+const config = require('./config.js');
+const comic = require('./comic.js');
 
-//Test the timing (not the best measurement because it will very by machine)
-app.get('/srv/api_time_test.js',testing.time_test)
+var app = express();
+
+//Setup sessions
+app.use(cookieParser());
+app.use(session({
+    secret: config.meta.session.secret,
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(express.json());
+
+//Handle account controls
+app.post('/srv/acct/login.js', accounts.login);
+app.post('/srv/acct/logout.js', accounts.logout);
+app.post('/srv/acct/signup.js', accounts.signup);
+app.get('/srv/acct/update.js', accounts.update);
+app.get('/srv/acct/getSess.js', accounts.getAccountSession);
+
+//Handle comic data
+app.post('/srv/comic/gallery.js', comic.gallery);
 
 //Handle bad status code error pages
-app.get('/srv/err.js', error_handler.error)
-app.use(error_handler.quick_404)
+app.get('/srv/err.js', error_handler.error);
+app.use(error_handler.quick_404);
 
-app.listen("9000", "node")
+app.listen("9000", "0.0.0.0");

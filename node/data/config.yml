@@ -1,0 +1,6 @@
+session:
+  secret: "secret"
+credentials:
+  user: "user"
+  password: "password"
+  database: "database"
