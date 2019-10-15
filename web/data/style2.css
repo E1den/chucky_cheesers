@@ -248,7 +248,7 @@
       justify-content: start;
       align-items: center;
       height: calc(100vh -200px);
-      overflow-y: scroll;
+      overflow-y: hidden;
     }
 
 /*
@@ -262,6 +262,13 @@
   START COMIC-GALLERY
   *******************
 */
+
+    .comic-content-pane
+    {
+      width:100%;
+      overflow-y: scroll;
+    }
+
     .comic-gallery
     {
       display: flex;
@@ -270,8 +277,6 @@
       align-content: center;
       align-items: center;
       width:100%;
-      margin-left:20px;
-      margin-right:20px;
     }
 
     .search-bar
@@ -336,7 +341,7 @@
       align-items: center;
       align-content: center;
       align-self: center;
-      width:inherit;
+      width:99%;
       height:31vw;
       margin-top:10px;
       margin-bottom:10px;
@@ -351,7 +356,7 @@
       width: 18vw;
       height:30.03vw;
       align-self: end;
-      transition: all 0.3s ease-in-out;
+      transition: all 0.5s ease-in-out;
     }
 
     .book:hover
@@ -386,7 +391,7 @@
       overflow: hidden;
       width: 100%;
       height:0;
-      transition: all .5s ease;
+      transition: all 1.5s ease;
     }
 
     .book:hover .overlay
@@ -677,5 +682,193 @@
 /*
   ****************
   END LOGIN/SIGNUP
+  ****************
+*/
+
+/*
+  ********************
+  *START ACCOUNT PAGE*
+  ********************
+*/
+
+  .account-content
+  {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height:100%;
+    width:100%;
+  }
+
+  .acc-content-pane
+  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: auto;
+    margin:auto;
+    height:100%;
+  }
+
+  .accImg
+  {
+    background-image: url("temp.jpg") !important;
+    border-radius: 50%;
+    height: 200px;
+    width:200px !important;
+    padding:0px !important;
+    margin-top:30px;
+    margin-bottom:30px;
+    background-size: cover !important;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .ImgEdit
+  {
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    font-family: 'Happy Monkey', cursive;
+    font-weight:bold;
+    top:50%;
+    left:50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .accImg:hover .ImgOverlay
+ {
+   display:flex;
+   height: inherit;
+   cursor: pointer;
+   border-radius: 50%;
+ }
+
+  .ImgOverlay
+  {
+    position: relative;
+    display:none;
+    background-color: rgba(0,0,0,0.2);
+    overflow: hidden;
+    width: 100%;
+    height:0;
+    transition: all 1.5s ease;
+  }
+
+  .accName
+  {
+    margin-left:10px;
+    font-family: 'Bangers', cursive;
+    font-size: 25px;
+  }
+
+  .accsidebar {
+  position:fixed;
+  margin: 0;
+  padding: 0;
+  width: 0;
+  background-color: #333;
+  position: relative;
+  height: 88%;
+  overflow-x: hidden;
+  display:flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  transition:0.5s;
+}
+
+.accmenu:hover
+{
+  background: #ccc;
+  cursor: pointer;
+}
+
+.accmenu:active
+{
+  background: #aaa;
+}
+
+.bar11, .bar21, .bar31
+{
+  width: 5px;
+  height: 35px;
+  background-color: black;
+  margin: 6px 3px;
+  transition: 0.4s;
+}
+
+.tabcontent
+{
+  height:100%;
+}
+
+#accComics, #accEdit
+{
+  overflow-y: scroll;
+}
+
+/* Sidebar links */
+.accsidebar button {
+  display: block;
+  color: white;
+  background: inherit;
+  border:none;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top:30px;
+  padding-bottom:30px;
+  text-decoration: none;
+  width:100%;
+  font-family: 'Bangers', cursive;
+  font-size: 20px;
+}
+
+.accsidebar button:focus
+{
+  outline:none;
+  background-color: white;
+  color: black;
+}
+
+/* Active/current link */
+.accsidebar button.focus {
+  background-color: white;
+  color: black;
+}
+
+/* Links on mouse-over */
+.AcPageBtn:hover {
+  background-color: #555;
+  color: white;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .accsidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .accsidebar button {float: left;}
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+  .accsidebar button {
+    text-align: center;
+    float: none;
+  }
+}
+
+/*
+  ****************
+  END ACCOUNT PAGE
   ****************
 */

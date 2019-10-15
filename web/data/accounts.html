@@ -1,5 +1,6 @@
 <html>
   <head>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Vibur&display=swap" rel="stylesheet">
     <link href="style2.css" rel="stylesheet">
@@ -38,11 +39,144 @@
       </div>
       <div class="content-pane">
         <div class="account-content">
-          <h2> ## Account Name ## </h2>
-          <img> </img>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
+          <div class="accsidebar" id="accsidebar">
+            <button class="accImg"><div class="ImgOverlay">
+            <div class="ImgEdit">Edit Profile Pic</div>
+            </div></button>
+            <button id="defaultOpen" class="AcPageBtn" onclick="openPage('AccSet', this, 'defaultOpen'); acccloseNav()">Account Settings</button>
+            <button id="secsetBtn" class="AcPageBtn" onclick="openPage('SecSet', this, 'secsetBtn'); acccloseNav()">Security Settings</button>
+            <button id="acomicBtn" class="AcPageBtn" onclick="openPage('AccComics', this, 'acomicBtn'); acccloseNav()">Your Comics</button>
+            <button id="aeditBtn" class="AcPageBtn" onclick="openPage('AccEdit', this, 'aeditBtn'); acccloseNav()">Your Edits</button>
+          </div>
+          <div style="justify-self:start; display:flex; height:100%;">
+            <div class="accmenu" onclick="AccMenuFunction(this)" style="display:flex; align-items:center; height:100%">
+              <div class="bar11"></div>
+              <div class="bar21"></div>
+              <div class="bar31"></div>
+            </div>
+          </div>
+          <div class="acc-content-pane">
+            <div id="AccSet" class="tabcontent">
+              <h2>Account Settings</h2>
+            </div>
+            <div id="SecSet" class="tabcontent">
+              <h2>Security Settings</h2>
+            </div>
+            <div id="AccComics" class="tabcontent">
+              <h2>Your Comics</h2>
+              <div class="bookcontainer">
+                <div class="book">
+                  <div class="overlay">
+                  <div class="bookDetails"> Details details details </div>
+                  </div>
+                </div>
+                <div class="book">
+                  <div class="overlay">
+                  <div class="bookDetails"> Details details details </div>
+                  </div>
+                </div>
+                <div class="book">
+                  <div class="overlay">
+                  <div class="bookDetails"> Details details details </div>
+                  </div>
+                </div>
+                <div class="book">
+                  <div class="overlay">
+                  <div class="bookDetails"> Details details details </div>
+                  </div>
+                </div>
+                <div class="book">
+                  <div class="overlay">
+                  <div class="bookDetails"> Details details details </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bookcontainer">
+                <div class="book">
+                  <div class="overlay">
+                  <div class="bookDetails"> Details details details </div>
+                  </div>
+                </div>
+                <div class="book">
+                  <div class="overlay">
+                  <div class="bookDetails"> Details details details </div>
+                  </div>
+                </div>
+                <div class="book">
+                  <div class="overlay">
+                  <div class="bookDetails"> Details details details </div>
+                  </div>
+                </div>
+                <div class="book">
+                  <div class="overlay">
+                  <div class="bookDetails"> Details details details </div>
+                  </div>
+                </div>
+                <div class="book">
+                  <div class="overlay">
+                  <div class="bookDetails"> Details details details </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="AccEdit" class="tabcontent">
+              <h2>Your Edits</h2>
+              <div class="bookcontainer">
+              <div class="book">
+                <div class="overlay">
+                <div class="bookDetails"> Details details details </div>
+                </div>
+              </div>
+              <div class="book">
+                <div class="overlay">
+                <div class="bookDetails"> Details details details </div>
+                </div>
+              </div>
+              <div class="book">
+                <div class="overlay">
+                <div class="bookDetails"> Details details details </div>
+                </div>
+              </div>
+              <div class="book">
+                <div class="overlay">
+                <div class="bookDetails"> Details details details </div>
+                </div>
+              </div>
+              <div class="book">
+                <div class="overlay">
+                <div class="bookDetails"> Details details details </div>
+                </div>
+              </div>
+            </div>
+            <div class="bookcontainer">
+              <div class="book">
+                <div class="overlay">
+                <div class="bookDetails"> Details details details </div>
+                </div>
+              </div>
+              <div class="book">
+                <div class="overlay">
+                <div class="bookDetails"> Details details details </div>
+                </div>
+              </div>
+              <div class="book">
+                <div class="overlay">
+                <div class="bookDetails"> Details details details </div>
+                </div>
+              </div>
+              <div class="book">
+                <div class="overlay">
+                <div class="bookDetails"> Details details details </div>
+                </div>
+              </div>
+              <div class="book">
+                <div class="overlay">
+                <div class="bookDetails"> Details details details </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
         </div>
       </div>
       </div>
