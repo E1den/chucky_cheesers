@@ -368,6 +368,7 @@ button {
   display: inline;
   bottom: 0;
   cursor: pointer;
+  height: 100%;
 }
 
 /*
