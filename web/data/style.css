@@ -674,7 +674,7 @@ h2 {
 
 .accImg
 {
-  background-image: url("temp.jpg") !important;
+  background-image: url("/temp/temp.jpg") !important;
   border-radius: 50%;
   height: 200px;
   width:200px !important;

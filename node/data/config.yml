@@ -1,3 +1,9 @@
+server:
+  public: "127.0.0.1"
+mail:
+  server: "smtp.gmail.com:465"
+  user: "user"
+  password: "password"
 session:
   secret: "secret"
 credentials:
