@@ -2,7 +2,7 @@
 To use any of the "access" functions you will have to pass a callback function to the function you are calling similar to the following.
 You can't move the data out of the function due to the functions being asynchronous, so you'll have to preform any operations that require database information insid this function area.
 ==================================
-var sql = require('./mysql.jd);
+var sql = require('./mysql.js');
 s.accessPage(page_id, function(err, result)
 {
 	//Preform actions on the result
@@ -18,14 +18,15 @@ result[0].comic_ic
 result[0].page_id
 */
 var mysql = require('mysql');
+const config = require('./config.js');
 
 //creates the MySQl connection string
 var con = mysql.createConnection(
 {
-    host: "",
-    user: "",
-    password: "",
-    database: ""
+    host: config.meta.server.public,
+    user: config.meta.credentials.user,
+    password: config.meta.credentials.password,
+    database: config.meta.credentials.database
 });
 
 //Initialize the connection
