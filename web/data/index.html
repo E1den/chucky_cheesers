@@ -39,17 +39,78 @@
     </div>
 
     <div class="content-pane">
+      <div class="subnav">
+      <div class="create-btn">
+        <button class="createBtn" onclick="createComic()"><span class="create-top">+ Create</span><span class="create-bottom">+ Create</span></button>
+      </div>
       <div class="search-bar">
         <form action="">
           <input type="text" placeholder="Search..." name="search" class="seach-input">
           <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
         </form>
       </div>
+      <div class="filter-btn">
+        <button onclick="filter('relevant')" id="filter-relevant">Relevant</button>
+        <button onclick="filter('recent')" id="filter-recent">Recent</button>
+        <button onclick="filter('accounts')" id="filter-accounts">Accounts</button>
+        <button onclick="filter('filter')" class="filterBtn"><span id="filter-btn"><<</span> Filter</button>
+      </div>
+    </div>
       <div class="comic-gallery">
 
 
 
       </div>
+      <div class="createComic">
+        <button id="createComic-close" onclick="createComic()">X</button>
+        <h2>Create a Comic</h2>
+        <form id="createComic">
+          <label for="file-upload" class="custom-file-upload">
+            Cover Art
+          </label>
+          <input id="file-upload" type="file" name="coverart" accept="image/*" onchange="loadFile(event)"><br>
+          <img id="Imgoutput"/><br>
+          <script>
+            var loadFile = function(event) {
+              var output = document.getElementById('Imgoutput');
+              output.src = URL.createObjectURL(event.target.files[0]);
+            };
+          </script>
+          <input type="text" name="comicname" placeholder="Comic Name" class="login_text"><br>
+          <input type="text" name="comictags" placeholder="Comic Tags" class="login_text"><br>
+          <textarea name="comicdescription" placeholder="Comic Description" row="5" cols="10"></textarea><br>
+          <input type="submit" Value="Create" class="submit">
+        </form>
+    </div>
+    <!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("Imgoutput");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+</script>
     </div>
   </div>
   </div>

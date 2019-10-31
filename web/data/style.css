@@ -237,6 +237,142 @@ button {
   overflow-y: scroll;
 }
 
+.createComic
+{
+  position:absolute;
+  margin:auto;
+  width:50%;
+  z-index: 10;
+  display:none;
+   background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #ffce55 0, #fffc83 30%, #ffffb1 50%, #fffc83 70%, #ffce55 100%);
+   background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
+   border: 5px solid #222;
+   box-shadow: 5px 5px 5px black;
+   overflow-y: visible;
+   margin-bottom: 30px;
+}
+
+.createComic-on
+{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-animation: swing-in-top-fwd 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+  animation: swing-in-top-fwd 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+}
+
+#createComic-close
+{
+  background: none;
+  color:black;
+  font-family: 'Bangers', cursive;
+  border:none;
+  font-size: 20px;
+  width:50px;
+  margin-bottom:20px;
+  align-self: flex-end;
+}
+
+#createComic-close:hover
+{
+  color:#ddd;
+}
+
+.createComic form
+{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 80%;
+}
+
+.createComic input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 2px 2px 4px grey;
+  font-family: 'Happy-Monkey', cursive;
+    cursor: pointer;
+    color:black;
+    text-align: center;
+}
+
+.custom-file-upload:hover
+{
+  background-color: #ccc;
+}
+
+textarea
+{
+  border-radius: 5px;
+  font-family: 'Happy-Monkey', cursive;
+  box-shadow: 2px 2px 4px grey;
+}
+
+#Imgoutput
+{
+  max-width: 40%;
+  max-height: 60%;
+  align-self: center;
+  transition: 1s all;
+}
+
+#Imgoutput:hover
+{
+  opacity:0.7;
+  cursor: pointer;
+}
+
+.comicForm
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9);
+  z-index: 20;
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
 /*
   ***************
   END CONTENTPANE
@@ -258,11 +394,160 @@ button {
   width: 100%;
 }
 
-.search-bar {
+/*
+  ************
+  START SUBNAV
+  ************
+*/
+
+.subnav
+{
+  width: 100%;
+  background: #444;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.create-btn
+{
+  height:50%;
+  overflow-y: hidden;
+  width:33.3%;
+  display:flex;
+  justify-content: flex-end;
+  align-content: flex-end;
+}
+
+.createBtn:active
+{
+  outline:none;
+}
+
+.createBtn
+{
+  background:inherit;
+  border:none;
+  font-size: 20px;
+  color:white;
+  font-family:'Bangers', cursive;
+  height:45%;
+  transition: 2s all;
+  display:flex;
+  flex-direction: column;
+}
+
+.create-top
+{
+  opacity:1;
+  border-bottom: none;
+  transition: 1s all;
+}
+
+.create-bottom
+{
+  opacity:0;
+  color:#ddd;
+  transition: 1s all;
+}
+
+.create-btn button:hover .create-top{
+  transform: translateY(-100%);
+}
+
+.create-btn button:hover .create-bottom
+{
+  opacity:1;
+  transform: translateY(-100%);
+}
+
+.filter-btn
+{
+  width:33.3%;
+  display:flex;
+  flex-direction: row;
+  overflow-x: visible;
+}
+
+.filter-btn button
+{
+  background:inherit;
+  border:none;
+  font-size: 20px;
+  color:white;
+  font-family:'Bangers', cursive;
+  display:flex;
+  flex-direction: row;
+}
+
+.filterBtn:active
+{
+  outline:none;
+}
+
+.filter-btn span
+{
+  opacity:0;
+  transition: 1s all;
+}
+
+.filterBtn:hover #filter-btn
+{
+  opacity:1;
+}
+
+#filter-recent
+{
+  display:none;
+  animation: slide-in 1s ease;
+}
+
+#filter-accounts
+{
+  display:none;
+  animation: slide-in 1s ease;
+}
+
+ #filter-relevant
+ {
+   display:none;
+   animation: slide-in 1s ease;
+ }
+
+.filter-type
+{
+  display:block !important;
+}
+
+.filter-type:active
+{
+  outline: none;
+}
+
+.filter-type:hover
+{
+  color:#ddd;
+}
+
+@keyframes slide-in {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.search-bar
+{
   position: sticky;
   top: 0;
   display: flex;
-  min-width: 40%;
+  min-width: 33.3%;
   min-height: 10%;
   justify-content: center;
   align-content: center;
@@ -277,7 +562,7 @@ button {
   margin-top: 8px;
   font-size: 17px;
   border: none;
-  height: 90%;
+  height: 50%;
   max-height: 38.3px;
   background: #ddd;
   box-shadow: -3px 0 10px -10px black, 0px 3px 10px -10px black, 0px -3px 10px -10px black;
@@ -289,7 +574,7 @@ button {
   float: right;
   display: flex;
   justify-content: center;
-  padding: 10px 15px;
+  padding: 7.5px 15px;
   margin-top: 8px;
   margin-right: 16px;
   background: #ddd;
@@ -307,6 +592,12 @@ button {
 .search-btn:hover {
   background: #ccc;
 }
+
+/*
+  **********
+  END SUBNAV
+  **********
+*/
 
 .bookcontainer {
   display: flex;
@@ -438,7 +729,7 @@ button {
   flex-direction: column;
 }
 
-.login-poster input, .signup-poster input, .forgotpass-poster input {
+.login-poster input, .signup-poster input, .forgotpass-poster input, .createComic input{
   background-color: white;
   padding: 5px;
   border-radius: 5px;
@@ -447,7 +738,7 @@ button {
   font-family: 'Happy-Monkey', cursive;
 }
 
-.login-poster input:hover, .signup-poster input:hover, .forgotpass-poster input:hover {
+.login-poster input:hover, .signup-poster input:hover, .forgotpass-poster input:hover, .createComic input:hover{
   background: #ddd;
   transition-duration: 0.5s;
 }
