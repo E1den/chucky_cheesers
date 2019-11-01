@@ -1,16 +1,9 @@
 //Handles logging in
-const mysql = require('mysql');
+const mysql = require('./mysql');
 const config = require('./config.js');
 const mailer = require('nodemailer');
+const crypto = require('crypto');
 const fs = require('fs');
-
-//Connection data, only used when connect called
-const con = mysql.createConnection({
-    host: "127.0.0.1",
-    user: config.meta.credentials.user,
-    password: config.meta.credentials.password,
-    database: config.meta.credentials.database
-});
 
 const sender = mailer.createTransport({
     service: 'gmail',
@@ -41,6 +34,8 @@ fs.readFile('static_pages/password.html', 'utf8', function (err, data) {
     mail.html = data;
 });
 
+const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
 //Handles user login
 exports.login = function (req, res) {
     try {
@@ -53,21 +48,37 @@ exports.login = function (req, res) {
         return;
     }
 
-
     //quick validate, html, and function check
-    if (email == "" | email.includes("<") | email.includes(")") | email.includes("'") | email.includes("\"") | !email.includes("@") | !email.includes(".")) {
+    if (!emailRegexp.test(email)) {
         res.send("failure");
         return;
     }
 
+    hashed = crypto.createHash('sha256').update(password).digest('base64');
 
+    try {
+        result = mysql.accessUserByEmail(email, function (rows) {
+            if (rows == undefined || rows.length == 0) {
+                //ERROR NON EXISTANT
+                res.send("failure");
+            }
+            else if (rows[0].password == hashed) {
+                //SUCCESS
+                req.session.user = rows[0].display_name;
+                res.send("success");
+            }
+            else {
+                //ERROR BAD PASSWORD
+                res.send("failure");
+            }
+        });
+    }
+    catch (e) {
+        req.query.e = 400;
+        err.error(req, res);
+        return;
+    }
 
-    con.connect(function (err) {
-        //validate
-    });
-
-    req.session.user = email;
-    res.send("success");
 }
 
 //Handles user logout
@@ -90,19 +101,29 @@ exports.signup = function (req, res) {
     }
 
     //quick validate, html, and function check
-    if (email == "" | email.includes("<") | email.includes(")") | email.includes("'") | email.includes("\"") | !email.includes("@") | !email.includes(".") | user == "" | user.includes("<") | user.includes(")") | user.includes("'") | user.includes("\"")) {
+    if ((!emailRegexp.test(email)) | user == "" | user.includes("<") | user.includes(")") | user.includes("'") | user.includes("\"")) {
         res.send("failure");
         return;
     }
 
+    hashed = crypto.createHash('sha256').update(password).digest('base64');
 
-
-    con.connect(function (err) {
-        //validate
-    });
-
-    req.session.user = user;
-    res.send("success");
+    try {
+        result = mysql.accessUserByEmail(email, function (rows) {
+            if (rows == undefined || rows.length == 0) {
+                mysql.createUser(user, email, hashed);
+                req.session.user = user;
+                res.send("success");
+            }
+            else {
+                res.send("failure");
+            }
+        });
+    } catch (e) {
+        req.query.e = 400;
+        err.error(req, res);
+        return;
+    }
 }
 
 exports.forgot = function (req, res) {
@@ -116,35 +137,47 @@ exports.forgot = function (req, res) {
     }
 
     //quick validate, html, and function check
-    if (email == "" | email.includes("<") | email.includes(")") | email.includes("'") | email.includes("\"") | !email.includes("@") | !email.includes(".")) {
+    if ((!emailRegexp.test(email))) {
         res.send("failure");
         return;
     }
 
-    //TODO
+    try {
+        result = mysql.accessUserByEmail(email, function (rows) {
+            if (rows == undefined || rows.length == 0) {
+                res.send("failure");
+            }
+            else {
+                //replace __USERNAME__
+                //replace __SERVER__
+                //replace __RESETKEY__
 
-    //replace __USERNAME__
-    //replace __SERVER__
-    //replace __RESETKEY__
+                key = "RANDOM_HASHEDKEY_FOR_A_TEMP_AMMOUNT_OF_TIME"
 
-    key = "RANDOM_HASHEDKEY_FOR_A_TEMP_AMMOUNT_OF_TIME"
+                user = "username"
+                path = "/srv/acct/forgot?k=" + key
 
-    user = "username"
-    path = "/srv/acct/forgot?k="+key
+                pack = mail;
+                pack.to = email;
+                pack.html = pack.html.replace(/__USERNAME__/g, user)
+                pack.html = pack.html.replace(/__SERVER__/g, config.meta.server.public)
+                pack.html = pack.html.replace(/__RESETKEY__/g, path);
 
-    pack = mail;
-    pack.to = email;
-    pack.html = pack.html.replace(/__USERNAME__/g, user)
-    pack.html = pack.html.replace(/__SERVER__/g, config.meta.server.public)
-    pack.html = pack.html.replace(/__RESETKEY__/g, path);
+                sender.sendMail(pack);
 
-    sender.sendMail(pack);
-
-    //always send success to obscure account existance
-    res.send("success")
+                //always send success to obscure account existance
+                res.send("success")
+            }
+        });
+    }
+    catch (e) {
+        req.query.e = 400;
+        err.error(req, res);
+        return;
+    }
 }
 
-exports.updateForgot = function(req, res) {
+exports.updateForgot = function (req, res) {
     key = req.query.k
     //validate key exists,
     //send password update page in this function

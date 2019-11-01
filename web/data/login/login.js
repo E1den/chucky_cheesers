@@ -80,7 +80,7 @@ $(document).ready(function () {
           }
           else if (n.startsWith("failure")) {
             //bad info
-            $(".forgotpass-poster h2").html("Invalid or Existing");
+            $(".forgotpass-poster h2").html("Invalid or Non-existing");
           }
           else {
             //error
