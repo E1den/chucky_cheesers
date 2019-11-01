@@ -33,10 +33,57 @@ function pollForComics(n) {
 
 
 grabNextRows();
-$(document).ready(function () {
-    $(".content-pane").scroll(function () {
-        if (!full && $(".content-pane").scrollTop() + window.innerHeight >= $(".comic-gallery").height() - 5 * $(".book").height())
-            grabNextRows();
+$(document).ready(function() {
+    $(".content-pane").scroll(function(){
+        if(!full && $(".content-pane").scrollTop() + window.innerHeight >= $(".comic-gallery").height() - 5 * $(".book").height())
+           grabNextRows();
+        $(".subnav").css("opacity", 1 - $(window).scrollTop() / 250);
     });
-    $(".search-bar form").submit(function () { pollForComics($(".seach-input")[0].value) })
 });
+
+function filter(filterType){
+  if(filterType == "filter")
+  {
+    if($("#filter-accounts").hasClass("filter-type"))
+    {
+      $("#filter-relevant").removeClass("filter-type")
+      $("#filter-recent").removeClass("filter-type")
+      $("#filter-accounts").removeClass("filter-type")
+    }
+    else {
+      $("#filter-relevant").addClass("filter-type")
+      $("#filter-recent").addClass("filter-type")
+      $("#filter-accounts").addClass("filter-type")
+    }
+  }
+  else if(filterType == "relevant")
+  {
+    $("#filter-relevant").removeClass("filter-type")
+    $("#filter-recent").removeClass("filter-type")
+    $("#filter-accounts").removeClass("filter-type")
+  }
+  else if(filterType == "recent")
+  {
+    $("#filter-relevant").removeClass("filter-type")
+    $("#filter-recent").removeClass("filter-type")
+    $("#filter-accounts").removeClass("filter-type")
+  }
+  else if(filterType == "accounts")
+  {
+    $("#filter-relevant").removeClass("filter-type")
+    $("#filter-recent").removeClass("filter-type")
+    $("#filter-accounts").removeClass("filter-type")
+  }
+
+};
+
+function createComic()
+{
+  if($(".createComic").hasClass("createComic-on"))
+  {
+    $(".createComic").removeClass("createComic-on")
+  }
+  else{
+    $(".createComic").addClass("createComic-on")
+  }
+}

@@ -36,5 +36,52 @@ function accMenuFunction(x) {
 
 function acccloseNav() {
     $(".accsidebar").width("0");
-    $(".acc-content-pane").width("auto");
+    $(".acc-content-pane").width("100%");
+}
+
+function filter(filterType){
+  if(filterType == "filter")
+  {
+    if($("#filter-accounts").hasClass("filter-type"))
+    {
+      $("#filter-relevant").removeClass("filter-type")
+      $("#filter-recent").removeClass("filter-type")
+      $("#filter-accounts").removeClass("filter-type")
+    }
+    else {
+      $("#filter-relevant").addClass("filter-type")
+      $("#filter-recent").addClass("filter-type")
+      $("#filter-accounts").addClass("filter-type")
+    }
+  }
+  else if(filterType == "relevant")
+  {
+    $("#filter-relevant").removeClass("filter-type")
+    $("#filter-recent").removeClass("filter-type")
+    $("#filter-accounts").removeClass("filter-type")
+  }
+  else if(filterType == "recent")
+  {
+    $("#filter-relevant").removeClass("filter-type")
+    $("#filter-recent").removeClass("filter-type")
+    $("#filter-accounts").removeClass("filter-type")
+  }
+  else if(filterType == "accounts")
+  {
+    $("#filter-relevant").removeClass("filter-type")
+    $("#filter-recent").removeClass("filter-type")
+    $("#filter-accounts").removeClass("filter-type")
+  }
+
+};
+
+function createComic()
+{
+  if($(".createComic").hasClass("createComic-on"))
+  {
+    $(".createComic").removeClass("createComic-on")
+  }
+  else{
+    $(".createComic").addClass("createComic-on")
+  }
 }
