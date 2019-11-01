@@ -19,17 +19,19 @@ app.use(session({
 app.use(express.json());
 
 //Handle account controls
-app.post('/srv/acct/login.js', accounts.login);
-app.post('/srv/acct/logout.js', accounts.logout);
-app.post('/srv/acct/signup.js', accounts.signup);
-app.get('/srv/acct/update.js', accounts.update);
-app.get('/srv/acct/getSess.js', accounts.getAccountSession);
+app.post('/srv/acct/login', accounts.login);
+app.post('/srv/acct/logout', accounts.logout);
+app.post('/srv/acct/signup', accounts.signup);
+app.post('/srv/acct/forgot', accounts.forgot);
+app.get('/srv/acct/forgot', accounts.updateForgot);
+app.get('/srv/acct/update', accounts.update);
+app.get('/srv/acct/getSess', accounts.getAccountSession);
 
 //Handle comic data
-app.post('/srv/comic/gallery.js', comic.gallery);
+app.post('/srv/comic/search', comic.search);
 
 //Handle bad status code error pages
-app.get('/srv/err.js', error_handler.error);
+app.get('/srv/err', error_handler.error);
 app.use(error_handler.quick_404);
 
 app.listen("9000", "0.0.0.0");

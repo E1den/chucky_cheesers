@@ -1,6 +1,7 @@
 //Handles comics
 const mysql = require('mysql');
 const config = require('./config.js');
+const err = require('./error.js')
 
 //Connection data, only used when connect called
 const con = mysql.createConnection({
@@ -10,13 +11,25 @@ const con = mysql.createConnection({
     database: config.meta.credentials.database
 });
 
-exports.gallery = function (req, res) {
+exports.search = function (req, res) {
 
-    const rowNum = req.body.row;
-    const time = req.body.start;
+    try{
+        search = req.body.search;
+        type = req.body.type;
+        rowNum = req.body.row;
+        time = req.body.start;
+    }
+    catch(e)
+    {
+        req.query.e = 400;
+        err.error(req,res);
+        return;
+    }
 
     //con.connect(function (err) {
     res.contentType("html");
+
+    //get the data to send from the sql server
 
     //FOR TESTING PURPOSES
     if(rowNum>20)

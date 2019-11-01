@@ -44,8 +44,8 @@
         <button class="createBtn" onclick="createComic()"><span class="create-top">+ Create</span><span class="create-bottom">+ Create</span></button>
       </div>
       <div class="search-bar">
-        <form action="">
-          <input type="text" placeholder="Search..." name="search" class="seach-input">
+        <form>
+          <input type="text" placeholder="Search..." name="search" onkeyup="pollForComics(this.value)" class="seach-input">
           <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
         </form>
       </div>

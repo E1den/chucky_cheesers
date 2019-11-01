@@ -16,12 +16,12 @@ function adjustPosterStyles() {
   }
 }
 
-$(document).ready(function() {
-  $(".menu").click(function() {
-    $(".sidenav").width(250);
+$(document).ready(function () {
+    $(".menu").click(function () {
+      $(".sidenav").width(250);
+    })
+    $(".closebtn").click(function () {
+      $(".sidenav").width(0);
+    })
   })
-  $(".closebtn").click(function() {
-    $(".sidenav").width(0);
-  })
-})
 
