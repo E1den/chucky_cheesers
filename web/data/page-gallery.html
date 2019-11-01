@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Vibur&display=swap" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet">
+    <script src="/interface.js"></script>
+    <script src="/accounts.js"></script>
+    <script src="/gallery.js"></script>
+    <script src="/comic.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Bangers|Happy+Monkey&display=swap" rel="stylesheet">
+    <title>Comicality</title>
+  </head>
+  <body>
+    <div class="main-content">
+    <div class="sidenav">
+      <a href="javascript:void(0)" class="closebtn">&times;</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="nav-bar">
+      <div style="justify-self:start">
+        <div class="menu">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+      <div>
+        <a href="/" style="text-decoration: none">
+          <div class="logo"><b>Com<span>i</span>ca<span>l</span>ity</b></div>
+        </a>
+      </div>
+      <div id="acctSess" style="justify-self:end">
+      </div>
+    </div>
+    <div class="content-pane">
+      <h2> ## Comic Name ## </h2>
+      <hr></hr>
+      <div class="subnav-page">
+      <div class="create-btn">
+        <button class="createBtn" onclick="editProperties()"><span class="create-top" style="color: black;">Edit Properties</span><span class="create-bottom" style="color: black;">Edit Properties</span></button>
+      </div>
+      <div style="width:33.3%">
+      </div>
+      <div class="create-btn" style="color: black;justify-content:flex-start;">
+        <button class="createBtn" onclick="deleteComic('open')"><span class="create-top" style="color: black;">Delete Comic</span><span class="create-bottom" style="color: black;">Delete Comic</span></button>
+      </div>
+    </div>
+      <div class="page-gallery">
+        <div class="page-container">
+          <div class="comic-page" id="page-1"><div class="overlay"></div></div>
+          <div class="comic-page"><div class="overlay"></div></div>
+          <div class="comic-page"><div class="overlay"></div></div>
+          <div class="comic-page"><div class="overlay"></div></div>
+        </div>
+      </div>
+      <div class="edit-preferences">
+          <button id="createComic-close" onclick="editProperties()">X</button>
+        <h2>Edit Preferences</h2>
+        <form id="createComic">
+          <label for="file-upload" class="custom-file-upload">
+            Cover Art
+          </label>
+          <input id="file-upload" type="file" name="coverart" accept="image/*" onchange="loadFile(event)"><br>
+          <img id="Imgoutput"/><br>
+          <script>
+            var loadFile = function(event) {
+              var output = document.getElementById('Imgoutput');
+              output.src = URL.createObjectURL(event.target.files[0]);
+            };
+          </script>
+          <input type="text" name="comicname" placeholder="Comic Name" class="login_text"><br>
+          <input type="text" name="comictags" placeholder="Comic Tags" class="login_text"><br>
+          <textarea name="comicdescription" placeholder="Comic Description" row="5" cols="10"></textarea><br>
+          <input type="submit" Value="Edit" class="submit">
+        </form>
+      </div>
+      <div class="delete-confirm">
+        <h3>Are You Sure?</h3>
+        <div class="confirm-wrap">
+        <button class="confirm-btn" onclick="deleteComic('yes')">YES</button>
+        <button class="confirm-btn" onclick="deleteComic('no')">NO</button>
+        </div>
+      </div>
+      <div class="page-open">
+      <span class="close">&times;</span>
+      <div class="page-wrap">
+      <span class="page-turn-left">&lt;</span>
+      <div class="page-left">
+      </div>
+      <div class="page-right">
+      </div>
+      <span class="page-turn-right">&gt;</span>
+      </div>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>
