@@ -656,9 +656,73 @@ textarea
 }
 
 .book:hover .overlay {
-  display: inline;
+  display: flex;
   bottom: 0;
   cursor: pointer;
+  height:100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.accountChip-container
+{
+  background:#222;
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 18vw;
+  height: 30.03vw;
+  align-self: end;
+  transition: all 0.5s ease-in-out;
+}
+
+.accountChip
+{
+  align-self: center;
+  width: 18vw;
+  height: 18vw;
+  border-radius: 50%;
+  background: red;
+  transition: .5s all;
+}
+
+.accountChip:hover .overlay {
+  display: flex;
+  bottom: 0;
+  cursor: pointer;
+  height:100%;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay p
+{
+  text-align: center;
+  font-family: 'Bangers', cursive;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.accountName
+{
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  font-family: 'Happy Monkey', cursive;
+  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.accountChip:hover
+{
+  transform: scale(1.1);
+  box-shadow: 2px 2px 8px black;
 }
 
 /*
