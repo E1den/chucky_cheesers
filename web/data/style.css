@@ -1405,17 +1405,11 @@ h3
   width:100%;
   height:85%;
 }
-.page-left
-{
-  background:white;
-  width:45%;
-  height: 100%;
-}
 
-.page-right
+.page
 {
   background:grey;
-  width:45%;
+  width:90%;
   height:100%;
 }
 
