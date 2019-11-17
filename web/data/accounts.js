@@ -1,6 +1,6 @@
 $.ajax({
     type: "GET",
-    url: "/srv/acct/getSess.js",
+    url: "/srv/acct/getSess",
     success: function (n) { $("#acctSess").html(n) }
 }).fail(function () { $("#acctSess").html("<a href='/login' class='nav-link'>Login/Signup</a>") })
 
@@ -11,7 +11,7 @@ $(document).ready(function () {
 function signOut() {
     $.ajax({
         type: "POST",
-        url: "/srv/acct/logout.js",
+        url: "/srv/acct/logout",
         success: function (n) { $(location).attr("href", "/"); }
     })
 }

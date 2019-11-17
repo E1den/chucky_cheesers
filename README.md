@@ -14,5 +14,9 @@ Locations
 Setting Up
 ----------
 *   Populate config.yml in node/data, all values are placeholders for the git
+    *   SQL credentials in the sql section
+    *   Replace secret with a random string
+    *   Replace public with the servers public address/dns
+    *   Replace email user/password/server with a smtp server and user/password. REM: on a google account it has to be specifically allowed as insecure access.
 
 We just needed someplace to actually start collaborating
