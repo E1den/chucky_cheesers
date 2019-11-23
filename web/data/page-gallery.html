@@ -41,7 +41,7 @@
       <hr></hr>
       <div class="subnav-page">
       <div class="create-btn">
-        <button class="createBtn" onclick="editProperties()"><span class="create-top" style="color: black;">Edit Properties</span><span class="create-bottom" style="color: black;">Edit Properties</span></button>
+        <button class="createBtn" onclick="popUp('.edit-preferences')"><span class="create-top" style="color: black;">Edit Properties</span><span class="create-bottom" style="color: black;">Edit Properties</span></button>
       </div>
       <div style="width:33.3%">
       </div>
@@ -57,8 +57,42 @@
           <div class="comic-page"><div class="overlay"></div></div>
         </div>
       </div>
+
+      <div class="edit-frame">
+        <button id="createComic-close" onclick="popUp('.edit-frame')">X</button>
+        <h2>Add Media</h2>
+        <div class="edit-frame-wrap">
+          <div class="edit-canvas">
+          </div>
+
+          <div class="edit-upload-form">
+            <form id="createComic">
+              <label for="edit-frame-upload" class="custom-file-upload">
+                Add Media
+              </label>
+              <input id="edit-frame-upload" type="file" name="frame-upload" accept="image/*" onchange="editFileUpload(event)" style="display:none"><br>
+            </form>
+            <div class="text-box-container">
+            </div>
+          </div>
+        </div>
+        <button class="confirm-edit">Confirm</button>
+      </div>
+
+      <div class="choose-template popup-on">
+        <button id="createComic-close" onclick="popUp('.choose-template')">X</button>
+        <h2>Choose Template</h2>
+        <div class="choice-wheel">
+          <div class="choice-slide current-slide" style="background: green">1</div>
+          <div class="choice-slide next-slide" style="background: red">2</div>
+          <div class="choice-slide" style="background: yellow">3</div>
+          <div class="choice-slide previous-slide" style="background: blue">4</div>
+        </div>
+        <button class="confirm-edit">Confirm</button>
+      </div>
+
       <div class="edit-preferences">
-          <button id="createComic-close" onclick="editProperties()">X</button>
+          <button id="createComic-close" onclick="popUp('.edit-preferences')">X</button>
         <h2>Edit Preferences</h2>
         <form id="createComic">
           <label for="file-upload" class="custom-file-upload">
