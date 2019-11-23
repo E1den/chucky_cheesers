@@ -1392,7 +1392,13 @@ hr
 
 .text-box-container
 {
-  height:40%;
+  height:60%;
+  width:100%;
+  background: gold;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .confirm-edit
