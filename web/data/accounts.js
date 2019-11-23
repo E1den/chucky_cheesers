@@ -74,14 +74,3 @@ function filter(filterType){
   }
 
 };
-
-function createComic()
-{
-  if($(".createComic").hasClass("createComic-on"))
-  {
-    $(".createComic").removeClass("createComic-on")
-  }
-  else{
-    $(".createComic").addClass("createComic-on")
-  }
-}

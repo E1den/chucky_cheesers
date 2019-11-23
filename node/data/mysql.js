@@ -153,7 +153,19 @@ module.exports =
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err)
-						throw callback(err);
+						throw callback(err,null);
+					else
+						return callback(err, result);
+				});
+			});
+		},
+
+		accessComicByID: function (comic_id, callback) {
+			var sql = `SELECT * FROM comics WHERE comic_id = '${comic_id}'`;
+			pool.getConnection(function (err, con) {
+				con.query(sql, function (err, result) {
+					if (err)
+						throw callback(err,null);
 					else
 						return callback(err, result);
 				});
@@ -174,7 +186,7 @@ module.exports =
 			var sql = `INSERT INTO pages (layout) VALUES ('${layout}')`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
-					if (err) console.log(err);
+					if (err) console.log(err,null);
 					//Subfunction that is used to get the page number
 					getPageNumber(comic_id, function (err, page_number) {
 						var sql2 = `INSERT INTO comic_page_list (comic_id, page_number, creator_user_id, page_id) VALUES ('${comic_id}', '${page_number}', '${creator_user_id}', '${result.insertId}')`;
@@ -200,8 +212,8 @@ module.exports =
 			var sql = `SELECT * from pages WHERE page_id = '${page_id}'`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
-					if (err) callback(err);
-					callback(null, result);
+					if (err) callback(err,null);
+					callback(err, result);
 				});
 			});
 		},
@@ -219,8 +231,8 @@ module.exports =
 			var sql = `SELECT * from comic_page_list WHERE comic_id = '${comic_id}'`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
-					if (err) callback(err);
-					callback(null, result);
+					if (err) callback(err,null);
+					callback(err,result);
 				});
 			});
 		},
@@ -234,5 +246,5 @@ module.exports =
 
 		forkComic: function () {
 			//Not done
-		},
+		}
 	}

@@ -17,11 +17,31 @@ function adjustPosterStyles() {
 }
 
 $(document).ready(function () {
-    $(".menu").click(function () {
-      $(".sidenav").width(250);
-    })
-    $(".closebtn").click(function () {
-      $(".sidenav").width(0);
-    })
+  $(".menu").click(function () {
+    $(".sidenav").width(250);
   })
+  $(".closebtn").click(function () {
+    $(".sidenav").width(0);
+  })
+})
 
+function updateCover(event) {
+  $("#Imgoutput").prop("src", URL.createObjectURL(event.target.files[0]));
+}
+
+$("#createComic").submit(function () {
+  var comic = {
+    cover: $("#createComic input[name=coverart]").val(),
+    title: $("#createComic input[name=comicname]").val(),
+    tags: $("#createComic input[name=comictags]").val(),
+    description: $("#createComic input[name=comicdescription]").val()
+  };
+  $.ajax({
+    type: "POST",
+    datatype: 'json',
+    url: "/srv/comic/create",
+    contentType: 'application/json',
+    data: JSON.stringify(comic),
+    success: function (n) { if (n == 'failure') {/*error*/return; } var back = JSON.parse(data); $(location).attr("href", "/comic/edit?id=" + back.id); }
+  });
+});
