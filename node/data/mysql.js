@@ -1,11 +1,29 @@
 /*
+COP 4331C - Fall 2019 
+Brandon F.
+Mitchell G.
+Joshua G.
+Andrew K.
+Timothy O'B.
+--------------------
+This is the MySQL object that will interact with the database
+The following functions are public can be called outside object
+	createUser(username, emailAddress, userPassword);
+	accessUser(username, callback)
+	createComic(username, comicName, tags, isComicPrivate, comicDescription)
+	accessComic(comicName, callback)
+	createPage(comicId, creatorUserId, pageLayout)
+	accessPage(pageIdtoAccess, callback)
+	accessComicPageList(comicId, callback)
+	forkComic(comicIdToSplit, newUserId, newPagelayout)
+--------------------
 To use any of the "access" functions you will have to pass a callback function to the function you are calling similar to the following.
-You can't move the data out of the function due to the functions being asynchronous, so you'll have to preform any operations that require database information insid this function area.
+You can't move the data out of the function due to the functions being asynchronous, so you'll have to preform any operations that require database information inside this function area.
 ==================================
-var sql = require('./mysql.js');
+var sql = require('./mysql.jd);
 s.accessPage(page_id, function(err, result)
 {
-	//Preform actions on the result
+        //Preform actions on the result
 }
 ==================================
 
@@ -14,7 +32,7 @@ row 1 will be result[0]
 row 2 will be result[1]
 row n will be result[n-1]
 Each of the columns are indexed so they can be called like the following
-result[0].comic_ic
+result[0].comic_id
 result[0].page_id
 */
 var mysql = require('mysql');
@@ -37,7 +55,30 @@ function getPageNumber(comic_id, callback) {
 	pool.getConnection(function (err, con) {
 		con.query(sql, function (err, result) {
 			if (err) return console.log(err);
-			callback(null, ++result[0].page_number);
+			callback(null, result[0].page_number);
+		});
+	});
+}
+
+//Copies all of the content for one comic to a new comic and copies the comic_page_list as well
+function copyComic(comic_id_to_split, new_user_id, callback)
+{
+	//Grab all of the data from one table and insert it as a new row, but with a new comic_id, and a new user_id
+	var sql = `INSERT INTO comics (user_id, comic_name, tags, is_private, descrip) SELECT '${new_user_id}', comic_name, tags, is_private, descrip FROM comics WHERE comic_id = '${comic_id_to_split}';`;
+	pool.getConnection(function (err, con) {
+		con.query(sql, function (err, result)
+		{
+			if (err) throw err;
+			var insertId = result.insertId;
+		
+			//Copy the comic_page_list for the source comic, but insert it with the new user id and the new comic id
+			//Will create the new comic with the name '$currentComicName-$newUserID'
+			var sql = `INSERT INTO comics (user_id, comic_name, tags, is_private, descrip) SELECT '${new_user_id}', concat(comic_name,'-',${new_user_id}), tags, is_private, descrip FROM comics WHERE comic_id = '${comic_id_to_split}';`;
+			con.query(sql2, function (err, result2) {if (err) throw err;});
+			
+			//Now that the new comic and new comic page are made return and insert the new page
+			//Result at this point still contains the comic_id
+			callback(err, result);
 		});
 	});
 }
@@ -176,9 +217,9 @@ module.exports =
 		Inserts a new page to the database and adds it to the comics page list
 
 		Inputs:
-			comic_id:
-			creator_user_id:
-			layout:
+			comic_id: Comic_id of which comic this page is for
+			creator_user_id: the user_id of the user that is inserting the page
+			layout: layout of the page
 		Returns:
 			Nothing
 		*/
@@ -200,12 +241,13 @@ module.exports =
 
 		/*
 		accesses the page of the provided id
-
+	
 		Inputs:
 			page_id: page id that you want to access
 		Returns:
 			results: an array of the contents of the table for this page id
 				columns:
+					page_id: the numerical page_id for this page
 					layout: the layout of the page
 		*/
 		accessPage: function (page_id, callback) {
@@ -237,14 +279,46 @@ module.exports =
 			});
 		},
 
-		createImage: function () {
-		},
+		/*
+		Creates a new fork of an existing comic for when a user adds a new image to the comic
 
-		accessImage: function () {
+		Inputs:
+			comic_id_to_split: Id of the comic to split
+			new_user_id: User id of the user that is splitting the comic
+			layout: layout of the new comic page
+		Returns:
+			None
+		*/
+		forkComic: function forkComic(comic_id_to_split, new_user_id, layout)
+		{
+			var new_page_id;
+			var new_comic_id;
+			//Sub-function that creates a new comic Id with the new user_id, also copies the comic_page_list to the have the new comic_id
+			copyComic(comic_id_to_split, new_user_id, function (err, result)
+			{
+				new_comic_id = result.insertId;
+				//Create a new page for the modified page
+				//This query will also return the id of the page that was just inserted
+				var sql = `INSERT INTO pages (layout) VALUES ('${layout}');`;
+				pool.getConnection(function (err, con) 
+				{
+					con.query(sql, function (err, result2)
+					{
+						if (err) { throw err; }
 
-		},
-
-		forkComic: function () {
-			//Not done
+						new_page_id = result2.insertId;
+						//Get the page_number of the comic
+						getPageNumber(comic_id_to_split, function(err, page_number)
+						{
+							//Swap the last page of the comic with the new page id
+							var sql2 = `UPDATE comic_page_list SET page_id = '${new_page_id}' WHERE comic_id = '${new_comic_id}' AND page_number = '${page_number}';`;
+							pool.getConnection(function (err, con) 
+							{
+								con.query(sql2, function(err, result) {	if (err) { throw err; } });
+							});
+						});
+					});
+				});
+			});
 		}
 	}
