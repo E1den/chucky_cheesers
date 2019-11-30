@@ -31,7 +31,6 @@ function pollForComics(n) {
     })
 }
 
-
 grabNextRows();
 $(document).ready(function() {
     $(".content-pane").scroll(function(){
@@ -40,6 +39,11 @@ $(document).ready(function() {
         $(".subnav").css("opacity", 1 - $(window).scrollTop() / 250);
     });
 });
+
+$(".bookDetails").click(function() {
+  $(this).attr('cid');
+  window.location.replace("/comic/");
+})
 
 function filter(filterType){
   if(filterType == "filter")

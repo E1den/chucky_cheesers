@@ -26,7 +26,6 @@ s.accessPage(page_id, function(err, result)
         //Preform actions on the result
 }
 ==================================
-
 Result will always be an array each row returned from MySQL will be its own entry
 row 1 will be result[0]
 row 2 will be result[1]
@@ -70,12 +69,10 @@ function copyComic(comic_id_to_split, new_user_id, callback)
 		{
 			if (err) throw err;
 			var insertId = result.insertId;
-		
 			//Copy the comic_page_list for the source comic, but insert it with the new user id and the new comic id
 			//Will create the new comic with the name '$currentComicName-$newUserID'
 			var sql = `INSERT INTO comics (user_id, comic_name, tags, is_private, descrip) SELECT '${new_user_id}', concat(comic_name,'-',${new_user_id}), tags, is_private, descrip FROM comics WHERE comic_id = '${comic_id_to_split}';`;
 			con.query(sql2, function (err, result2) {if (err) throw err;});
-			
 			//Now that the new comic and new comic page are made return and insert the new page
 			//Result at this point still contains the comic_id
 			callback(err, result);
@@ -94,12 +91,10 @@ module.exports =
 	{
 		/*
 		Creates a user in the database
-
 		Inputs:
 			username: the username of the user
 			email_address: The user's email address
 			pass: the user's password, it should be hashed by this point hopefully
-
 		Returns:
 			result: a boolean value for if the insertion was successful or not
 		*/
@@ -117,10 +112,8 @@ module.exports =
 
 		/*
 		Pulls the user information from the database
-
 		Inputs:
 			Username: username of the user that we want to access
-
 		Returns:
 			result: Contains the array of all of the user's information that was saved in the database;
 		*/
@@ -149,16 +142,13 @@ module.exports =
 
 		/*
 		Creates an entry for a new comic in the database
-
 		Inputs:
 			username: username of the user that is creating the comic
 			comic_name: name of the comic that is being made
 			tags: text of the tags that are associated with the comic, json data will work, or any text
 			isPrivate: a boolean that says if the comic should be private
-
 		Returns:
 			boolean: tells if the insertion was successful or not
-
 		TODO: If private is true a second function should be called to create the private table
 		*/
 		createComic: function (username, comic_name, tags, isPrivate, descrip) {
@@ -176,10 +166,8 @@ module.exports =
 
 		/*
 		Pulls the data for a comic that exist in the database
-
 		Inputs:
 			comic_name: the name of the comic that you want to pull
-
 		Returns:
 			result: an array of all of the data in the comic table
 				columns:
@@ -201,6 +189,19 @@ module.exports =
 			});
 		},
 
+		//passed a comics name and returns the id of the comic specified
+		getComicIDByName: function(comic_name) {
+			var sql = `SELECT comic_id FROM comics WHERE comic_name = '${comic_name}'`;
+			pool.getConnection(function (err, con) {
+				con.query(sql, function (err, result) {
+					if (err) {
+						throw err;
+					}
+					return result[0].comic_id;
+				});
+			});
+		},
+
 		accessComicByID: function (comic_id, callback) {
 			var sql = `SELECT * FROM comics WHERE comic_id = '${comic_id}'`;
 			pool.getConnection(function (err, con) {
@@ -215,7 +216,6 @@ module.exports =
 
 		/*
 		Inserts a new page to the database and adds it to the comics page list
-
 		Inputs:
 			comic_id: Comic_id of which comic this page is for
 			creator_user_id: the user_id of the user that is inserting the page
@@ -261,7 +261,6 @@ module.exports =
 		},
 		/*
 		accesses the page of the provided id
-
 		Inputs:
 				page_id: page id that you want to access
 		Returns:
@@ -281,7 +280,6 @@ module.exports =
 
 		/*
 		Creates a new fork of an existing comic for when a user adds a new image to the comic
-
 		Inputs:
 			comic_id_to_split: Id of the comic to split
 			new_user_id: User id of the user that is splitting the comic
@@ -312,7 +310,7 @@ module.exports =
 						{
 							//Swap the last page of the comic with the new page id
 							var sql2 = `UPDATE comic_page_list SET page_id = '${new_page_id}' WHERE comic_id = '${new_comic_id}' AND page_number = '${page_number}';`;
-							pool.getConnection(function (err, con) 
+							pool.getConnection(function (err, con)
 							{
 								con.query(sql2, function(err, result) {	if (err) { throw err; } });
 							});
