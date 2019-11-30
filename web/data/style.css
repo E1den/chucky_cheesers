@@ -578,6 +578,41 @@ textarea
       border-bottom-left-radius: 5px;*/
 }
 
+.accmenu-wrapper
+{
+  justify-self:start;
+  display:flex;
+  height:100%;
+}
+
+.acc-search-bar
+{
+  position: sticky;
+  top: 0;
+  display: flex;
+  min-width: 33.3%;
+  min-height: 10%;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  z-index: 1;
+  transform: skew(-10deg, 0);
+  font-family: 'Happy Monkey', cursive;
+}
+
+.acc-search-bar input {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  height: 50%;
+  max-height: 38.3px;
+  background: #ddd;
+  box-shadow: -3px 0 10px -10px black, 0px 3px 10px -10px black, 0px -3px 10px -10px black;
+  /*border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;*/
+}
+
 .search-btn {
   float: right;
   display: flex;
@@ -1105,13 +1140,12 @@ h2 {
 }
 
 .accsidebar {
-position:fixed;
 margin: 0;
 padding: 0;
 width: 0;
 background-color: #333;
-position: relative;
-height: 88%;
+width: 0%;
+height:100%;
 overflow-x: hidden;
 display:flex;
 justify-content: flex-start;
@@ -1119,6 +1153,11 @@ flex-direction: column;
 align-items: center;
 z-index: 100;
 transition:0.5s;
+}
+
+.accsidebar-on
+{
+  width: 100%;
 }
 
 .accmenu:hover
@@ -1185,24 +1224,6 @@ color: black;
 .AcPageBtn:hover {
 background-color: #555;
 color: white;
-}
-
-/* On screens that are less than 700px wide, make the sidebar into a topbar */
-@media screen and (max-width: 700px) {
-.accsidebar {
-  width: 100%;
-  height: auto;
-  position: relative;
-}
-.accsidebar button {float: left;}
-}
-
-/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-@media screen and (max-width: 400px) {
-.accsidebar button {
-  text-align: center;
-  float: none;
-}
 }
 
 /*
@@ -1798,6 +1819,118 @@ h3
       ********************
       END MOBILE MAIN-PAGE
       ********************
+    */
+
+    /*
+      ******************
+      START MOBILE LOGIN
+      ******************
+    */
+
+    .login-poster
+    {
+      height:80%;
+      width:90%;
+    }
+
+    .signup-poster
+    {
+      height: 80%;
+      width: 90%;
+    }
+
+    .forgotpass-poster
+    {
+      height: 80%;
+      width: 90%;
+    }
+    /*
+      ****************
+      END MOBILE LOGIN
+      ****************
+    */
+
+    /*
+      *************************
+      START MOBILE ACCOUNT-PAGE
+      *************************
+    */
+
+      .account-content
+      {
+        flex-direction: column;
+      }
+
+      .accmenu-wrapper
+      {
+        height:10%;
+        width:100%;
+      }
+
+      .accmenu
+      {
+        height:15%;
+        width:100%;
+        flex-direction: column;
+      }
+
+      .bar1
+      {
+        height: 5px;
+        width:35px;
+        margin: 3px 6px;
+      }
+
+      .accsidebar {
+        width: 100%;
+        height: 0 !important;
+        bottom: 0;
+        position: fixed;
+        transition: all 0.5s;
+      }
+
+      .accsidebar-on
+      {
+        height:88% !important;
+      }
+      .accsidebar button {float: left;}
+
+      .accsidebar button{
+        text-align: center;
+        float: none;
+        font-size:20px;
+        height: 25%;
+      }
+
+      .acc-search-bar input
+      {
+        width:64.3%;
+        font-size:14px;
+      }
+
+      .create-btn
+      {
+        margin-right:15px;
+        width:25%;
+      }
+
+      .acc-dropdown
+      {
+        background: white !important;
+        color:black !important;
+        top: 50% !important;
+        justify-content: flex-start !important;
+      }
+
+      #acc-filter-dropdown-btn
+      {
+        color:black !important;
+      }
+
+    /*
+      ***********************
+      END MOBILE ACCOUNT-PAGE
+      ***********************
     */
   }
 

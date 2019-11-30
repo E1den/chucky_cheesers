@@ -8,6 +8,7 @@
   <script src="../interface.js"></script>
   <script src="../accounts.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Bangers|Happy+Monkey&display=swap" rel="stylesheet">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Comicality</title>
 </head>
 
@@ -50,10 +51,8 @@
               onclick="openPage('#SecSet', this, '#secsetBtn'); acccloseNav()">Security Settings</button>
             <button id="acomicBtn" class="AcPageBtn"
               onclick="openPage('#AccComics', this, '#acomicBtn'); acccloseNav()">Your Comics</button>
-
-            <button id="aeditBtn" class="AcPageBtn" onclick="openPage('#AccEdit', this, '#aeditBtn'); acccloseNav()">Your Edits</button>
           </div>
-          <div style="justify-self:start; display:flex; height:100%;">
+          <div class="accmenu-wrapper">
             <div class="accmenu" onclick="accMenuFunction(this)" style="display:flex; align-items:center; height:100%">
               <div class="bar1"></div>
               <div class="bar1"></div>
@@ -74,7 +73,7 @@
               <div class="create-btn">
                 <button class="createBtn" onclick="createComic()"><span class="create-top" style="color:black">+ Create</span><span class="create-bottom" style="color:black">+ Create</span></button>
               </div>
-              <div class="search-bar">
+              <div class="acc-search-bar">
                 <form action="">
                   <input type="text" placeholder="Search..." name="search" class="seach-input">
                   <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
@@ -85,6 +84,11 @@
                 <button onclick="filter('recent')" id="filter-recent" style="color:black">Recent</button>
                 <button onclick="filter('accounts')" id="filter-accounts" style="color:black">Accounts</button>
                 <button onclick="filter('filter')" class="filterBtn" style="color:black"><span id="filter-btn" style="color:black"><<</span> Filter</button>
+                <div id="filter-dropdown" class="acc-dropdown">
+                  <button onclick="filter('relevant')" id="acc-filter-dropdown-btn">Relevant</button>
+                  <button onclick="filter('recent')" id="acc-filter-dropdown-btn">Recent</button>
+                  <button onclick="filter('accounts')" id="acc-filter-dropdown-btn">Accounts</button>
+                </div>
               </div>
             </div>
 
