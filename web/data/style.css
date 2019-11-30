@@ -1668,6 +1668,11 @@ h3
     {
       height:50%;
     }
+
+    .delete-confirm
+    {
+      width:90%;
+    }
     /*
       ***********************
       END MOBILE PAGE-GALLERY
