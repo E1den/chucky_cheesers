@@ -1,5 +1,5 @@
 /*
-COP 4331C - Fall 2019
+COP 4331C - Fall 2019 
 Brandon F.
 Mitchell G.
 Joshua G.
@@ -69,12 +69,10 @@ function copyComic(comic_id_to_split, new_user_id, callback)
 		{
 			if (err) throw err;
 			var insertId = result.insertId;
-
 			//Copy the comic_page_list for the source comic, but insert it with the new user id and the new comic id
 			//Will create the new comic with the name '$currentComicName-$newUserID'
 			var sql = `INSERT INTO comics (user_id, comic_name, tags, is_private, descrip) SELECT '${new_user_id}', concat(comic_name,'-',${new_user_id}), tags, is_private, descrip FROM comics WHERE comic_id = '${comic_id_to_split}';`;
 			con.query(sql2, function (err, result2) {if (err) throw err;});
-
 			//Now that the new comic and new comic page are made return and insert the new page
 			//Result at this point still contains the comic_id
 			callback(err, result);
@@ -243,7 +241,7 @@ module.exports =
 
 		/*
 		accesses the page of the provided id
-
+	
 		Inputs:
 			page_id: page id that you want to access
 		Returns:
@@ -300,7 +298,7 @@ module.exports =
 				//Create a new page for the modified page
 				//This query will also return the id of the page that was just inserted
 				var sql = `INSERT INTO pages (layout) VALUES ('${layout}');`;
-				pool.getConnection(function (err, con)
+				pool.getConnection(function (err, con) 
 				{
 					con.query(sql, function (err, result2)
 					{
