@@ -1753,6 +1753,17 @@ h3
       {
         font-size: 15px;
       }
+
+      .createComic
+      {
+        width:90%;
+        height:80%;
+      }
+
+      .createComic form
+      {
+        max-width: 50%;
+      }
     /*
       ********************
       END MOBILE MAIN-PAGE
