@@ -24,19 +24,106 @@ exports.create = function (req, res) {
 }
 
 exports.getPages = function (req, res) {
-    var data = { pages: [] };
+    var data = { page: [] };
     res.contentType("json");
     mysql.accessComicPageList(req.body.id, function (err, rows) {
         rows.foreach(function (row) {
-            data.pages.push({
+            data.page.push({
                 layout: row.layout,
                 //NEED TO VERIFY STRUCTURE OF THE DB
                 frames: JSON.parse(row.frames)
             });
         });
-        res.write(JSON.encode(data));
+        res.write(JSON.stringify(data));
         res.end();
     });
+    /* example of data to send -->
+    data = {
+        "page": [
+
+            {
+                "layout": 0,
+                "frames": [
+                    {
+                        imageURL: "1.png"
+                    },
+
+                    {
+                        imageURL: "1.png"
+                    },
+                    {
+                        imageURL: "1.png"
+                    },
+                    {
+                        imageURL: "1.png"
+                    }
+                ]
+            }, {
+                "layout": 0,
+                "frames": [
+                    {
+                        imageURL: "2.png"
+                    },
+                    {
+                        imageURL: "2.png"
+                    },
+                    {
+                        imageURL: "2.png"
+                    },
+                    {
+                        imageURL: "2.png"
+                    }]
+            }, {
+                "layout": 0,
+                "frames": [
+                    {
+                        imageURL: "3.png"
+                    },
+                    {
+                        imageURL: "3.png"
+                    },
+                    {
+                        imageURL: "3.png"
+                    },
+                    {
+                        imageURL: "3.png"
+                    }]
+            }
+            , {
+                "layout": 0,
+                "frames": [
+                    {
+                        imageURL: "4.png"
+                    },
+                    {
+                        imageURL: "4.png"
+                    },
+                    {
+                        imageURL: "4.png"
+                    },
+                    {
+                        imageURL: "4.png"
+                    }]
+            }
+            , {
+                "layout": 0,
+                "frames": [
+                    {
+                        imageURL: "5.png"
+                    },
+                    {
+                        imageURL: "6.png"
+                    },
+                    {
+                        imageURL: "7.png"
+                    },
+                    {
+                        imageURL: "8.png"
+                    }]
+            }
+
+        ]
+    };*/
 }
 
 exports.search = function (req, res) {
@@ -87,9 +174,13 @@ exports.search = function (req, res) {
             return;
         }
 
+        var rowLimited = rowNum + 5;
+        if (rowLimited > rows.length)
+            rowLimited = rows.length;
+
         res.write("<div class='bookcontainer'>");
-        for (var row = rowNum; row < rowNum + 5; row++) {
-            res.write("<div class='book'><div class='overlay'><div class='bookDetails'><h2>" + rows[row].comic_name + "</h2>" + rows[row].descrip + "</div></div></div>");
+        for (var row = rowNum; row < rowLimited; row++) {
+            res.write("<div class='book'><div class='overlay'><div class='bookDetails' cid='"+rows[row].comic_id+"'><h2>" + rows[row].comic_name + "</h2>" + rows[row].descrip + "</div></div></div>");
         }
         res.write("</div>");
     })
