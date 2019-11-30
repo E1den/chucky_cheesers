@@ -1249,7 +1249,6 @@ hr
   align-content: center;
   align-self: center;
   width: 99%;
-  height: 31vw;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -1599,4 +1598,98 @@ h3
   ****************
   END PAGE GALLERY
   ****************
+*/
+
+/*
+  **************************
+  START MOBILE COMPATABILITY
+  **************************
+*/
+
+  @media only screen and (max-width: 768px) {
+    /*
+      *************************
+      START MOBILE PAGE-GALLERY
+      *************************
+    */
+    .page-container
+    {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comic-page
+    {
+      margin: 5px;
+      align-self:center;
+      width: 70%;
+      height: 60vh;
+    }
+
+    .edit-preferences
+    {
+      width:90%;
+      height:80%;
+    }
+
+    .edit-preferences form
+    {
+      max-width:50%;
+    }
+
+    h2
+    {
+      font-size: 40px;
+    }
+
+    .edit-frame
+    {
+      height: 80%;
+      width:90%;
+    }
+
+    .custom-file-upload
+    {
+      font-size:14px;
+    }
+
+    .choose-template
+    {
+      width:90%;
+      height:80%;
+    }
+
+    .choice-wheel
+    {
+      height:50%;
+    }
+    /*
+      ***********************
+      END MOBILE PAGE-GALLERY
+      ***********************
+    */
+
+    /*
+      **********************
+      START MOBILE MAIN-PAGE
+      **********************
+    */
+
+      .logo
+      {
+        font-size:12px;
+      }
+
+    /*
+      ********************
+      END MOBILE MAIN-PAGE
+      ********************
+    */
+  }
+
+/*
+  ************************
+  END MOBILE COMPATABILITY
+  ************************
 */

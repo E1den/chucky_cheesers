@@ -10,6 +10,7 @@
     <script src="comic.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bangers|Happy+Monkey&display=swap" rel="stylesheet">
     <title>Comicality</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
   </head>
   <body>
     <div class="main-content">
@@ -58,13 +59,12 @@
         </div>
       </div>
 
-      <div class="edit-frame popup-on">
+      <div class="edit-frame">
         <button id="createComic-close" onclick="popUp('.edit-frame')">X</button>
         <h2>Add Media</h2>
         <div class="edit-frame-wrap">
           <div class="edit-canvas">
           </div>
-
           <div class="edit-upload-form">
             <form id="createComic">
               <label for="edit-frame-upload" class="custom-file-upload">
@@ -80,7 +80,7 @@
         <button class="confirm-edit">Confirm</button>
       </div>
 
-      <div class="choose-template">
+      <div class="choose-template popup-on">
         <button id="createComic-close" onclick="popUp('.choose-template')">X</button>
         <h2>Choose Template</h2>
         <div class="choice-wheel">
@@ -121,7 +121,7 @@
         <img class="modal-content" id="img01">
         <div id="caption"></div>
       </div>
-      
+
       <script>
       // Get the modal
       var modal = document.getElementById("myModal");
