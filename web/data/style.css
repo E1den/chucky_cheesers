@@ -615,7 +615,6 @@ textarea
   align-content: center;
   align-self: center;
   width: 99%;
-  height: 31vw;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -1763,6 +1762,32 @@ h3
       .createComic form
       {
         max-width: 50%;
+      }
+
+      .bookcontainer
+      {
+        flex-direction: column;
+      }
+
+      .book
+      {
+        margin: 5px;
+        align-self:center;
+        width: 70%;
+        height: 60vh;
+      }
+
+      .accountChip-container
+      {
+        width: 70%;
+        height: 60vh;
+        align-self: center;
+      }
+
+      .accountChip
+      {
+        width: 100%;
+        height: 65%;
       }
     /*
       ********************
