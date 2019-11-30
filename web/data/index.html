@@ -10,6 +10,7 @@
   <script src="gallery.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Bangers|Happy+Monkey&display=swap" rel="stylesheet">
   <title>Comicality</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
 </head>
 
 <body>
@@ -55,8 +56,13 @@
           <button onclick="filter('relevant')" id="filter-relevant">Relevant</button>
           <button onclick="filter('recent')" id="filter-recent">Recent</button>
           <button onclick="filter('accounts')" id="filter-accounts">Accounts</button>
-          <button onclick="filter('filter')" class="filterBtn"><span id="filter-btn">
+          <button onclick="filter('filter')" class="filterBtn"><span id="filter-btn"><<
             </span> Filter</button> </div>
+            <div id="filter-dropdown">
+              <button onclick="filter('relevant')" id="filter-dropdown-btn">Relevant</button>
+              <button onclick="filter('recent')" id="filter-dropdown-btn">Recent</button>
+              <button onclick="filter('accounts')" id="filter-dropdown-btn">Accounts</button>
+            </div>
       </div>
       <div class="comic-gallery">
       </div>
