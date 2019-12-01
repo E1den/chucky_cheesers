@@ -1,0 +1,6 @@
+#comic-viewer {
+    width: calc(75vh * 1.8);
+    height: 77vh;
+    margin: 2%;
+    background-color: white;
+}
