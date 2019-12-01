@@ -78,3 +78,16 @@ function filter(filterType){
   }
 
 };
+
+function createComic()
+{
+  if($("#acctSess").html().includes("Login/Signup"))
+    window.location.replace("/login");
+  if($(".createComic").hasClass("createComic-on"))
+  {
+    $(".createComic").removeClass("createComic-on")
+  }
+  else{
+    $(".createComic").addClass("createComic-on")
+  }
+}

@@ -168,7 +168,7 @@ body {
   height: 100%;
   width: 0;
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   top: 0;
   left: 0;
   background-color: #111;
@@ -618,6 +618,7 @@ textarea
   display: flex;
   justify-content: center;
   padding: 7.5px 15px;
+  width:20%;
   margin-top: 8px;
   margin-right: 16px;
   background: #ddd;
@@ -1865,12 +1866,14 @@ h3
       {
         height:10%;
         width:100%;
+        margin-bottom: 5px;
       }
 
       .accmenu
       {
         height:15%;
         width:100%;
+        padding: 10px;
         flex-direction: column;
       }
 
@@ -1904,7 +1907,7 @@ h3
 
       .acc-search-bar input
       {
-        width:64.3%;
+        width:71%;
         font-size:14px;
       }
 
