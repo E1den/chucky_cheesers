@@ -1,0 +1,49 @@
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Vibur&display=swap" rel="stylesheet">
+  <link href="/style.css" rel="stylesheet">
+  <link href="/comic/view.css" rel="stylesheet">
+  <script src="/interface.js"></script>
+  <script src="/accounts.js"></script>
+  <script src="/comic/comic.js"></script>
+  <script src="/comic/edit.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Bangers|Happy+Monkey&display=swap" rel="stylesheet">
+  <title>Comicality</title>
+</head>
+
+<body>
+  <div class="main-content">
+    <div class="sidenav">
+      <a href="javascript:void(0)" class="closebtn">&times;</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="nav-bar">
+      <div style="justify-self:start">
+        <div class="menu">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+      <div>
+        <a href="/" style="text-decoration: none">
+          <div class="logo"><b>Com<span>i</span>ca<span>l</span>ity</b></div>
+        </a>
+      </div>
+      <div id="acctSess" style="justify-self:end">
+      </div>
+    </div>
+
+    <div class="content-pane" style="background:#f4f4f4!important">
+      <canvas id="comic-viewer" width="2560" height="1440"></canvas>
+    </div>
+  </div>
+</body>
+
+</html>
