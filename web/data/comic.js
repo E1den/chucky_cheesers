@@ -77,6 +77,21 @@ $(document).ready(function () {
   slides = $(".choice-slide");
 });
 
+$(".createComic").submit(function (n) {
+  n.preventDefault();
+  $.ajax({
+    type: "POST",
+    datatype: 'json',
+    url: "/srv/comic/create",
+    contentType: 'application/json',
+    data: JSON.stringify($(".createComic").serializeArray()),
+    success: function (n) {
+        $(location).attr("href", "/comic/editor/");
+    }
+  })
+}),
+
+
 $(document).on('click', '.previous-slide', function () { animateSlides(0) })
 $(document).on('click', '.next-slide', function () { animateSlides(1) })
 

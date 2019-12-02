@@ -2,13 +2,14 @@
 const mysql = require('./mysql.js');
 const config = require('./config.js');
 const err = require('./error.js')
+const fs = require('fs');
 
 exports.create = function (req, res) {
     try {
-        title = req.body.title.value;
-        cover = req.body.cover.value;
-        tags = req.body.tags.value;
-        description = req.body.description.value;
+        cover = req.body[0].value;
+        title = req.body[1].value;
+        tags = req.body[2].value;
+        description = req.body[3].value;
     }
     catch (e) {
         req.query.e = 400;
@@ -19,6 +20,11 @@ exports.create = function (req, res) {
     mysql.createComic(req.session.user, title, tags, false, description);
     mysql.accessComic(title, function (err, res) {
         res.write(res[0].comic_id);
+
+        fs.writeFile(res[0].comic_id, cover, (err) => {
+            if (err) throw err;
+        });
+
         res.end();
     });
 }
@@ -168,7 +174,7 @@ exports.search = function (req, res) {
     res.contentType("html");
 
     if(search == "" || search==undefined)
-        mysql.accessAllComic( function (err, rows) {
+        mysql.accessAllComic(function (err, rows) {
             res.write("</div>");
             rows.forEach(function(row,index){
                 if(index%5==0){
@@ -191,7 +197,7 @@ exports.search = function (req, res) {
                         res.write("</div>");
                     res.write("<div class='bookcontainer'>");
                 }
-                res.write("<div class='book'><div class='overlay'><div class='bookDetails' cid='"+row.comic_id+"'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
+                res.write("<div class='book' style=\"background:url('/covers/"+row.comic_id+".jpg');\"><div class='overlay'><div class='bookDetails' cid='"+row.comic_id+"'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
             });
             res.write("</div>");
 
