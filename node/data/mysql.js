@@ -126,7 +126,7 @@ module.exports =
 				});
 			});
 		},
-	
+
 		/*
 		Removes the user data from the database
 		Inputs:
@@ -135,7 +135,7 @@ module.exports =
 			Nothing
 		*/
 		deleteUser: function (username) {
-			var sql = `DROP FROM FROM users WHERE display_name = '${username}' OR email_address = '${username}'`;
+			var sql = `DROP FROM users WHERE display_name = '${username}' OR email_address = '${username}'`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err) throw err;
