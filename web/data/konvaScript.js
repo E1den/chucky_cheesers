@@ -154,6 +154,13 @@ $(document).ready(function(){
           false
       )
 
+      window.confirmFrame = function() 
+      {
+        layer.find('Transformer').hide();
+        layer.find('Circle').hide();
+        layer.draw();
+      };
+
       window.addTextBox = function(src)
       {
         var konvaImage = new Konva.Image({
