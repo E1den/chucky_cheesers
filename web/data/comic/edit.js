@@ -126,6 +126,7 @@ $(document).ready(function () {
 
     function showFrameEditor() {
         $(".edit-frame").addClass("popup-on");
+        window.fitStageIntoParentContainer();
         currentlyEditingFrame = true;
         return;
     }
