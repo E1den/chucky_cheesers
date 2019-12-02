@@ -96,7 +96,7 @@ exports.getComicData = function (req, res) {
     mysql.accessUser(req.session.user, function (orows) {
         if(orows==undefined||orows==null||orows.length==0)
         {
-            res.redirect("/");
+            res.write("failure")
             res.end();
             return;
         }

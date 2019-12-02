@@ -15,7 +15,7 @@ $.ajax({
     url: "/srv/comic/getdata",
     contentType: 'application/json',
     data:JSON.stringify({id:$.urlParam('id')}),
-    success: function (n) { if (n == 'failure') {return;}
+    success: function (n) { if (n == 'failure') {window.location.href="/";}
         $(".content-pane h2").html(n.comic_name);
     }
   });
