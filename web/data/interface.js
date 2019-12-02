@@ -16,19 +16,19 @@ function adjustPosterStyles() {
   }
 }
 
-function createComic(n){
+$("#createComic").submit(function(n){
   n.preventDefault();
   $.ajax({
     type: "POST",
     datatype: 'json',
     url: "/srv/comic/create",
     contentType: 'application/json',
-    data: JSON.stringify($(".createComic").serializeArray()),
+    data: JSON.stringify($("#createComic").serializeArray()),
     success: function (n) {
         $(location).attr("href", "/comic/editor/");
     }
   })
-}
+});
 
 $(document).ready(function () {
   $(".menu").click(function () {
@@ -42,20 +42,3 @@ $(document).ready(function () {
 function updateCover(event) {
   $("#Imgoutput").prop("src", URL.createObjectURL(event.target.files[0]));
 }
-
-$("#createComic").submit(function () {
-  var comic = {
-    cover: $("#createComic input[name=coverart]").val(),
-    title: $("#createComic input[name=comicname]").val(),
-    tags: $("#createComic input[name=comictags]").val(),
-    description: $("#createComic input[name=comicdescription]").val()
-  };
-  $.ajax({
-    type: "POST",
-    datatype: 'json',
-    url: "/srv/comic/create",
-    contentType: 'application/json',
-    data: JSON.stringify(comic),
-    success: function (n) { if (n == 'failure') {/*error*/return; } var back = JSON.parse(data); $(location).attr("href", "/comic/edit?id=" + back.id); }
-  });
-});

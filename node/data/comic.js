@@ -176,6 +176,11 @@ exports.search = function (req, res) {
 
         if (search == "" || search == undefined)
             mysql.accessAllComic(function (err, rows) {
+                if(rows == undefined||rows==null)
+                {
+                    res.end();
+                    return;
+                }
                 res.write("</div>");
                 rows.forEach(function (row, index) {
                     if (index % 5 == 0) {
@@ -191,6 +196,11 @@ exports.search = function (req, res) {
             });
         else
             mysql.accessComic(search, function (err, rows) {
+                if(rows == undefined||rows==null)
+                {
+                    res.end();
+                    return;
+                }
                 res.write("</div>");
                 rows.forEach(function (row, index) {
                     if (index % 5 == 0) {
