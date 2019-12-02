@@ -18,12 +18,18 @@ exports.create = function (req, res) {
         return;
     }
 
-    mysql.createComic(req.session.user, title, tags, false, description,function(err, id){
+    if(description==undefined)
+        description="";
+    if(tags==undefined)
+        tags="";
+    if(title==undefined)
+        title="";
+
+    mysql.createComic(req.session.user, title, tags, "false", description,function(err, id){
         res.write(id);
         fs.writeFile("covers/" + id, cover, (err) => {
             if (err) throw err;
         });
-
         res.end();
     });
 
