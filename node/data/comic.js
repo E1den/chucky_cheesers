@@ -7,20 +7,25 @@ const fs = require('fs-extra');
 
 exports.create = function (req, res) {
 
+    var title="";
+    var tags="";
+    var description="";
+
     var fstream;
     req.pipe(req.busboy);
+
+    busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+        if(fieldname=="title")
+            title=val;
+        if(fieldname=="tags")
+            tags=val;
+        if(fieldname=="description")
+            description=val;
+      });
+
     req.busboy.on('file', function (fieldname, file, filename) {
 
         console.log("Uploading "+filename);
-
-        console.log(req.body);
-
-        if (description == undefined)
-            description = "";
-        if (tags == undefined)
-            tags = "";
-        if (title == undefined)
-            title = "";
 
         mysql.createComic(req.session.user, title, tags, "false", description, function (err, id) {
             res.write("" + id);
@@ -177,7 +182,7 @@ exports.update = function (req, res) {
 exports.search = function (req, res) {
 
     try {
-        search = req.body.search+"";
+        search = req.body.search;
         type = req.body.type;
     }
     catch (e) {
