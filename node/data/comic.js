@@ -21,7 +21,7 @@ exports.create = function (req, res) {
     mysql.accessComic(title, function (err, res) {
         res.write(res[0].comic_id);
 
-        fs.writeFile("covers/"+res[0].comic_id, cover, (err) => {
+        fs.writeFile("covers/" + res[0].comic_id, cover, (err) => {
             if (err) throw err;
         });
 
@@ -29,12 +29,11 @@ exports.create = function (req, res) {
     });
 }
 
-exports.delete = function(req, res) {
-    try{
-        mysql.deleteComic(req.body.id.value,req.body.user.value);
+exports.delete = function (req, res) {
+    try {
+        mysql.deleteComic(req.body.id.value, req.body.user.value);
     }
-    catch(e)
-    {
+    catch (e) {
         req.query.e = 400;
         err.error(req, res);
         return;
@@ -143,10 +142,10 @@ exports.getPages = function (req, res) {
     res.end();*/
 }
 
-exports.update = function(req, res) {
+exports.update = function (req, res) {
     try {
         //res.body
-        mysql.accessComicPageList( function (err, rows) {
+        mysql.accessComicPageList(function (err, rows) {
             var n = rows.length;
         });
 
@@ -173,36 +172,40 @@ exports.search = function (req, res) {
     //con.connect(function (err) {
     res.contentType("html");
 
-    if(search == "" || search==undefined)
-        mysql.accessAllComic(function (err, rows) {
-            res.write("</div>");
-            rows.forEach(function(row,index){
-                if(index%5==0){
-                    if(index!=0)
-                        res.write("</div>");
-                    res.write("<div class='bookcontainer'>");
-                }
-                res.write("<div class='book'><div class='overlay'><div class='bookDetails' cid='"+row.comic_id+"'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
-            });
-            res.write("</div>");
+    try {
 
-            res.end();
-        });
-    else
-        mysql.accessComic(search, function (err, rows) {
-            res.write("</div>");
-            rows.forEach(function(row,index){
-                if(index%5==0){
-                    if(index!=0)
-                        res.write("</div>");
-                    res.write("<div class='bookcontainer'>");
-                }
-                res.write("<div class='book' style=\"background:url('/covers/"+row.comic_id+".jpg');\"><div class='overlay'><div class='bookDetails' cid='"+row.comic_id+"'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
-            });
-            res.write("</div>");
+        if (search == "" || search == undefined)
+            mysql.accessAllComic(function (err, rows) {
+                res.write("</div>");
+                rows.forEach(function (row, index) {
+                    if (index % 5 == 0) {
+                        if (index != 0)
+                            res.write("</div>");
+                        res.write("<div class='bookcontainer'>");
+                    }
+                    res.write("<div class='book'><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
+                });
+                res.write("</div>");
 
-            res.end();
-        });
+                res.end();
+            });
+        else
+            mysql.accessComic(search, function (err, rows) {
+                res.write("</div>");
+                rows.forEach(function (row, index) {
+                    if (index % 5 == 0) {
+                        if (index != 0)
+                            res.write("</div>");
+                        res.write("<div class='bookcontainer'>");
+                    }
+                    res.write("<div class='book' style=\"background:url('/covers/" + row.comic_id + ".jpg');\"><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
+                });
+                res.write("</div>");
+
+                res.end();
+            });
+    }
+    catch (e) { res.end(); }
 
 
 }

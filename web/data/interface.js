@@ -16,8 +16,7 @@ function adjustPosterStyles() {
   }
 }
 
-
-$("#createComic").submit(function (n) {
+function createComic(n){
   n.preventDefault();
   $.ajax({
     type: "POST",
@@ -29,7 +28,7 @@ $("#createComic").submit(function (n) {
         $(location).attr("href", "/comic/editor/");
     }
   })
-});
+}
 
 $(document).ready(function () {
   $(".menu").click(function () {
