@@ -1,7 +1,8 @@
-const imageFile = document.getElementById("image-file");
+$(document).ready(function(){
+      const imageFile = document.getElementById("image-file");
       const videoFile = document.getElementById("video-file");
-      var width = window.innerWidth;
-      var height = window.innerHeight;
+      var width = $("#edit-canvas").width();
+      var height = $("#edit-canvas").height();
 
       // Set anchor functions for resizing of images
       // Base code from Konva tutorials
@@ -95,7 +96,7 @@ const imageFile = document.getElementById("image-file");
 
       // Create stage
       var stage = new Konva.Stage({
-        container: 'container',
+        container: 'edit-canvas',
         width: width,
         height: height
       });
@@ -105,21 +106,21 @@ const imageFile = document.getElementById("image-file");
       var offsetY = 0;
 
       stage.add(layer);
-      
+
       var myVideo = document.createElement("video");
       var anim = new Konva.Animation(function() {
-          }, layer);  
+          }, layer);
 
 
       // addImage button clicks on get imagefile
-      document.getElementById('addImage').addEventListener(
+      document.getElementById('edit-frame-pic').addEventListener(
         'click',
         function() {
             imageFile.click();
         },
         false
       );
-      
+
       // when imagefile is changed, create konva image from chosen file
       imageFile.addEventListener(
         "change",
@@ -138,8 +139,8 @@ const imageFile = document.getElementById("image-file");
           myImage.src = URL.createObjectURL(event.target.files[0]);
           // Create group and add image for resizing purposes
           var myImageGroup = new Konva.Group({
-          x: 400,
-          y: 50,
+          x: 0,
+          y: 0,
           draggable: true
           });
           // Add group to layer and image to group
@@ -152,9 +153,37 @@ const imageFile = document.getElementById("image-file");
           },
           false
       )
-      
+
+      window.addTextBox = function(src)
+      {
+        var konvaImage = new Konva.Image({
+          width: 200,
+          height: 138,
+        });
+        // Create basic image and fill with file selected
+        var myImage = new Image();
+        myImage.onload = function() {
+          konvaImage.image(myImage);
+          layer.draw();
+        };
+        myImage.src = src;
+        // Create group and add image for resizing purposes
+        var myImageGroup = new Konva.Group({
+        x: 0,
+        y: 0,
+        draggable: true
+        });
+        // Add group to layer and image to group
+        layer.add(myImageGroup);
+        myImageGroup.add(konvaImage);
+        addAnchor(myImageGroup, 0, 0, 'topLeft');
+        addAnchor(myImageGroup, 200, 0, 'topRight');
+        addAnchor(myImageGroup, 200, 138, 'bottomRight');
+        addAnchor(myImageGroup, 0, 138, 'bottomLeft');
+      };
+
       // addVideo clicks on get videofile
-      document.getElementById('addVideo').addEventListener(
+      document.getElementById('edit-frame-video').addEventListener(
         'click',
         function() {
           videoFile.click();
@@ -171,7 +200,7 @@ const imageFile = document.getElementById("image-file");
             height: 138,
           });
           // Create animation
-          // Create basic video 
+          // Create basic video
           myVideo = document.createElement("video");
           konvaVideo.image(myVideo);
           layer.add(konvaVideo);
@@ -183,8 +212,8 @@ const imageFile = document.getElementById("image-file");
 
           // Create konva group for resizing purposes
           var myVideoGroup = new Konva.Group({
-          x: 400,
-          y: 50,
+          x: 0,
+          y: 0,
           draggable: true
           });
           // Add group to layer and video to group
@@ -201,30 +230,38 @@ const imageFile = document.getElementById("image-file");
           false
       )
 
+      document.getElementById('edit-frame-clear').addEventListener(
+        "click",
+        function()
+        {
+          location.reload();
+        }
+      )
+
       // add button event bindings
-      document.getElementById('play').addEventListener('click', function() {
-        myVideo.play();
-        anim.start();
-      });
-      document.getElementById('pause').addEventListener('click', function() {
-        myVideo.pause();
-        anim.stop();
-      });
-      
-      // addText adds drag and drop resizable txt 
+      //document.getElementById('play').addEventListener('click', function() {
+        //myVideo.play();
+        //anim.start();
+      //});
+      //document.getElementById('pause').addEventListener('click', function() {
+        //myVideo.pause();
+        //anim.stop();
+      //});
+
+      // addText adds drag and drop resizable txt
       // Base code from konva tutorials on how to make text editable
       // https://konvajs.org/docs/sandbox/Editable_Text.html
-      document.getElementById('addText').addEventListener(
+      document.getElementById('edit-frame-text').addEventListener(
         'click',
         function() {
           // Create konva text
           var textNode = new Konva.Text({
             text: 'Some text here',
-            x: 400,
-            y: 80,
+            x: 0,
+            y: 0,
             fontSize: 20,
             draggable: true,
-            width: 200
+            width: 100
           });
 
       layer.add(textNode);
@@ -296,6 +333,7 @@ const imageFile = document.getElementById("image-file");
         textarea.style.background = 'none';
         textarea.style.outline = 'none';
         textarea.style.resize = 'none';
+        textarea.style.zIndex = 100;
         textarea.style.lineHeight = textNode.lineHeight();
         textarea.style.fontFamily = textNode.fontFamily();
         textarea.style.transformOrigin = 'left top';
@@ -392,3 +430,4 @@ const imageFile = document.getElementById("image-file");
         },
         false
       );
+});

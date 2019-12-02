@@ -3,7 +3,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Vibur&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/konva@4.0.18/konva.min.js"></script>
     <link href="style.css" rel="stylesheet">
+    <script src="konvaScript.js"></script>
     <script src="interface.js"></script>
     <script src="accounts.js"></script>
     <script src="gallery.js"></script>
@@ -59,28 +61,32 @@
         </div>
       </div>
 
-      <div class="edit-frame">
+      <div class="edit-frame popup-on">
         <button id="createComic-close" onclick="popUp('.edit-frame')">X</button>
         <h2>Add Media</h2>
         <div class="edit-frame-wrap">
-          <div class="edit-canvas">
+          <div class="edit-canvas" id="edit-canvas">
           </div>
           <div class="edit-upload-form">
-            <form id="createComic">
-              <label for="edit-frame-upload" class="custom-file-upload">
-                Add Media
-              </label>
-              <input id="edit-frame-upload" type="file" name="frame-upload" accept="image/*" onchange="editFileUpload(event)" style="display:none"><br>
-            </form>
-            <div class="text-box-container">
-
+            <input type="file" id="image-file" accept="image/*" hidden="hidden">
+            <input type="file" id="video-file" accept="video/*" hidden="hidden">
+            <div class="pic-vid-btnwrapper">
+            <button class="confirm-edit" id="edit-frame-pic" style="margin-right:5px;">Add Picture</button>
+            <button class="confirm-edit" id="edit-frame-video">Add Video</button>
             </div>
+            <button class="confirm-edit" id="edit-frame-text">Add Text</button>
+            <div class="text-box-container">
+              <button class="text-box-btn" onclick="addTextBox('assets/bubble.png')"><img src="assets/bubble.png"></button>
+              <button class="text-box-btn" onclick="addTextBox('assets/explosion.png')"><img src="assets/explosion.png"></button>
+              <button class="text-box-btn" onclick="addTextBox('assets/box.png')"><img src="assets/box.png"></button>
+            </div>
+            <button class="confirm-edit" id="edit-frame-clear" style="margin-top:5px;">Clear Frame</button>
           </div>
         </div>
         <button class="confirm-edit">Confirm</button>
       </div>
 
-      <div class="choose-template popup-on">
+      <div class="choose-template">
         <button id="createComic-close" onclick="popUp('.choose-template')">X</button>
         <h2>Choose Template</h2>
         <div class="choice-wheel">
