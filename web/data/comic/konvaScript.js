@@ -154,7 +154,7 @@ $(document).ready(function(){
           false
       )
 
-      window.confirmFrame = function()
+      window.confirmFrame = function() 
       {
         layer.find('Transformer').hide();
         layer.find('Circle').hide();
