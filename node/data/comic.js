@@ -21,7 +21,7 @@ exports.create = function (req, res) {
     mysql.accessComic(title, function (err, res) {
         res.write(res[0].comic_id);
 
-        fs.writeFile(res[0].comic_id, cover, (err) => {
+        fs.writeFile("covers/"+res[0].comic_id, cover, (err) => {
             if (err) throw err;
         });
 
