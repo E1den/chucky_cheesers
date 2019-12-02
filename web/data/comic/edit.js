@@ -57,19 +57,16 @@ window.frameError = function (offsetx, offsety) {
     ctx.closePath();
 }
 
-function saveFrame()
-{
+function saveFrame() {
 
 }
 
 
-function saveComic()
-{
+function saveComic() {
 
     tempData = window.comicData;
-    tempData.page.forEach(function (page, index){
-        page.frames.forEach(function(frame, frame_index)
-        {
+    tempData.page.forEach(function (page, index) {
+        page.frames.forEach(function (frame, frame_index) {
             delete tempData.page[frame].x;
             delete tempData.page[frame].y;
             delete tempData.page[frame].width;
@@ -88,24 +85,22 @@ function saveComic()
     window.location.replace(`/comic/view/?id=${window.COMIC_ID}`);
 }
 
-function cancelTemplate()
-{
+function cancelTemplate() {
     $(".choose-template").removeClass("popup-on");
-    currentLayoutFor=0;
+    currentLayoutFor = 0;
 }
 
-function chooseTemplate()
-{
+function chooseTemplate() {
     $(".choose-template").removeClass("popup-on");
     var layout = Number($(".current-slide").attr("id"));
     pos = window.getLayoutPos(layout);
     window.comicData.page.push({ 'layout': layout, frames: pos });
     window.redrawPages();
-    if(currentLayoutFor==1)
+    if (currentLayoutFor == 1)
         leftPageExists = true;
-    else if(currentLayoutFor==2)
-        rightPageExists=true;
-    currentLayoutFor=0;
+    else if (currentLayoutFor == 2)
+        rightPageExists = true;
+    currentLayoutFor = 0;
     return;
 }
 
@@ -125,7 +120,7 @@ $(document).ready(function () {
 
     var current_index = 0;
 
-    window.commitFrame = function() {
+    window.commitFrame = function () {
         currentlyEditingFrame = false;
     }
 
@@ -148,15 +143,15 @@ $(document).ready(function () {
         x = (x / $("#comic-viewer").width()) * width;
         y = (y / $("#comic-viewer").height()) * height;
 
-        if(currentLayoutFor!=0)
+        if (currentLayoutFor != 0)
             return; //currently Selecting Layout
-        if(currentlyEditingFrame)
+        if (currentlyEditingFrame)
             return;//currently editing frame
 
 
         if (window.comicData == undefined) {
-            currentLayoutFor=1;
-            currentPageNumber=0;
+            currentLayoutFor = 1;
+            currentPageNumber = 0;
             window.comicData = { page: [] };
             showSelectLayout();
             return;
@@ -188,34 +183,35 @@ $(document).ready(function () {
             return;
         }
 
-        //right
-        if ((window.leftPageNum + 2 <= window.comicData.page.length) && (x >= rleft) && (x <= rleft + 90) && (y >= bheight) && (y <= bheight + 90)) {
-            //selected this box at index
-            window.leftPageNum += 2;
-            currentPageNumber = leftPageNum;
+        try {//right
+            if ((window.leftPageNum + 2 <= window.comicData.page.length) && (x >= rleft) && (x <= rleft + 90) && (y >= bheight) && (y <= bheight + 90)) {
+                //selected this box at index
+                window.leftPageNum += 2;
+                currentPageNumber = leftPageNum;
 
-            if (window.leftPageNum >= 0 && window.leftPageNum < window.comicData.page.length)
-                leftPageExists = true;
-            else
-                leftPageExists = false;
+                if (window.leftPageNum >= 0 && window.leftPageNum < window.comicData.page.length)
+                    leftPageExists = true;
+                else
+                    leftPageExists = false;
 
-            if (window.leftPageNum + 1 > 0 && window.leftPageNum + 1 < window.comicData.page.length)
-                rightPageExists = true;
-            else
-                rightPageExists = false;
+                if (window.leftPageNum + 1 > 0 && window.leftPageNum + 1 < window.comicData.page.length)
+                    rightPageExists = true;
+                else
+                    rightPageExists = false;
 
-            window.redrawPages();
-            return;
-        }
+                window.redrawPages();
+                return;
+            }
+        } catch (e) { }
 
 
         if (x < (width / 2) && leftPageExists == false) {
-            currentLayoutFor=1;
+            currentLayoutFor = 1;
             showSelectLayout();
             return;
         }
         if (x > (width / 2) && rightPageExists == false) {
-            currentLayoutFor=2;
+            currentLayoutFor = 2;
             showSelectLayout();
             return;
         }
@@ -224,12 +220,12 @@ $(document).ready(function () {
         var pageXOffset = 0;
         if (x > (width / 2)) {
             currentPage = window.comicData.page[window.leftPageNum + 1]; // right page
-            pageXOffset=(width/2);
+            pageXOffset = (width / 2);
         }
 
         //each should be a plus sign until an image is added
         currentPage.frames.forEach(function (frame, index) {
-            if ((x >= frame.x+pageXOffset) && (x <= frame.x + frame.width + pageXOffset) && (y >= frame.y) && (y <= frame.y + frame.height)) {
+            if ((x >= frame.x + pageXOffset) && (x <= frame.x + frame.width + pageXOffset) && (y >= frame.y) && (y <= frame.y + frame.height)) {
                 //selected this box at index
                 if (index == current_index) {
                     showFrameEditor();
