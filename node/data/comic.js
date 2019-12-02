@@ -259,7 +259,7 @@ exports.search = function (req, res) {
                             res.write("</div>");
                         res.write("<div class='bookcontainer'>");
                     }
-                    res.write("<div class='book'style=\"background:url('/covers/" + row.comic_id + ".jpg');\"><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
+                    res.write("<div class='book'style=\"background:url('/covers/" + row.comic_id + ".jpg');background-size:cover;\"><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
                 });
                 res.write("</div>");
 
@@ -278,7 +278,7 @@ exports.search = function (req, res) {
                             res.write("</div>");
                         res.write("<div class='bookcontainer'>");
                     }
-                    res.write("<div class='book' style=\"background:url('/covers/" + row.comic_id + ".jpg');\"><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
+                    res.write("<div class='book' style=\"background:url('/covers/" + row.comic_id + ".jpg');background-size:cover;\"><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
                 });
                 res.write("</div>");
 
