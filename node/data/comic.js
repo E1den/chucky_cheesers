@@ -179,22 +179,26 @@ exports.search = function (req, res) {
 
     // res.end();
 
-    mysql.accessComic(search, function (rows) {
+
+    mysql.accessComic(search, function (err, rows) {
         if (rowNum < rows.length) {
             res.write("done")
             return;
         }
 
-        var rowLimited = rowNum + 5;
-        if (rowLimited > rows.length)
-            rowLimited = rows.length;
-
-        res.write("<div class='bookcontainer'>");
-        for (var row = rowNum; row < rowLimited; row++) {
+        rows.foreach(function(row,index){
+            res.write("</div>");
+            if(index%5==0){
+                if(index!=0)
+                    res.write("</div>");
+                res.write("<div class='bookcontainer'>");
+            }
             res.write("<div class='book'><div class='overlay'><div class='bookDetails' cid='"+rows[row].comic_id+"'><h2>" + rows[row].comic_name + "</h2>" + rows[row].descrip + "</div></div></div>");
-        }
+        });
         res.write("</div>");
+
+        res.end();
     })
 
-    res.end();
+
 }
