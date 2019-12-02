@@ -154,6 +154,13 @@ $(document).ready(function(){
           false
       )
 
+      window.confirmFrame = function() 
+      {
+        layer.find('Transformer').hide();
+        layer.find('Circle').hide();
+        layer.draw();
+      };
+
       window.addTextBox = function(src)
       {
         var konvaImage = new Konva.Image({
@@ -234,7 +241,8 @@ $(document).ready(function(){
         "click",
         function()
         {
-          location.reload();
+          layer.destroyChildren();
+          layer.draw();
         }
       )
 
@@ -261,7 +269,8 @@ $(document).ready(function(){
             y: 0,
             fontSize: 20,
             draggable: true,
-            width: 100
+            width: 100,
+            fontFamily: 'Happy Monkey, cursive'
           });
 
       layer.add(textNode);
@@ -335,7 +344,7 @@ $(document).ready(function(){
         textarea.style.resize = 'none';
         textarea.style.zIndex = 100;
         textarea.style.lineHeight = textNode.lineHeight();
-        textarea.style.fontFamily = textNode.fontFamily();
+        textarea.style.boxShadow = 'none';
         textarea.style.transformOrigin = 'left top';
         textarea.style.textAlign = textNode.align();
         textarea.style.color = textNode.fill();
@@ -430,4 +439,22 @@ $(document).ready(function(){
         },
         false
       );
+
+      function fitStageIntoParentContainer() {
+        var container = document.querySelector('#edit-canvas');
+
+        // now we need to fit stage into parent
+        var containerWidth = container.offsetWidth;
+        // to do this we need to scale the stage
+        var scale = containerWidth / stageWidth;
+
+        stage.width(stageWidth * scale);
+        stage.height(stageHeight * scale);
+        stage.scale({ x: scale, y: scale });
+        stage.draw();
+      }
+
+      fitStageIntoParentContainer();
+      // adapt the stage on any window resize
+      window.addEventListener('resize', fitStageIntoParentContainer);
 });
