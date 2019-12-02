@@ -156,6 +156,7 @@ $(document).ready(function () {
 
         if (window.comicData == undefined) {
             currentLayoutFor=1;
+            currentPageNumber=0;
             window.comicData = { page: [] };
             showSelectLayout();
             return;
