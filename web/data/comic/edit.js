@@ -4,6 +4,7 @@ var currentPageNumber = 0;
 
 //1=left,2=right
 var currentLayoutFor = 0;
+var currentlyEditingFrame = 0;
 
 window.dataLoaded = function () {
     try {
@@ -125,11 +126,12 @@ $(document).ready(function () {
     var current_index = 0;
 
     window.commitFrame = function() {
-
+        currentlyEditingFrame = false;
     }
 
     function showFrameEditor() {
         $(".edit-frame").addClass("popup-on");
+        currentlyEditingFrame = true;
         return;
     }
 
@@ -148,6 +150,8 @@ $(document).ready(function () {
 
         if(currentLayoutFor!=0)
             return; //currently Selecting Layout
+        if(currentlyEditingFrame)
+            return;//currently editing frame
 
 
         if (window.comicData == undefined) {
