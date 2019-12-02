@@ -187,6 +187,30 @@ module.exports =
 			});
 		},
 
+		/*
+		Pulls the data for all comics in the database
+		Returns:
+			result: an array of all of the data in the comic table
+				columns:
+					user_id: id of the user that created the comic
+					comic_name: the comics name
+					tags: the tag list for the comic
+					is_pirvate: says if the comic is private or not
+					descrip: description of the comic
+		*/
+                accessAllComic: function (callback) {
+                        var sql = `SELECT * FROM comics;`;
+                        pool.getConnection(function (err, con) {
+                                con.query(sql, function (err, result) {
+                                        if (err)
+                                                throw callback(err, null);
+                                        else
+                                                return callback(err, result);
+                                });
+                        });
+                },
+
+
 		//passed a comics name and returns the id of the comic specified
 		getComicIDByName: function (comic_name) {
 			var sql = `SELECT comic_id FROM comics WHERE comic_name = '${comic_name}'`;
