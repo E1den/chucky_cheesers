@@ -292,7 +292,7 @@ module.exports =
 					layout: the layout of the page
 		*/
 		accessComicPageList: function (comic_id, callback) {
-			var sql = `SELECT * from comic_page_list WHERE comic_id = '${comic_id}'`;
+			var sql = `SELECT * FROM pages INNER JOIN comic_page_list ON pages.page_id=comic_page_list.page_id WHERE comic_id='${comic_id}';`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err) callback(err, null);
