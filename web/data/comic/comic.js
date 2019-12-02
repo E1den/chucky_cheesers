@@ -121,6 +121,8 @@ window.handleLayout = function () {
      }
 
     try {
+        if(window.comicData.page.length==0||window.leftPageNum+1>window.comicData.page.length)
+          return;
         var right = window.comicData.page[window.leftPageNum + 1];
         window.getLayoutPos(right.layout).forEach(function (frame, index) {
             //pass layout to the frame rach frame object on the right page
@@ -147,8 +149,6 @@ function grabData() {
                 return;
             }
             window.comicData = n;
-            if(window.comicData.page.length==0)
-              delete window.comicData.page;
             window.dataLoaded();
             window.handleLayout();
             setupUtility();
