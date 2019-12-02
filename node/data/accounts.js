@@ -4,6 +4,7 @@ const config = require('./config.js');
 const mailer = require('nodemailer');
 const crypto = require('crypto');
 const fs = require('fs');
+const err = require('./error.js')
 
 const sender = mailer.createTransport({
     service: 'gmail',

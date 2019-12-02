@@ -7,33 +7,35 @@ const fs = require('fs-extra');
 
 exports.create = function (req, res) {
 
-    var title="";
-    var tags="";
-    var description="";
+    var title = "";
+    var tags = "";
+    var description = "";
 
     var fstream;
     req.pipe(req.busboy);
 
-    req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
-        console.log(fieldname+":="+val);
-        if(fieldname=="title")
-            title=val;
-        if(fieldname=="tags")
-            tags=val;
-        if(fieldname=="description")
-            description=val;
-      });
+    req.busboy.on('field', function (fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+        console.log(fieldname + ":=" + val);
+        if (fieldname == "title")
+            title = val;
+        if (fieldname == "tags")
+            tags = val;
+        if (fieldname == "description")
+            description = val;
+    });
 
     req.busboy.on('file', function (fieldname, file, filename) {
 
-        console.log("Uploading "+filename);
+        console.log("Uploading " + filename);
 
-        mysql.createComic(req.session.user, title, tags, "false", description, function (err, id) {
-            res.write("" + id);
-            fstream = fs.createWriteStream("../../web/data/covers/" + id + ".jpg");
-            file.pipe(fstream);
-            fstream.on('close', function() {
-                res.end();
+        mysql.accessUser(req.session.user, function (req, res) {
+            mysql.createComic(res[0].user_id, title, tags, "false", description, function (err, id) {
+                res.write("" + id);
+                fstream = fs.createWriteStream("../../web/data/covers/" + id + ".jpg");
+                file.pipe(fstream);
+                fstream.on('close', function () {
+                    res.end();
+                });
             });
         });
 
@@ -61,6 +63,51 @@ exports.delete = function (req, res) {
         err.error(req, res);
         return;
     }
+}
+
+//verify owner of comic
+function verifyOwner(callback) {
+    mysql.accessUser(req.session.user, function (req, rows) {
+        mysql.accessComicByID(id, function (err, rows) {
+            if (rows[0].user_id != res[0].user_id) {
+                req.query.e = 400;
+                err.error(req, res);
+                return;
+            }
+            else
+                callback();
+        });
+    });
+}
+
+exports.getComicData = function (req, res) {
+
+    try {
+        id = req.body.id;
+    }
+    catch (e) {
+        req.query.e = 400;
+        err.error(req, res);
+        return;
+    }
+
+    //verify owner
+
+    mysql.accessUser(req.session.user, function (req, rows) {
+        mysql.accessComicByID(id, function (err, rows) {
+            if (rows[0].user_id != res[0].user_id) {
+                req.query.e = 400;
+                err.error(req, res);
+                return;
+            }
+            else
+            {
+                res.contentType("json");
+                res.write(JSON.stringify(rows[0]));
+                res.end();
+            }
+        });
+    });
 }
 
 exports.getPages = function (req, res) {
