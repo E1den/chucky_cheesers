@@ -5,7 +5,6 @@ const err = require('./error.js')
 const fs = require('fs');
 
 exports.create = function (req, res) {
-    console.log(req.body);
     try {
         cover = req.body.cover;
         title = req.body.title;
@@ -26,7 +25,7 @@ exports.create = function (req, res) {
         title="";
 
     mysql.createComic(req.session.user, title, tags, "false", description,function(err, id){
-        res.write(id);
+        res.write(""+id);
         fs.writeFile("covers/" + id, cover, (err) => {
             if (err) throw err;
         });
