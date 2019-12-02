@@ -147,6 +147,8 @@ function grabData() {
                 return;
             }
             window.comicData = n;
+            if(window.comicData.page.length==0)
+              delete window.comicData.page;
             window.dataLoaded();
             window.handleLayout();
             setupUtility();
