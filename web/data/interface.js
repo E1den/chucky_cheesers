@@ -40,7 +40,7 @@ $(document).ready(function () {
       url: "/srv/comic/create",
       contentType: 'application/json',
       data: JSON.stringify(comic),
-      success: function (n) { if (n == 'failure') {return; } $(location).attr("href", "/comic/edit/?id="+n); }
+      success: function (n) { if (n == 'failure') {return; } $(location).attr("href", "/comic/editor/?id="+n); }
     });
   });
 })

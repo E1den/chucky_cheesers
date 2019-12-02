@@ -3,6 +3,7 @@ const mysql = require('./mysql.js');
 const config = require('./config.js');
 const err = require('./error.js')
 const fs = require('fs');
+var multer = require('multer');
 
 exports.create = function (req, res) {
     try {
@@ -17,18 +18,38 @@ exports.create = function (req, res) {
         return;
     }
 
-    if(description==undefined)
-        description="";
-    if(tags==undefined)
-        tags="";
-    if(title==undefined)
-        title="";
+    if (description == undefined)
+        description = "";
+    if (tags == undefined)
+        tags = "";
+    if (title == undefined)
+        title = "";
 
-    mysql.createComic(req.session.user, title, tags, "false", description,function(err, id){
-        res.write(""+id);
-        fs.writeFile("covers/" + id, cover, (err) => {
+    mysql.createComic(req.session.user, title, tags, "false", description, function (err, id) {
+        res.write("" + id);
+        fs.writeFile("../../web/data/covers/" + id + ".jpg", cover, (err) => {
             if (err) throw err;
         });
+
+
+        var storage = multer.diskStorage({
+            destination: function (req, file, callback) {
+                callback(null, '../../web/data/covers/');
+            },
+            filename: function (req, file, callback) {
+                callback(null, id);
+            }
+        });
+
+        var upload = multer({ storage: storage }).single('userPhoto');
+
+        upload(req, res, function (err) {
+            if (err) {
+                return res.end("Error uploading file.");
+            }
+            res.end("File is uploaded");
+        });
+
         res.end();
     });
 
@@ -181,8 +202,7 @@ exports.search = function (req, res) {
 
         if (search == "" || search == undefined)
             mysql.accessAllComic(function (err, rows) {
-                if(rows == undefined||rows==null)
-                {
+                if (rows == undefined || rows == null) {
                     res.end();
                     return;
                 }
@@ -201,8 +221,7 @@ exports.search = function (req, res) {
             });
         else
             mysql.accessComic(search, function (err, rows) {
-                if(rows == undefined||rows==null)
-                {
+                if (rows == undefined || rows == null) {
                     res.end();
                     return;
                 }
