@@ -54,7 +54,21 @@
         <button class="createBtn" onclick="deleteComic('open')"><span class="create-top" style="color: black;">Delete Comic</span><span class="create-bottom" style="color: black;">Delete Comic</span></button>
       </div>
     </div>
+
     <canvas id="comic-viewer" width="2560" height="1440"></canvas>
+
+    <div class="choose-template">
+      <button id="createComic-close" onclick="popUp('.choose-template')">X</button>
+      <h2>Choose Template</h2>
+      <div class="choice-wheel">
+        <div class="choice-slide current-slide" style="background: green">1</div>
+        <div class="choice-slide next-slide" style="background: red">2</div>
+        <div class="choice-slide" style="background: yellow">3</div>
+        <div class="choice-slide previous-slide" style="background: blue">4</div>
+      </div>
+      <button class="confirm-edit" onclick="chooseTemplate()">Confirm</button>
+    </div>
+
   </div>
 </body>
 

@@ -67,9 +67,9 @@ exports.delete = function (req, res) {
 
 //verify owner of comic
 function verifyOwner(callback) {
-    mysql.accessUser(req.session.user, function (req, rows) {
+    mysql.accessUser(req.session.user, function (orows) {
         mysql.accessComicByID(id, function (err, rows) {
-            if (rows[0].user_id != res[0].user_id) {
+            if (rows[0].user_id != orows[0].user_id) {
                 req.query.e = 400;
                 err.error(req, res);
                 return;
@@ -93,9 +93,10 @@ exports.getComicData = function (req, res) {
 
     //verify owner
 
-    mysql.accessUser(req.session.user, function (req, rows) {
+    mysql.accessUser(req.session.user, function (orows) {
         mysql.accessComicByID(id, function (err, rows) {
-            if (rows[0].user_id != res[0].user_id) {
+            console.log("loading: "+ rows[0]);
+            if (rows[0].user_id != orows[0].user_id) {
                 req.query.e = 400;
                 err.error(req, res);
                 return;
