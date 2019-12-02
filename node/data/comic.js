@@ -14,7 +14,8 @@ exports.create = function (req, res) {
     var fstream;
     req.pipe(req.busboy);
 
-    busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+    req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+        console.log(fieldname+":="+val);
         if(fieldname=="title")
             title=val;
         if(fieldname=="tags")
@@ -209,7 +210,7 @@ exports.search = function (req, res) {
                             res.write("</div>");
                         res.write("<div class='bookcontainer'>");
                     }
-                    res.write("<div class='book'><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
+                    res.write("<div class='book'style=\"background:url('/covers/" + row.comic_id + ".jpg');\"><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
                 });
                 res.write("</div>");
 

@@ -31,11 +31,11 @@ $(document).ready(function () {
 
     var file = $("#file-upload")[0].files[0];
     var formData = new FormData();
-    formData.append('file', file);
     formData.append("upload_file", true);
     formData.append("title",$("#createComic input[name=comicname]").val());
     formData.append("tags",$("#createComic input[name=comictags]").val());
     formData.append("description",$("#comicdescription").val());
+    formData.append('file', file);
 
     $.ajax({
       type: "POST",
