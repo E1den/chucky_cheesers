@@ -2,36 +2,48 @@
 const mysql = require('./mysql.js');
 const config = require('./config.js');
 const err = require('./error.js')
-const fs = require('fs');
+const busboy = require('connect-busboy');
+const fs = require('fs-extra');
 
 exports.create = function (req, res) {
-    try {
-        cover = req.body.cover;
-        title = req.body.title;
-        tags = req.body.tags;
-        description = req.body.description;
-    }
-    catch (e) {
-        req.query.e = 400;
-        err.error(req, res);
-        return;
-    }
 
-    if (description == undefined)
-        description = "";
-    if (tags == undefined)
-        tags = "";
-    if (title == undefined)
-        title = "";
+    var fstream;
+    req.pipe(req.busboy);
+    req.busboy.on('file', function (fieldname, file, filename) {
 
-    mysql.createComic(req.session.user, title, tags, "false", description, function (err, id) {
-        res.write("" + id);
-        fs.writeFile("../../web/data/covers/" + id + ".jpg", cover, (err) => {
-            if (err) throw err;
+        console.log("Uploading "+filename);
+
+        console.log(req.body);
+
+        if (description == undefined)
+            description = "";
+        if (tags == undefined)
+            tags = "";
+        if (title == undefined)
+            title = "";
+
+        mysql.createComic(req.session.user, title, tags, "false", description, function (err, id) {
+            res.write("" + id);
+            fstream = fs.createWriteStream("../../web/data/covers/" + id + ".jpg");
+            file.pipe(fstream);
+            fstream.on('close', function() {
+                res.end();
+            });
         });
-        res.end();
+
     });
 
+    // try {
+    //     cover = req.body.cover;
+    //     title = req.body.title;
+    //     tags = req.body.tags;
+    //     description = req.body.description;
+    // }
+    // catch (e) {
+    //     req.query.e = 400;
+    //     err.error(req, res);
+    //     return;
+    // }
 }
 
 exports.delete = function (req, res) {

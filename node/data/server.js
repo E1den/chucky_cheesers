@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const busboy = require('connect-busboy');
 //Load in custom pages
 const error_handler = require('./error.js');
 const accounts = require('./accounts.js');
@@ -16,6 +17,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+app.use(busboy());
 app.use(express.json());
 
 //Handle account controls

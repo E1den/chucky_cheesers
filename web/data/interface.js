@@ -29,14 +29,16 @@ $(document).ready(function () {
   $("#createComic").submit(function (n) {
     n.preventDefault();
 
-    //var file = $("#createComic")[0].files[0];
-    //var formData = new FormData().append('file', file);
+    var file = $("#file-upload")[0].files[0];
+    var formData = new FormData();
+    formData.append('file', file);
+    formData.append("upload_file", true);
 
     var comic = {
-      cover: "",//formData,
+      cover: formData,
       title: $("#createComic input[name=comicname]").val(),
       tags: $("#createComic input[name=comictags]").val(),
-      description: $("#createComic input[name=comicdescription]").val()
+      description: $("#comicdescription").val()
     };
 
     $.ajax({
@@ -48,7 +50,7 @@ $(document).ready(function () {
       success: function (n) { if (n == 'failure') {return; } $(location).attr("href", "/comic/editor/?id="+n); }
     });
   });
-})
+});
 
 function updateCover(event) {
   $("#Imgoutput").prop("src", URL.createObjectURL(event.target.files[0]));
