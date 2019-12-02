@@ -1,5 +1,5 @@
 /*
-COP 4331C - Fall 2019 
+COP 4331C - Fall 2019
 Brandon F.
 Mitchell G.
 Joshua G.
@@ -41,7 +41,7 @@ const config = require('./config.js');
 const pool = mysql.createPool(
 	{
 		connectionLimit: 100,
-		queueLimit : 0,
+		queueLimit: 0,
 		host: config.meta.credentials.host,
 		user: config.meta.credentials.user,
 		password: config.meta.credentials.password,
@@ -60,19 +60,17 @@ function getPageNumber(comic_id, callback) {
 }
 
 //Copies all of the content for one comic to a new comic and copies the comic_page_list as well
-function copyComic(comic_id_to_split, new_user_id, callback)
-{
+function copyComic(comic_id_to_split, new_user_id, callback) {
 	//Grab all of the data from one table and insert it as a new row, but with a new comic_id, and a new user_id
 	var sql = `INSERT INTO comics (user_id, comic_name, tags, is_private, descrip) SELECT '${new_user_id}', comic_name, tags, is_private, descrip FROM comics WHERE comic_id = '${comic_id_to_split}';`;
 	pool.getConnection(function (err, con) {
-		con.query(sql, function (err, result)
-		{
+		con.query(sql, function (err, result) {
 			if (err) throw err;
 			var insertId = result.insertId;
 			//Copy the comic_page_list for the source comic, but insert it with the new user id and the new comic id
 			//Will create the new comic with the name '$currentComicName-$newUserID'
 			var sql = `INSERT INTO comics (user_id, comic_name, tags, is_private, descrip) SELECT '${new_user_id}', concat(comic_name,'-',${new_user_id}), tags, is_private, descrip FROM comics WHERE comic_id = '${comic_id_to_split}';`;
-			con.query(sql2, function (err, result2) {if (err) throw err;});
+			con.query(sql2, function (err, result2) { if (err) throw err; });
 			//Now that the new comic and new comic page are made return and insert the new page
 			//Result at this point still contains the comic_id
 			callback(err, result);
@@ -182,7 +180,7 @@ module.exports =
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err)
-						throw callback(err,null);
+						throw callback(err, null);
 					else
 						return callback(err, result);
 				});
@@ -190,7 +188,7 @@ module.exports =
 		},
 
 		//passed a comics name and returns the id of the comic specified
-		getComicIDByName: function(comic_name) {
+		getComicIDByName: function (comic_name) {
 			var sql = `SELECT comic_id FROM comics WHERE comic_name = '${comic_name}'`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
@@ -207,9 +205,34 @@ module.exports =
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err)
-						throw callback(err,null);
+						throw callback(err, null);
 					else
 						return callback(err, result);
+				});
+			});
+		},
+
+		//just removes the entry for the comic, no the actual comic, works for now : NEED TO ACTAULLY
+		deleteComic: function (comic_id, user_id) {
+			var sql1 = `SELECT user_id FROM  comics WHERE comic_id='${comic_id}'`;
+			var sql2 = `SELECT page_id FROM comic_page_list WHERE comic_id='${comic_id}'`;
+			var sql3 = `DELETE * FROM comics WHERE comic_id = '${comic_id}'`;
+			pool.getConnection(function (err, con) {
+				con.query(sql1, function (err, result) {
+					if (err)
+						throw err;
+
+					if(result[0].user_id!=user_id)
+						return;
+
+					con.query(sql2, function (err, result) {
+						if (err)
+							throw err;
+					});
+					con.query(sql3, function (err, result) {
+						if (err)
+							throw err;
+					});
 				});
 			});
 		},
@@ -227,7 +250,7 @@ module.exports =
 			var sql = `INSERT INTO pages (layout) VALUES ('${layout}')`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
-					if (err) console.log(err,null);
+					if (err) console.log(err, null);
 					//Subfunction that is used to get the page number
 					getPageNumber(comic_id, function (err, page_number) {
 						var sql2 = `INSERT INTO comic_page_list (comic_id, page_number, creator_user_id, page_id) VALUES ('${comic_id}', '${page_number}', '${creator_user_id}', '${result.insertId}')`;
@@ -241,7 +264,7 @@ module.exports =
 
 		/*
 		accesses the page of the provided id
-	
+
 		Inputs:
 			page_id: page id that you want to access
 		Returns:
@@ -254,7 +277,7 @@ module.exports =
 			var sql = `SELECT * from pages WHERE page_id = '${page_id}'`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
-					if (err) callback(err,null);
+					if (err) callback(err, null);
 					callback(err, result);
 				});
 			});
@@ -272,8 +295,8 @@ module.exports =
 			var sql = `SELECT * from comic_page_list WHERE comic_id = '${comic_id}'`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
-					if (err) callback(err,null);
-					callback(err,result);
+					if (err) callback(err, null);
+					callback(err, result);
 				});
 			});
 		},
@@ -287,32 +310,26 @@ module.exports =
 		Returns:
 			None
 		*/
-		forkComic: function forkComic(comic_id_to_split, new_user_id, layout)
-		{
+		forkComic: function forkComic(comic_id_to_split, new_user_id, layout) {
 			var new_page_id;
 			var new_comic_id;
 			//Sub-function that creates a new comic Id with the new user_id, also copies the comic_page_list to the have the new comic_id
-			copyComic(comic_id_to_split, new_user_id, function (err, result)
-			{
+			copyComic(comic_id_to_split, new_user_id, function (err, result) {
 				new_comic_id = result.insertId;
 				//Create a new page for the modified page
 				//This query will also return the id of the page that was just inserted
 				var sql = `INSERT INTO pages (layout) VALUES ('${layout}');`;
-				pool.getConnection(function (err, con) 
-				{
-					con.query(sql, function (err, result2)
-					{
+				pool.getConnection(function (err, con) {
+					con.query(sql, function (err, result2) {
 						if (err) { throw err; }
 
 						new_page_id = result2.insertId;
 						//Get the page_number of the comic
-						getPageNumber(comic_id_to_split, function(err, page_number)
-						{
+						getPageNumber(comic_id_to_split, function (err, page_number) {
 							//Swap the last page of the comic with the new page id
 							var sql2 = `UPDATE comic_page_list SET page_id = '${new_page_id}' WHERE comic_id = '${new_comic_id}' AND page_number = '${page_number}';`;
-							pool.getConnection(function (err, con)
-							{
-								con.query(sql2, function(err, result) {	if (err) { throw err; } });
+							pool.getConnection(function (err, con) {
+								con.query(sql2, function (err, result) { if (err) { throw err; } });
 							});
 						});
 					});

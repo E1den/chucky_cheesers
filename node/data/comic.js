@@ -23,6 +23,18 @@ exports.create = function (req, res) {
     });
 }
 
+exports.delete = function(req, res) {
+    try{
+        mysql.deleteComic(req.body.id.value,req.body.user.value);
+    }
+    catch(e)
+    {
+        req.query.e = 400;
+        err.error(req, res);
+        return;
+    }
+}
+
 exports.getPages = function (req, res) {
     var data = { page: [] };
     res.contentType("json");

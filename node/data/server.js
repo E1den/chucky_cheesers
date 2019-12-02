@@ -30,6 +30,7 @@ app.get('/srv/acct/getSess', accounts.getAccountSession);
 //Handle comic data
 app.post('/srv/comic/search', comic.search);
 app.post('/srv/comic/create', comic.create);
+app.post('/srv/comic/delete', comic.delete);
 app.post('/srv/comic/pages', comic.getPages)
 
 //Handle bad status code error pages
