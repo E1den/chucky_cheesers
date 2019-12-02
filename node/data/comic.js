@@ -28,8 +28,8 @@ exports.create = function (req, res) {
 
         console.log("Uploading " + filename);
 
-        mysql.accessUser(req.session.user, function (req, res) {
-            mysql.createComic(res[0].user_id, title, tags, "false", description, function (err, id) {
+        mysql.accessUser(req.session.user, function (rows) {
+            mysql.createComic(rows[0].user_id, title, tags, "false", description, function (err, id) {
                 res.write("" + id);
                 fstream = fs.createWriteStream("../../web/data/covers/" + id + ".jpg");
                 file.pipe(fstream);

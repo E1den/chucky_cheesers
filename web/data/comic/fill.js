@@ -14,7 +14,7 @@ $.ajax({
     datatype: 'json',
     url: "/srv/comic/getdata",
     contentType: 'application/json',
-    data:{id:$.urlParam('id')},
+    data:JSON.stringify({id:$.urlParam('id')}),
     success: function (n) { if (n == 'failure') {return;}
         $(".content-pane h2").html(n.comic_name);
     }
