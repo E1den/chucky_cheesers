@@ -57,17 +57,18 @@ window.frameError = function (offsetx, offsety) {
 function saveComic()
 {
 
-    window.comicData.page.forEach(function (page, index){
+    tempData = window.comicData;
+    tempData.page.forEach(function (page, index){
         page.frames.forEach(function(frame, frame_index)
         {
-            delete window.comicData.page[frame].x;
-            delete window.comicData.page[frame].y;
-            delete window.comicData.page[frame].width;
-            delete window.comicData.page[frame].height;
+            delete tempData.page[frame].x;
+            delete tempData.page[frame].y;
+            delete tempData.page[frame].width;
+            delete tempData.page[frame].height;
         });
     });
 
-    //TODO: save window.comicData to server
+    //TODO: save tempData to server
 
     window.location.replace(`/comic/view/?id=${window.COMIC_ID}`);
 }
