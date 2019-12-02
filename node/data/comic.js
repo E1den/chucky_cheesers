@@ -6,10 +6,10 @@ const fs = require('fs');
 
 exports.create = function (req, res) {
     try {
-        cover = req.body[0].value;
-        title = req.body[1].value;
-        tags = req.body[2].value;
-        description = req.body[3].value;
+        cover = req.body.cover.value;
+        title = req.body.title.value;
+        tags = req.body.tags.value;
+        description = req.body.description.value;
     }
     catch (e) {
         req.query.e = 400;
