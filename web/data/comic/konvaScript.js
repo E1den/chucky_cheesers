@@ -444,6 +444,9 @@ $(document).ready(function(){
       function fitStageIntoParentContainer() {
         var container = document.querySelector('#edit-canvas');
 
+        var stageWidth = $(".edit-canvas").width();
+        var stageHeight = $(".edit-canvas").height();
+
         // now we need to fit stage into parent
         var containerWidth = container.offsetWidth;
         // to do this we need to scale the stage
