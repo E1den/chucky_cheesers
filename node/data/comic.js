@@ -3,7 +3,6 @@ const mysql = require('./mysql.js');
 const config = require('./config.js');
 const err = require('./error.js')
 const fs = require('fs');
-var multer = require('multer');
 
 exports.create = function (req, res) {
     try {
@@ -30,26 +29,6 @@ exports.create = function (req, res) {
         fs.writeFile("../../web/data/covers/" + id + ".jpg", cover, (err) => {
             if (err) throw err;
         });
-
-
-        var storage = multer.diskStorage({
-            destination: function (req, file, callback) {
-                callback(null, '../../web/data/covers/');
-            },
-            filename: function (req, file, callback) {
-                callback(null, id);
-            }
-        });
-
-        var upload = multer({ storage: storage }).single('userPhoto');
-
-        upload(req, res, function (err) {
-            if (err) {
-                return res.end("Error uploading file.");
-            }
-            res.end("File is uploaded");
-        });
-
         res.end();
     });
 
@@ -71,7 +50,7 @@ exports.getPages = function (req, res) {
     res.contentType("json");
 
     mysql.accessComicPageList(req.body.id, function (err, rows) {
-        rows.foreach(function (row) {
+        rows.forEach(function (row) {
             data.page.push(JSON.parse(row.layout));
         });
         res.write(JSON.stringify(data));
