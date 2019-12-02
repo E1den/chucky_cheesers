@@ -91,3 +91,23 @@ function createComic()
     $(".createComic").addClass("createComic-on")
   }
 }
+
+function deleteAccount(confirm)
+{
+  if($(".delete-confirm").hasClass("delete-confirm-on"))
+  {
+    $(".delete-confirm").removeClass("delete-confirm-on")
+  }
+  else{
+    $(".delete-confirm").addClass("delete-confirm-on")
+  }
+
+  if(confirm == "yes")
+  {
+
+  }
+  else if(confirm == "no")
+  {
+    $(".delete-confirm").removeClass("delete-confirm-on")
+  }
+}
