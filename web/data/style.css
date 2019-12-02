@@ -571,6 +571,7 @@ textarea
   font-size: 17px;
   border: none;
   height: 50%;
+  width:74%;
   max-height: 38.3px;
   background: #ddd;
   box-shadow: -3px 0 10px -10px black, 0px 3px 10px -10px black, 0px -3px 10px -10px black;
