@@ -126,6 +126,22 @@ module.exports =
 				});
 			});
 		},
+	
+		/*
+		Removes the user data from the database
+		Inputs:
+			Username: username of the user that is to be removed
+		Returns:
+			Nothing
+		*/
+		deleteUser: function (username) {
+			var sql = `DROP FROM FROM users WHERE display_name = '${username}' OR email_address = '${username}'`;
+			pool.getConnection(function (err, con) {
+				con.query(sql, function (err, result) {
+					if (err) throw err;
+				});
+			});
+		},
 
 		accessUserByEmail: function (emailAddress, callback) {
 			var sql = `SELECT * FROM users WHERE email_address = '${emailAddress}'`;
