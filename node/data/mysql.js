@@ -191,7 +191,7 @@ module.exports =
 					descrip: description of the comic
 		*/
 		accessComic: function (comic_name, callback) {
-			var sql = `SELECT * FROM comics WHERE comic_name like '%${comic_name}%'`;
+			var sql = `SELECT * FROM comics WHERE comic_name like '%${comic_name}%' OR tags like '%${comic_name}%' Or desctip like '%${comic_name}%'`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err)
@@ -307,7 +307,7 @@ module.exports =
 					layout: the layout of the page
 		*/
 		accessComicPageList: function (comic_id, callback) {
-			var sql = `SELECT * from comic_page_list WHERE comic_id = '${comic_id}'`;
+			var sql = `SELECT * from comic_page_list WHERE comic_id = '${comic_id}`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err) callback(err, null);
