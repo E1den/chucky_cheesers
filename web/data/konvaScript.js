@@ -241,7 +241,8 @@ $(document).ready(function(){
         "click",
         function()
         {
-          location.reload();
+          layer.destroyChildren();
+          layer.draw();
         }
       )
 
