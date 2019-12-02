@@ -188,6 +188,7 @@ exports.updateForgot = function (req, res) {
 //Handles user updating data, eg password
 exports.update = function (req, res) {
     //TODO
+    
 }
 
 //Gets the current data to display about login state for a given user
