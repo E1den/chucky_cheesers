@@ -18,16 +18,15 @@ exports.create = function (req, res) {
         return;
     }
 
-    mysql.createComic(req.session.user, title, tags, false, description);
-    mysql.accessComic(title, function (err, res) {
-        res.write(res[0].comic_id);
-
-        fs.writeFile("covers/" + res[0].comic_id, cover, (err) => {
+    mysql.createComic(req.session.user, title, tags, false, description,function(err, id){
+        res.write(id);
+        fs.writeFile("covers/" + id, cover, (err) => {
             if (err) throw err;
         });
 
         res.end();
     });
+
 }
 
 exports.delete = function (req, res) {
