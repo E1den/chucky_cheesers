@@ -165,16 +165,15 @@ module.exports =
 			boolean: tells if the insertion was successful or not
 		TODO: If private is true a second function should be called to create the private table
 		*/
-		createComic: function (username, comic_name, tags, isPrivate, descrip) {
-			var sql = `INSERT INTO comics (user_id, comic_name, tags, is_private, descrip) VALUES ('${username}', '${comic_name}', '${tags}', '${isPrivate}', '${descrip})`;
+		createComic: function (username, comic_name, tags, isPrivate, descrip, callback) {
+			var sql = `INSERT INTO comics (user_id, comic_name, tags, is_private, descrip) VALUES ('${username}', '${comic_name}', '${tags}', '${isPrivate}', '${descrip}')`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err) {
 						throw err;
-						return false;
-					}
+						}
+					callback(null, result.insertId);
 				});
-				return true;
 			});
 		},
 
