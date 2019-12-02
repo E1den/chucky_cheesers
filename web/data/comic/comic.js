@@ -117,6 +117,7 @@ window.handleLayout = function () {
     }
     catch (e) {
         window.pageError(0);
+        return;
      }
 
     try {
