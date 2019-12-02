@@ -96,8 +96,7 @@ exports.getComicData = function (req, res) {
     mysql.accessUser(req.session.user, function (orows) {
         if(orows==undefined||orows==null||orows.length==0)
         {
-            req.query.e = 400;
-            err.error(req, res);
+            res.redirect("/");
             return;
         }
         mysql.accessComicByID(id, function (err, rows) {
