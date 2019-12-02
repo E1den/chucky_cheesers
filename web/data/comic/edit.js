@@ -216,13 +216,15 @@ $(document).ready(function () {
         }
 
         var currentPage = window.comicData.page[window.leftPageNum]; // left page
+        var pageXOffset = 0;
         if (x > (width / 2)) {
             currentPage = window.comicData.page[window.leftPageNum + 1]; // right page
+            pageXOffset=(width/2);
         }
 
         //each should be a plus sign until an image is added
         currentPage.frames.forEach(function (frame, index) {
-            if ((x >= frame.x + (width / 2)) && (x <= frame.x + frame.width + (width / 2)) && (y >= frame.y) && (y <= frame.y + frame.height)) {
+            if ((x >= frame.x+pageXOffset) && (x <= frame.x + frame.width + pageXOffset) && (y >= frame.y) && (y <= frame.y + frame.height)) {
                 //selected this box at index
                 if (index == current_index) {
                     showFrameEditor();
