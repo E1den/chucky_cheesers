@@ -5,11 +5,12 @@ const err = require('./error.js')
 const fs = require('fs');
 
 exports.create = function (req, res) {
+    console.log(req.body);
     try {
-        cover = req.body.cover.value;
-        title = req.body.title.value;
-        tags = req.body.tags.value;
-        description = req.body.description.value;
+        cover = req.body.cover;
+        title = req.body.title;
+        tags = req.body.tags;
+        description = req.body.description;
     }
     catch (e) {
         req.query.e = 400;
