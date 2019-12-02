@@ -137,13 +137,26 @@ exports.getPages = function (req, res) {
     res.end();*/
 }
 
+exports.update = function(req, res) {
+    try {
+        //res.body
+        mysql.accessComicPageList( function (err, rows) {
+            var n = rows.length;
+        });
+
+    }
+    catch (e) {
+        req.query.e = 400;
+        err.error(req, res);
+        return;
+    }
+}
+
 exports.search = function (req, res) {
 
     try {
         search = req.body.search;
         type = req.body.type;
-        rowNum = req.body.row;
-        time = req.body.start;
     }
     catch (e) {
         req.query.e = 400;
@@ -154,34 +167,8 @@ exports.search = function (req, res) {
     //con.connect(function (err) {
     res.contentType("html");
 
-    //get the data to send from the sql server
-
-    //FOR TESTING PURPOSES
-    // if(rowNum>20)
-    // {
-    //     res.write("done");
-    //     res.end();
-    //     return;
-    // }
-
-    // //END TESTING
-
-    // //send the next 5 rows
-    // for (var row = 0; row < 5; row++) {
-    //     res.write("<div class='bookcontainer'>");
-    //     for (var col = 0; col < 5; col++) {
-    //         var details = "Details and stuff";
-    //         res.write("<div class='book'><div class='overlay'><div class='bookDetails'>" + details + "</div></div></div>");
-    //     }
-
-    //     res.write("</div>");
-    // }
-
-    // res.end();
-
-
     if(search == "" || search==undefined)
-        mysql.accessAllComic(search, function (err, rows) {
+        mysql.accessAllComic( function (err, rows) {
             res.write("</div>");
             rows.forEach(function(row,index){
                 if(index%5==0){

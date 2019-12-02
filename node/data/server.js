@@ -31,7 +31,8 @@ app.get('/srv/acct/getSess', accounts.getAccountSession);
 app.post('/srv/comic/search', comic.search);
 app.post('/srv/comic/create', comic.create);
 app.post('/srv/comic/delete', comic.delete);
-app.post('/srv/comic/pages', comic.getPages)
+app.post('/srv/comic/pages', comic.getPages);
+app.post('/srv/comic/update', comic.update);
 
 //Handle bad status code error pages
 app.get('/srv/err', error_handler.error);

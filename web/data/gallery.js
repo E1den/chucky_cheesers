@@ -2,13 +2,10 @@
 var rowNumber = 0;
 //The time to start the most recent gallery at, maintains recent comic consistency at times of high throughput
 var full = false;
-const startTime = new Date();
 function grabNextRows() {
     var data = {
         search: 0,
         type: 0,
-        row: rowNumber += 5,
-        start: startTime.toJSON()
     };
     $.ajax({
         type: "POST",
@@ -34,8 +31,8 @@ function pollForComics(n) {
 grabNextRows();
 $(document).ready(function() {
     $(".content-pane").scroll(function(){
-        if(!full && $(".content-pane").scrollTop() + window.innerHeight >= $(".comic-gallery").height() - 5 * $(".book").height())
-           grabNextRows();
+     //   if(!full && $(".content-pane").scrollTop() + window.innerHeight >= $(".comic-gallery").height() - 5 * $(".book").height())
+    //       grabNextRows();
         $(".subnav").css("opacity", 1 - $(window).scrollTop() / 250);
     });
 });

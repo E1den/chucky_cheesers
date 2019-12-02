@@ -68,7 +68,13 @@ function saveComic()
         });
     });
 
-    //TODO: save tempData to server
+    $.ajax({
+        type: "POST",
+        datatype: 'json',
+        url: "/srv/comic/update",
+        contentType: 'application/json',
+        data: JSON.stringify(tempData)
+    });
 
     window.location.replace(`/comic/view/?id=${window.COMIC_ID}`);
 }
