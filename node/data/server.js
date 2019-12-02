@@ -26,6 +26,7 @@ app.post('/srv/acct/forgot', accounts.forgot);
 app.get('/srv/acct/forgot', accounts.updateForgot);
 app.get('/srv/acct/update', accounts.update);
 app.get('/srv/acct/getSess', accounts.getAccountSession);
+app.get('/srv/acct/delete', accounts.deleteAcct);
 
 //Handle comic data
 app.post('/srv/comic/search', comic.search);

@@ -232,6 +232,14 @@ exports.update = function (req, res) {
     }
 }
 
+exports.deleteAcct = function (req, res)
+{
+    var user = req.session.user;
+    mysql.deleteUser(user);
+    res.write("done");
+    res.end();
+}
+
 //Gets the current data to display about login state for a given user
 exports.getAccountSession = function (req, res) {
     //into: "account-session-on"
