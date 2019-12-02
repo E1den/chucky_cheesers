@@ -38,13 +38,10 @@ exports.delete = function(req, res) {
 exports.getPages = function (req, res) {
     var data = { page: [] };
     res.contentType("json");
+
     mysql.accessComicPageList(req.body.id, function (err, rows) {
         rows.foreach(function (row) {
-            data.page.push({
-                layout: row.layout,
-                //NEED TO VERIFY STRUCTURE OF THE DB
-                frames: JSON.parse(row.frames)
-            });
+            data.page.push(JSON.parse(row.layout));
         });
         res.write(JSON.stringify(data));
         res.end();
@@ -135,7 +132,9 @@ exports.getPages = function (req, res) {
             }
 
         ]
-    };*/
+    };
+    res.write(JSON.stringify(data));
+    res.end();*/
 }
 
 exports.search = function (req, res) {
