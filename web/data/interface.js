@@ -33,21 +33,17 @@ $(document).ready(function () {
     var formData = new FormData();
     formData.append('file', file);
     formData.append("upload_file", true);
-
-    var comic = {
-      cover: formData,
-      title: $("#createComic input[name=comicname]").val(),
-      tags: $("#createComic input[name=comictags]").val(),
-      description: $("#comicdescription").val()
-    };
+    formData.append("title",$("#createComic input[name=comicname]").val());
+    formData.append("tags",$("#createComic input[name=comictags]").val());
+    formData.append("description",$("#comicdescription").val());
 
     $.ajax({
       type: "POST",
-      datatype: 'json',
       url: "/srv/comic/create",
-      contentType: 'application/json',
-      data: JSON.stringify(comic),
-      success: function (n) { if (n == 'failure') {return; } $(location).attr("href", "/comic/editor/?id="+n); }
+      processData: false,
+      contentType: false,
+      data: formData,
+      success: function (n) { if (n == 'failure') {return;} $(location).attr("href", "/comic/editor/?id="+n); }
     });
   });
 });

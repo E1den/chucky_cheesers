@@ -177,7 +177,7 @@ exports.update = function (req, res) {
 exports.search = function (req, res) {
 
     try {
-        search = req.body.search;
+        search = req.body.search+"";
         type = req.body.type;
     }
     catch (e) {
