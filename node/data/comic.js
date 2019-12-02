@@ -97,6 +97,7 @@ exports.getComicData = function (req, res) {
         if(orows==undefined||orows==null||orows.length==0)
         {
             res.redirect("/");
+            res.end();
             return;
         }
         mysql.accessComicByID(id, function (err, rows) {
