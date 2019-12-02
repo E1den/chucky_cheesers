@@ -29,13 +29,11 @@ $(document).ready(function () {
   $("#createComic").submit(function (n) {
     n.preventDefault();
 
-    var fileInput = document.getElementById('createComic');
-    var file = fileInput.files[0];
-    var formData = new FormData();
-    formData.append('file', file);
+    //var file = $("#createComic")[0].files[0];
+    //var formData = new FormData().append('file', file);
 
     var comic = {
-      cover: formData,
+      cover: "",//formData,
       title: $("#createComic input[name=comicname]").val(),
       tags: $("#createComic input[name=comictags]").val(),
       description: $("#createComic input[name=comicdescription]").val()
