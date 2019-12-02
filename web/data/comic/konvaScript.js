@@ -446,12 +446,14 @@ $(document).ready(function () {
 
     // now we need to fit stage into parent
     var containerWidth = container.offsetWidth;
+    var containerHeight = container.offsetHeight;
     // to do this we need to scale the stage
-    var scale = containerWidth / stageWidth;
+    var scaleX = containerWidth / stageWidth;
+    var scaleY = containerHeight / stageHeight;
 
-    stage.width(stageWidth * scale);
-    stage.height(stageHeight * scale);
-    stage.scale({ x: scale, y: scale });
+    stage.width(stageWidth * scaleX);
+    stage.height(stageHeight * scaleY);
+    stage.scale({ x: scaleX, y: scaleY });
     stage.draw();
   }
   window.fitStageIntoParentContainer = fitStageIntoParentContainer;
