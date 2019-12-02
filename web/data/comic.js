@@ -77,7 +77,7 @@ $(document).ready(function () {
   slides = $(".choice-slide");
 });
 
-$(".createComic").submit(function (n) {
+$("#createComic").submit(function (n) {
   n.preventDefault();
   $.ajax({
     type: "POST",
