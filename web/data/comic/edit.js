@@ -94,6 +94,8 @@ function chooseTemplate() {
     $(".choose-template").removeClass("popup-on");
     var layout = Number($(".current-slide").attr("id"));
     pos = window.getLayoutPos(layout);
+    if(window.comicData.page==undefined)
+        window.comicData.push({page:[]})
     window.comicData.page.push({ 'layout': layout, frames: pos });
     window.redrawPages();
     if (currentLayoutFor == 1)
