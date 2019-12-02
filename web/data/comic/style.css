@@ -168,7 +168,7 @@ body {
   height: 100%;
   width: 0;
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   top: 0;
   left: 0;
   background-color: #111;
@@ -242,13 +242,13 @@ button {
   position:absolute;
   margin:auto;
   width:50%;
+  height:80%;
   z-index: 10;
   display:none;
    background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #ffce55 0, #fffc83 30%, #ffffb1 50%, #fffc83 70%, #ffce55 100%);
    background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
    border: 5px solid #222;
    box-shadow: 5px 5px 5px black;
-   overflow-y: visible;
    margin-bottom: 30px;
 }
 
@@ -259,6 +259,14 @@ button {
   align-items: center;
   -webkit-animation: swing-in-top-fwd 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
   animation: swing-in-top-fwd 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+}
+
+.create-wrapper
+{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 #createComic-close
@@ -495,7 +503,7 @@ textarea
 
 .filterBtn:hover #filter-btn
 {
-  opacity:1;
+  opacity:1 !important;
 }
 
 #filter-recent
@@ -570,11 +578,48 @@ textarea
       border-bottom-left-radius: 5px;*/
 }
 
+.accmenu-wrapper
+{
+  justify-self:start;
+  display:flex;
+  height:100%;
+}
+
+.acc-search-bar
+{
+  position: sticky;
+  top: 0;
+  display: flex;
+  min-width: 33.3%;
+  min-height: 10%;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  z-index: 1;
+  transform: skew(-10deg, 0);
+  font-family: 'Happy Monkey', cursive;
+}
+
+.acc-search-bar input {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  height: 50%;
+  width: 74%;
+  max-height: 38.3px;
+  background: #ddd;
+  box-shadow: -3px 0 10px -10px black, 0px 3px 10px -10px black, 0px -3px 10px -10px black;
+  /*border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;*/
+}
+
 .search-btn {
   float: right;
   display: flex;
   justify-content: center;
   padding: 7.5px 15px;
+  width:20%;
   margin-top: 8px;
   margin-right: 16px;
   background: #ddd;
@@ -607,7 +652,6 @@ textarea
   align-content: center;
   align-self: center;
   width: 99%;
-  height: 31vw;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -725,6 +769,11 @@ textarea
   box-shadow: 2px 2px 8px black;
 }
 
+#filter-dropdown
+{
+  display: none;
+}
+
 /*
   *****************
   END COMIC-GALLERY
@@ -793,7 +842,7 @@ textarea
   flex-direction: column;
 }
 
-.login-poster input, .signup-poster input, .forgotpass-poster input, .createComic input{
+.login-poster input, .signup-poster input, .forgotpass-poster input, .createComic input, .edit-preferences input{
   background-color: white;
   padding: 5px;
   border-radius: 5px;
@@ -802,7 +851,7 @@ textarea
   font-family: 'Happy-Monkey', cursive;
 }
 
-.login-poster input:hover, .signup-poster input:hover, .forgotpass-poster input:hover, .createComic input:hover{
+.login-poster input:hover, .signup-poster input:hover, .forgotpass-poster input:hover, .createComic input:hover, .edit-preferences input:hover{
   background: #ddd;
   transition-duration: 0.5s;
 }
@@ -1093,13 +1142,12 @@ h2 {
 }
 
 .accsidebar {
-position:fixed;
 margin: 0;
 padding: 0;
 width: 0;
 background-color: #333;
-position: relative;
-height: 88%;
+width: 0%;
+height:100%;
 overflow-x: hidden;
 display:flex;
 justify-content: flex-start;
@@ -1107,6 +1155,11 @@ flex-direction: column;
 align-items: center;
 z-index: 100;
 transition:0.5s;
+}
+
+.accsidebar-on
+{
+  width: 100%;
 }
 
 .accmenu:hover
@@ -1175,26 +1228,851 @@ background-color: #555;
 color: white;
 }
 
-/* On screens that are less than 700px wide, make the sidebar into a topbar */
-@media screen and (max-width: 700px) {
-.accsidebar {
-  width: 100%;
-  height: auto;
-  position: relative;
-}
-.accsidebar button {float: left;}
+#SecSet
+{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-@media screen and (max-width: 400px) {
-.accsidebar button {
-  text-align: center;
-  float: none;
+#changepass
+{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+#changepass input
+{
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 2px 2px 4px grey;
+  font-family: 'Happy-Monkey', cursive;
 }
 
 /*
 ****************
 END ACCOUNT PAGE
 ****************
+*/
+
+/*
+  ******************
+  START PAGE GALLERY
+  ******************
+*/
+
+hr
+{
+  width:80%;
+  border-top: 3px solid #222;
+}
+
+  .subnav-page
+  {
+    width: 100%;
+    background: white;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+
+.page-gallery
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.text-box-btn
+{
+  width: 33%;
+  height: 33%;
+  background: white;
+  border-radius: 5px;
+  border: none;
+  margin: 5px;
+  box-shadow: 2px 2px 5px grey;
+}
+
+.text-box-btn:hover
+{
+  background: #ddd;
+}
+
+.text-box-btn img
+{
+  width: 100%;
+  height: 100%;
+}
+
+.page-container
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+  width: 99%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.comic-page
+{
+  background: grey;
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 18vw;
+  height: 30.03vw;
+  align-self: end;
+  transition: all 0.5s ease-in-out;
+
+}
+
+.comic-page:hover
+{
+  transform: scale(1.1);
+  box-shadow: 2px 2px 8px black;
+}
+
+.comic-page:hover .overlay
+{
+  display: flex;
+  bottom: 0;
+  cursor: pointer;
+  height:100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.choose-template
+{
+  position:absolute;
+  margin:auto;
+  width:50%;
+  z-index: 10;
+  display:none;
+   background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #ffce55 0, #fffc83 30%, #ffffb1 50%, #fffc83 70%, #ffce55 100%);
+   background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
+   border: 5px solid #222;
+   box-shadow: 5px 5px 5px black;
+   overflow-y: visible;
+   margin-bottom: 30px;
+}
+
+.popup-on
+{
+  display:flex !important;
+  flex-direction: column;
+  align-items: center;
+  -webkit-animation: swing-in-top-fwd 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+  animation: swing-in-top-fwd 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+  height:80%;
+}
+
+.choice-wheel
+{
+  height:80%;
+  width:100%;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.choice-slide
+{
+  width: 25%;
+  height:80%;
+  display:none;
+  transition: all 0.5s;
+}
+
+.next-slide
+{
+  order: 3;
+  display:block;
+  opacity:0.5;
+}
+
+.current-slide
+{
+  order: 2;
+  display:block;
+  transform: scale(1.1);
+}
+
+.previous-slide
+{
+  order:1;
+  display:block;
+  opacity:0.5;
+}
+
+.previous-slide, .next-slide, .current-slide
+{
+  margin: 7px;
+}
+
+.previous-slide:hover, .next-slide:hover
+{
+  cursor:pointer;
+}
+
+.edit-frame
+{
+  position:absolute;
+  margin:auto;
+  width:50%;
+  z-index: 10;
+  display:none;
+   background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #ffce55 0, #fffc83 30%, #ffffb1 50%, #fffc83 70%, #ffce55 100%);
+   background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
+   border: 5px solid #222;
+   box-shadow: 5px 5px 5px black;
+   overflow-y: visible;
+   margin-bottom: 30px;
+}
+
+.edit-frame-wrap
+{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  height:85%;
+}
+
+.edit-canvas
+{
+  height:100%;
+  width:65%;
+  background-color: #222;
+  box-shadow: 2px 2px 10px grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-upload-form
+{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height:100%;
+  width:30%;
+}
+
+.text-box-container
+{
+  height:60%;
+  width:100%;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm-edit
+{
+  margin-top: 5px;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 2px 2px 4px grey;
+  font-family: 'Happy-Monkey', cursive;
+  cursor: pointer;
+  color:black;
+  text-align: center;
+  margin-bottom:10px;
+}
+
+.confirm-edit:hover
+{
+  background-color: #ccc;
+}
+
+.edit-preferences
+{
+  position:absolute;
+  margin:auto;
+  width:50%;
+  z-index: 10;
+  display:none;
+   background-image: radial-gradient(ellipse farthest-corner, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 35%, #ffffff 30%, #ffffff 40%, rgba(0, 0, 0, 0) 90%), radial-gradient(ellipse farthest-corner at 0px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 8px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), radial-gradient(ellipse farthest-corner at 0px 8px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 40%), radial-gradient(ellipse farthest-corner at 8px 0px, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 20%, #ffffff 15%, #ffffff 20%, rgba(0, 0, 0, 0) 50%), linear-gradient(40deg, #ffce55 0, #fffc83 30%, #ffffb1 50%, #fffc83 70%, #ffce55 100%);
+   background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
+   border: 5px solid #222;
+   box-shadow: 5px 5px 5px black;
+   overflow-y: visible;
+   margin-bottom: 30px;
+}
+
+.pic-vid-btnwrapper
+{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-preferences form
+{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 80%;
+}
+
+.edit-preferences input[type="file"] {
+    display: none;
+}
+
+.preference-wrapper
+{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#Imgoutput
+{
+  margin: 10px;
+}
+
+.delete-confirm
+{
+  background: white;
+  position:absolute;
+  margin:auto;
+  height:50%;
+  width:50%;
+  z-index: 10;
+  display:none;
+  box-shadow: 5px 5px 5px grey;
+}
+
+.delete-confirm-on
+{
+  margin-top: 50px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  -webkit-animation: swing-in-top-fwd 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+  animation: swing-in-top-fwd 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+}
+
+.confirm-wrap
+{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  width:100%;
+  height:80%;
+}
+
+.confirm-btn
+{
+  margin:5px;
+  background: #ddd;
+  border: none;
+  border-radius: 5px;
+  width:40%;
+  height:20%;
+  font-family: 'Bangers',cursive;
+  font-size: 20px;
+  box-shadow: 3px 3px 5px lightgrey;
+}
+
+.confirm-btn:hover
+{
+  background: #bbb;
+}
+
+.confirm-btn:active
+{
+  outline:none;
+  background: #888;
+}
+
+h3
+{
+  font-family: 'Bangers', cursive;
+  font-size: 30px;
+}
+
+.page-open
+{
+  display: none;
+  position: fixed;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9);
+  z-index: 20;
+}
+
+.page-open-on
+{
+  display:block;
+}
+
+.page-wrap
+{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  width:100%;
+  height:85%;
+}
+
+.page
+{
+  background:white;
+  width:90%;
+  height:100%;
+}
+
+.page-turn-left
+{
+  color:white;
+  font-weight: 900;
+  font-size: 40px;
+  margin-right:10px;
+}
+
+.page-turn-right
+{
+  color:white;
+  font-weight: bold;
+  font-size: 40px;
+  margin-left: 10px;
+}
+
+.page-turn-left:hover
+{
+  cursor: pointer;
+}
+
+.page-turn-right:hover
+{
+  cursor: pointer;
+}
+/*
+  ****************
+  END PAGE GALLERY
+  ****************
+*/
+
+/*
+  ****************
+  START CONTACT US
+  ****************
+*/
+
+.contact-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  width: 39%;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  transform: skew(-15deg);
+  background: white;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-right: 3px solid;
+}
+
+.contact-form:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  left: -0.5em;
+  transform: skew(15deg);
+  background: white;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  backface-visibility: hidden;
+  z-index: 0;
+}
+
+.contact-form form {
+  z-index: 1;
+  font-size: 14px;
+  transform: skew(15deg);
+  font-family: 'Happy Monkey', cursive;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  align-self: center;
+  text-align: center;
+}
+
+.contact-form input
+{
+  background-color: white;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 2px 2px 4px grey;
+  font-family: 'Happy-Monkey', cursive;
+}
+
+.contact-form textarea
+{
+  width: 95%;
+}
+
+/*
+  ****************
+  END CONTACT US
+  ****************
+*/
+
+/*
+  **************************
+  START MOBILE COMPATABILITY
+  **************************
+*/
+
+  @media only screen and (max-width: 768px) {
+    /*
+      *************************
+      START MOBILE PAGE-GALLERY
+      *************************
+    */
+    .page-container
+    {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comic-page
+    {
+      margin: 5px;
+      align-self:center;
+      width: 70%;
+      height: 60vh;
+    }
+
+    .edit-preferences
+    {
+      width:90%;
+      height:80%;
+    }
+
+    .edit-preferences form
+    {
+      max-width:50%;
+    }
+
+    h2
+    {
+      font-size: 40px;
+    }
+
+    .edit-frame
+    {
+      height: 80%;
+      width:90%;
+    }
+
+    .custom-file-upload
+    {
+      font-size:14px;
+    }
+
+    .choose-template
+    {
+      width:90%;
+      height:80%;
+    }
+
+    .choice-wheel
+    {
+      height:50%;
+    }
+
+    .delete-confirm
+    {
+      width:90%;
+    }
+
+    .text-box-container
+    {
+      flex-direction: column;
+    }
+    /*
+      ***********************
+      END MOBILE PAGE-GALLERY
+      ***********************
+    */
+
+    /*
+      **********************
+      START MOBILE MAIN-PAGE
+      **********************
+    */
+
+      .logo
+      {
+        font-size:12px;
+      }
+
+      .search-btn
+      {
+        padding: 6px 15px;
+      }
+
+      .search-bar input
+      {
+        width:64%;
+        font-size:14px;
+      }
+
+      .create-btn
+      {
+        margin-right:15px;
+        width:25%;
+      }
+
+      .createBtn
+      {
+        font-size: 15px;
+      }
+
+      #filter-dropdown
+      {
+        position:absolute;
+        right:0;
+        top:20%;
+        width:30%;
+        height: 20%;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #444;
+        z-index: 1;
+      }
+
+      #filter-dropdown button
+      {
+        background:inherit;
+        border:none;
+        font-size: 15px;
+        color:white;
+        font-family:'Bangers', cursive;
+        display:flex;
+        flex-direction: row;
+      }
+
+      .filterBtn
+      {
+        width:20%;
+      }
+
+      .show-dropdown
+      {
+        display:flex !important;
+      }
+
+      .filter-btn button
+      {
+        font-size: 15px;
+      }
+
+      #filter-btn
+      {
+        font-size: 15px;
+      }
+
+      .createComic
+      {
+        width:90%;
+        height:80%;
+      }
+
+      .createComic form
+      {
+        max-width: 50%;
+      }
+
+      .bookcontainer
+      {
+        flex-direction: column;
+      }
+
+      .book
+      {
+        margin: 5px;
+        align-self:center;
+        width: 70%;
+        height: 60vh;
+      }
+
+      .accountChip-container
+      {
+        width: 70%;
+        height: 60vh;
+        align-self: center;
+      }
+
+      .accountChip
+      {
+        width: 100%;
+        height: 65%;
+      }
+    /*
+      ********************
+      END MOBILE MAIN-PAGE
+      ********************
+    */
+
+    /*
+      ******************
+      START MOBILE LOGIN
+      ******************
+    */
+
+    .login-poster
+    {
+      height:80%;
+      width:90%;
+    }
+
+    .signup-poster
+    {
+      height: 80%;
+      width: 90%;
+    }
+
+    .forgotpass-poster
+    {
+      height: 80%;
+      width: 90%;
+    }
+    /*
+      ****************
+      END MOBILE LOGIN
+      ****************
+    */
+
+    /*
+      *************************
+      START MOBILE ACCOUNT-PAGE
+      *************************
+    */
+
+      .account-content
+      {
+        flex-direction: column;
+      }
+
+      .accmenu-wrapper
+      {
+        height:10%;
+        width:100%;
+        margin-bottom: 5px;
+      }
+
+      .accmenu
+      {
+        height:15%;
+        width:100%;
+        padding: 10px;
+        flex-direction: column;
+      }
+
+      .bar1
+      {
+        height: 5px;
+        width:35px;
+        margin: 3px 6px;
+      }
+
+      .accsidebar {
+        width: 100%;
+        height: 0 !important;
+        bottom: 0;
+        position: fixed;
+        transition: all 0.5s;
+      }
+
+      .accsidebar-on
+      {
+        height:88% !important;
+      }
+      .accsidebar button {float: left;}
+
+      .accsidebar button{
+        text-align: center;
+        float: none;
+        font-size:20px;
+        height: 25%;
+      }
+
+      .acc-search-bar input
+      {
+        width:71%;
+        font-size:14px;
+      }
+
+      .create-btn
+      {
+        margin-right:15px;
+        width:25%;
+      }
+
+      .acc-dropdown
+      {
+        background: white !important;
+        color:black !important;
+        top: 50% !important;
+        justify-content: flex-start !important;
+      }
+
+      #acc-filter-dropdown-btn
+      {
+        color:black !important;
+      }
+
+    /*
+      ***********************
+      END MOBILE ACCOUNT-PAGE
+      ***********************
+    */
+  }
+
+/*
+  ************************
+  END MOBILE COMPATABILITY
+  ************************
 */
