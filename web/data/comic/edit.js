@@ -56,6 +56,11 @@ window.frameError = function (offsetx, offsety) {
     ctx.closePath();
 }
 
+function saveFrame()
+{
+
+}
+
 
 function saveComic()
 {
@@ -82,12 +87,17 @@ function saveComic()
     window.location.replace(`/comic/view/?id=${window.COMIC_ID}`);
 }
 
+function cancelTemplate()
+{
+    $(".choose-template").removeClass("popup-on");
+    currentLayoutFor=0;
+}
+
 function chooseTemplate()
 {
     $(".choose-template").removeClass("popup-on");
     var layout = Number($(".current-slide").attr("id"));
     pos = window.getLayoutPos(layout);
-    window.comicData = { page: [] };
     window.comicData.page.push({ 'layout': layout, frames: pos });
     window.redrawPages();
     if(currentLayoutFor==1)
@@ -97,6 +107,8 @@ function chooseTemplate()
     currentLayoutFor=0;
     return;
 }
+
+
 
 $(document).ready(function () {
 
@@ -112,8 +124,12 @@ $(document).ready(function () {
 
     var current_index = 0;
 
+    window.commitFrame = function() {
+
+    }
+
     function showFrameEditor() {
-        alert('Frame editor here');
+        $(".edit-frame").addClass("popup-on");
         return;
     }
 
@@ -130,9 +146,13 @@ $(document).ready(function () {
         x = (x / $("#comic-viewer").width()) * width;
         y = (y / $("#comic-viewer").height()) * height;
 
+        if(currentLayoutFor!=0)
+            return; //currently Selecting Layout
+
 
         if (window.comicData == undefined) {
             currentLayoutFor=1;
+            window.comicData = { page: [] };
             showSelectLayout();
             return;
         }
