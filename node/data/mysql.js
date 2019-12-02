@@ -222,7 +222,7 @@ module.exports =
 					if (err)
 						throw err;
 
-					if(result[0].user_id!=user_id)
+					if (result[0].user_id != user_id)
 						return;
 
 					con.query(sql2, function (err, result) {
@@ -297,6 +297,18 @@ module.exports =
 				con.query(sql, function (err, result) {
 					if (err) callback(err, null);
 					callback(err, result);
+				});
+			});
+		},
+
+		accessAllComic: function (callback) {
+			var sql = `SELECT * FROM comics;`;
+			pool.getConnection(function (err, con) {
+				con.query(sql, function (err, result) {
+					if (err)
+						throw callback(err, null);
+					else
+						return callback(err, result);
 				});
 			});
 		},

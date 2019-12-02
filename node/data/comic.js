@@ -180,25 +180,36 @@ exports.search = function (req, res) {
     // res.end();
 
 
-    mysql.accessComic(search, function (err, rows) {
-        if (rowNum < rows.length) {
-            res.write("done")
-            return;
-        }
-
-        rows.foreach(function(row,index){
+    if(search == "" || search==undefined)
+        mysql.accessAllComic(search, function (err, rows) {
             res.write("</div>");
-            if(index%5==0){
-                if(index!=0)
-                    res.write("</div>");
-                res.write("<div class='bookcontainer'>");
-            }
-            res.write("<div class='book'><div class='overlay'><div class='bookDetails' cid='"+rows[row].comic_id+"'><h2>" + rows[row].comic_name + "</h2>" + rows[row].descrip + "</div></div></div>");
-        });
-        res.write("</div>");
+            rows.forEach(function(row,index){
+                if(index%5==0){
+                    if(index!=0)
+                        res.write("</div>");
+                    res.write("<div class='bookcontainer'>");
+                }
+                res.write("<div class='book'><div class='overlay'><div class='bookDetails' cid='"+row.comic_id+"'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
+            });
+            res.write("</div>");
 
-        res.end();
-    })
+            res.end();
+        });
+    else
+        mysql.accessComic(search, function (err, rows) {
+            res.write("</div>");
+            rows.forEach(function(row,index){
+                if(index%5==0){
+                    if(index!=0)
+                        res.write("</div>");
+                    res.write("<div class='bookcontainer'>");
+                }
+                res.write("<div class='book'><div class='overlay'><div class='bookDetails' cid='"+row.comic_id+"'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
+            });
+            res.write("</div>");
+
+            res.end();
+        });
 
 
 }
