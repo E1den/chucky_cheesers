@@ -104,7 +104,7 @@ function deleteAccount(confirm)
 
   if(confirm == "yes")
   {
-
+      window.location.replace("/login");
   }
   else if(confirm == "no")
   {
