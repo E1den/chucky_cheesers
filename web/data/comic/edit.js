@@ -84,7 +84,7 @@ function saveComic()
 
 function chooseTemplate()
 {
-    var layout = $(".current-slide").html();
+    var layout = $(".current-slide").attr("id");
     pos = window.getLayoutPos(layout);
     window.comicData = { page: [] };
     window.comicData.page.push({ 'layout': layout, frames: pos });
