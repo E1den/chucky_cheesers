@@ -8,6 +8,7 @@
   <script src="../interface.js"></script>
   <script src="../accounts.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Bangers|Happy+Monkey&display=swap" rel="stylesheet">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Comicality</title>
 </head>
 
@@ -50,10 +51,8 @@
               onclick="openPage('#SecSet', this, '#secsetBtn'); acccloseNav()">Security Settings</button>
             <button id="acomicBtn" class="AcPageBtn"
               onclick="openPage('#AccComics', this, '#acomicBtn'); acccloseNav()">Your Comics</button>
-
-            <button id="aeditBtn" class="AcPageBtn" onclick="openPage('#AccEdit', this, '#aeditBtn'); acccloseNav()">Your Edits</button>
           </div>
-          <div style="justify-self:start; display:flex; height:100%;">
+          <div class="accmenu-wrapper">
             <div class="accmenu" onclick="accMenuFunction(this)" style="display:flex; align-items:center; height:100%">
               <div class="bar1"></div>
               <div class="bar1"></div>
@@ -74,7 +73,7 @@
               <div class="create-btn">
                 <button class="createBtn" onclick="createComic()"><span class="create-top" style="color:black">+ Create</span><span class="create-bottom" style="color:black">+ Create</span></button>
               </div>
-              <div class="search-bar">
+              <div class="acc-search-bar">
                 <form action="">
                   <input type="text" placeholder="Search..." name="search" class="seach-input">
                   <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
@@ -85,6 +84,11 @@
                 <button onclick="filter('recent')" id="filter-recent" style="color:black">Recent</button>
                 <button onclick="filter('accounts')" id="filter-accounts" style="color:black">Accounts</button>
                 <button onclick="filter('filter')" class="filterBtn" style="color:black"><span id="filter-btn" style="color:black"><<</span> Filter</button>
+                <div id="filter-dropdown" class="acc-dropdown">
+                  <button onclick="filter('relevant')" id="acc-filter-dropdown-btn">Relevant</button>
+                  <button onclick="filter('recent')" id="acc-filter-dropdown-btn">Recent</button>
+                  <button onclick="filter('accounts')" id="acc-filter-dropdown-btn">Accounts</button>
+                </div>
               </div>
             </div>
 
@@ -95,24 +99,20 @@
         <div class="createComic">
           <button id="createComic-close" onclick="createComic()">X</button>
           <h2>Create a Comic</h2>
+          <div class="preference-wrapper">
+            <img id="Imgoutput" /><br>
           <form id="createComic">
             <label for="file-upload" class="custom-file-upload">
               Cover Art
             </label>
-            <input id="file-upload" type="file" name="coverart" accept="image/*" onchange="loadFile(event)"><br>
-            <img id="Imgoutput"/><br>
-            <script>
-              var loadFile = function(event) {
-                var output = document.getElementById('Imgoutput');
-                output.src = URL.createObjectURL(event.target.files[0]);
-              };
-            </script>
+            <input id="file-upload" type="file" name="coverart" accept="image/*" onchange="updateCover(event)"><br>
             <input type="text" name="comicname" placeholder="Comic Name" class="login_text"><br>
             <input type="text" name="comictags" placeholder="Comic Tags" class="login_text"><br>
             <textarea name="comicdescription" placeholder="Comic Description" row="5" cols="10"></textarea><br>
             <input type="submit" Value="Create" class="submit">
           </form>
-      </div>
+          </div>
+        </div>
       <!-- The Modal -->
   <div id="myModal" class="modal">
     <span class="close">&times;</span>

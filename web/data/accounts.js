@@ -30,47 +30,64 @@ function openPage(pageName, elmnt, btnName) {
 }
 
 function accMenuFunction(x) {
-    $(".accsidebar").width("100%");
+    $(".accsidebar").addClass("accsidebar-on")
     $(".accsidebar").css("position","fixed");
 }
 
 function acccloseNav() {
-    $(".accsidebar").width("0");
+    $(".accsidebar").removeClass("accsidebar-on");
     $(".acc-content-pane").width("100%");
 }
 
 function filter(filterType){
   if(filterType == "filter")
   {
-    if($("#filter-accounts").hasClass("filter-type"))
+    if(window.screen.availWidth > 768)
+    {
+      if($("#filter-accounts").hasClass("filter-type"))
+      {
+        $("#filter-relevant").removeClass("filter-type")
+        $("#filter-recent").removeClass("filter-type")
+        $("#filter-accounts").removeClass("filter-type")
+      }
+      else {
+        $("#filter-relevant").addClass("filter-type")
+        $("#filter-recent").addClass("filter-type")
+        $("#filter-accounts").addClass("filter-type")
+      }
+    }
+    else
+    {
+      $("#filter-dropdown").addClass("show-dropdown");
+      $("#filter-dropdown-btn").addClass("filter-type")
+    }
+  }
+  else if(filterType == "relevant" || filterType == "recent" || filterType ==  "accounts")
+  {
+    if(window.screen.availWidth > 768)
     {
       $("#filter-relevant").removeClass("filter-type")
       $("#filter-recent").removeClass("filter-type")
       $("#filter-accounts").removeClass("filter-type")
     }
-    else {
-      $("#filter-relevant").addClass("filter-type")
-      $("#filter-recent").addClass("filter-type")
-      $("#filter-accounts").addClass("filter-type")
+    else
+    {
+      $("#filter-dropdown").removeClass("show-dropdown");
+      $("#filter-dropdown-btn").removeClass("filter-type")
     }
-  }
-  else if(filterType == "relevant")
-  {
-    $("#filter-relevant").removeClass("filter-type")
-    $("#filter-recent").removeClass("filter-type")
-    $("#filter-accounts").removeClass("filter-type")
-  }
-  else if(filterType == "recent")
-  {
-    $("#filter-relevant").removeClass("filter-type")
-    $("#filter-recent").removeClass("filter-type")
-    $("#filter-accounts").removeClass("filter-type")
-  }
-  else if(filterType == "accounts")
-  {
-    $("#filter-relevant").removeClass("filter-type")
-    $("#filter-recent").removeClass("filter-type")
-    $("#filter-accounts").removeClass("filter-type")
   }
 
 };
+
+function createComic()
+{
+  if($("#acctSess").html().includes("Login/Signup"))
+    window.location.replace("/login");
+  if($(".createComic").hasClass("createComic-on"))
+  {
+    $(".createComic").removeClass("createComic-on")
+  }
+  else{
+    $(".createComic").addClass("createComic-on")
+  }
+}

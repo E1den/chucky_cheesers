@@ -11,6 +11,7 @@
   <script src="/modal.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Bangers|Happy+Monkey&display=swap" rel="stylesheet">
   <title>Comicality</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
 </head>
 
 <body>
@@ -56,25 +57,32 @@
           <button onclick="filter('relevant')" id="filter-relevant">Relevant</button>
           <button onclick="filter('recent')" id="filter-recent">Recent</button>
           <button onclick="filter('accounts')" id="filter-accounts">Accounts</button>
-          <button onclick="filter('filter')" class="filterBtn"><span id="filter-btn">
+          <button onclick="filter('filter')" class="filterBtn"><span id="filter-btn"><<
             </span> Filter</button> </div>
+            <div id="filter-dropdown">
+              <button onclick="filter('relevant')" id="filter-dropdown-btn">Relevant</button>
+              <button onclick="filter('recent')" id="filter-dropdown-btn">Recent</button>
+              <button onclick="filter('accounts')" id="filter-dropdown-btn">Accounts</button>
+            </div>
       </div>
       <div class="comic-gallery">
       </div>
       <div class="createComic">
         <button id="createComic-close" onclick="createComic()">X</button>
         <h2>Create a Comic</h2>
+        <div class="preference-wrapper">
+          <img id="Imgoutput" /><br>
         <form id="createComic">
           <label for="file-upload" class="custom-file-upload">
             Cover Art
           </label>
           <input id="file-upload" type="file" name="coverart" accept="image/*" onchange="updateCover(event)"><br>
-          <img id="Imgoutput" /><br>
           <input type="text" name="comicname" placeholder="Comic Name" class="login_text"><br>
           <input type="text" name="comictags" placeholder="Comic Tags" class="login_text"><br>
           <textarea name="comicdescription" placeholder="Comic Description" row="5" cols="10"></textarea><br>
           <input type="submit" Value="Create" class="submit">
         </form>
+        </div>
       </div>
       <!-- The Modal -->
       <div id="myModal" class="modal">
