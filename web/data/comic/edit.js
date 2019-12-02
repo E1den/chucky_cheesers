@@ -117,7 +117,7 @@ $(document).ready(function () {
     }
 
     function showSelectLayout() {
-        $("choose-template").addClass("popup-on");
+        $(".choose-template").addClass("popup-on")
         return;
     }
 

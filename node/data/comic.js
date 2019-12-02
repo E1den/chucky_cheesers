@@ -95,7 +95,8 @@ exports.getComicData = function (req, res) {
 
     mysql.accessUser(req.session.user, function (orows) {
         mysql.accessComicByID(id, function (err, rows) {
-            console.log("loading: "+ rows[0]);
+            console.log("loading: ");
+            console.log(rows[0]);
             if (rows[0].user_id != orows[0].user_id) {
                 req.query.e = 400;
                 err.error(req, res);
