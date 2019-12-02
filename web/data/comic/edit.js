@@ -84,6 +84,7 @@ function saveComic()
 
 function chooseTemplate()
 {
+    $(".choose-template").removeClass("popup-on");
     var layout = $(".current-slide").attr("id");
     pos = window.getLayoutPos(layout);
     window.comicData = { page: [] };
@@ -117,7 +118,7 @@ $(document).ready(function () {
     }
 
     function showSelectLayout() {
-        $(".choose-template").addClass("popup-on")
+        $(".choose-template").addClass("popup-on");
         return;
     }
 
