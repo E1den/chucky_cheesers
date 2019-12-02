@@ -176,7 +176,7 @@ module.exports =
 					descrip: description of the comic
 		*/
 		accessComic: function (comic_name, callback) {
-			var sql = `SELECT * FROM comics WHERE comic_name = '${comic_name}'`;
+			var sql = `SELECT * FROM comics WHERE comic_name like '%${comic_name}%'`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err)
