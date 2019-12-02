@@ -35,7 +35,7 @@ window.pageError = function (offset) {
 
     if (offset != 0) {
         rightPageExists = false;
-        currentPageNumber = leftPageNum + 1;
+        currentPageNumber = leftPageNum;
     }
     else {
         leftPageExists = false;
