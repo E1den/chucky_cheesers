@@ -16,6 +16,21 @@ function adjustPosterStyles() {
   }
 }
 
+
+$("#createComic").submit(function (n) {
+  n.preventDefault();
+  $.ajax({
+    type: "POST",
+    datatype: 'json',
+    url: "/srv/comic/create",
+    contentType: 'application/json',
+    data: JSON.stringify($(".createComic").serializeArray()),
+    success: function (n) {
+        $(location).attr("href", "/comic/editor/");
+    }
+  })
+});
+
 $(document).ready(function () {
   $(".menu").click(function () {
     $(".sidenav").width(250);
