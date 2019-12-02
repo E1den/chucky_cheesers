@@ -188,6 +188,48 @@ exports.updateForgot = function (req, res) {
 //Handles user updating data, eg password
 exports.update = function (req, res) {
     //TODO
+    try
+    {
+        oldpass = req.body[0].value;
+        newpass = req.body[1].value;
+        newpassconf = req.body[2].value;
+        if(newpass != newpassconf)
+        {
+          res.send("failure");
+        }
+    }
+    catch(e)
+    {
+      req.query.e = 400;
+      err.error(req, res);
+      return;
+    }
+
+    hashed = crypto.createHash('sha256').update(oldpassword).digest('base64');
+    hashednew = crypto.createHash('sha256').update(newpassword).digest('base64');
+
+    try {
+        result = mysql.accessUserByEmail(email, function (rows) {
+            if (rows == undefined || rows.length == 0) {
+                //ERROR NON EXISTANT
+                res.send("failure");
+            }
+            else if (rows[0].password == hashed) {
+                //SUCCESS
+                req.session.user = rows[0].display_name;
+                res.send("success");
+            }
+            else {
+                //ERROR BAD PASSWORD
+                res.send("failure");
+            }
+        });
+    }
+    catch (e) {
+        req.query.e = 400;
+        err.error(req, res);
+        return;
+    }
 }
 
 //Gets the current data to display about login state for a given user

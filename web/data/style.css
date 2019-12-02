@@ -1228,6 +1228,32 @@ background-color: #555;
 color: white;
 }
 
+#SecSet
+{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#changepass
+{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#changepass input
+{
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 2px 2px 4px grey;
+  font-family: 'Happy-Monkey', cursive;
+}
+
 /*
 ****************
 END ACCOUNT PAGE
@@ -1434,7 +1460,11 @@ hr
 {
   height:100%;
   width:65%;
-  background-color: #ddd;
+  background-color: #222;
+  box-shadow: 2px 2px 10px grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .edit-upload-form
@@ -1459,6 +1489,7 @@ hr
 
 .confirm-edit
 {
+  margin-top: 5px;
   background-color: white;
   padding: 5px;
   border-radius: 5px;
@@ -1654,6 +1685,73 @@ h3
 /*
   ****************
   END PAGE GALLERY
+  ****************
+*/
+
+/*
+  ****************
+  START CONTACT US
+  ****************
+*/
+
+.contact-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  width: 39%;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  transform: skew(-15deg);
+  background: white;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-right: 3px solid;
+}
+
+.contact-form:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  left: -0.5em;
+  transform: skew(15deg);
+  background: white;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  backface-visibility: hidden;
+  z-index: 0;
+}
+
+.contact-form form {
+  z-index: 1;
+  font-size: 14px;
+  transform: skew(15deg);
+  font-family: 'Happy Monkey', cursive;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  align-self: center;
+  text-align: center;
+}
+
+.contact-form input
+{
+  background-color: white;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 2px 2px 4px grey;
+  font-family: 'Happy-Monkey', cursive;
+}
+
+.contact-form textarea
+{
+  width: 95%;
+}
+
+/*
+  ****************
+  END CONTACT US
   ****************
 */
 
