@@ -369,6 +369,7 @@ exports.pushImg = function (req, res) {
                 try {
                     data = JSON.parse(rows[0].layout);
                 } catch (e) { }
+                console.log(data)
                 data.frames[frame] = {
                     imageURL: "/imgs/" + image_id + ".png"
                 }
