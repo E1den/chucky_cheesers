@@ -144,7 +144,7 @@ $(document).ready(function () {
 
 
         //draw on comic
-        var curFrame  = window.comicData.page[currentPageNumber].frame[current_index];
+        var curFrame  = window.comicData.page[currentPageNumber].frames[current_index];
         window.ctx.putImageData(frameIMG, curFrame.pageXOffset, curFrame.y,0,0,curFrame.width,curFrame.height);
 
         $(".edit-frame").removeClass("popup-on");
