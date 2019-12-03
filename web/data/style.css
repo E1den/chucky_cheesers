@@ -233,6 +233,7 @@ button {
   align-content: start;
   justify-content: start;
   align-items: center;
+  word-wrap: normal;
   /*height: calc(100vh - 200px);*/
   overflow-y: scroll;
 }
