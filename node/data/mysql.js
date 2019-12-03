@@ -137,7 +137,7 @@ module.exports =
                         Nothing
                 */
                 deleteUser: function (username) {
-                        var sql = `DROP * FROM users WHERE display_name = '${username}'`;
+                        var sql = `DROP FROM users WHERE display_name = '${username}'`;
                         pool.getConnection(function (err, con) {
                                 con.query(sql, function (err, result) {
                                         if (err) throw err;
