@@ -143,7 +143,7 @@ $(document).ready(function () {
 
         // var currentPage = window.comicData.page[window.leftPageNum]; // left page
         var pageXOffset = 0;
-        if (x > (width / 2)) {
+        if (currentPageNumber%2!=0) {
             //     currentPage = window.comicData.page[window.leftPageNum + 1]; // right page
             pageXOffset = (width / 2);
         }
