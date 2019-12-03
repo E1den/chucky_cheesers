@@ -383,5 +383,5 @@ function animateSlides(np)
 }
 
 function toEditor(){
-  $(location).attr("href", "/comic/edit?id=" + window.COMIC_ID);
+  $(location).attr("href", "/comic/editor/?id=" + window.COMIC_ID);
 }
