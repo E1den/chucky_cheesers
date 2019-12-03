@@ -383,12 +383,5 @@ function animateSlides(np)
 }
 
 function toEditor(){
-  $.ajax({
-    type: "POST",
-    datatype: 'json',
-    url: "/srv/comic/create",
-    contentType: 'application/json',
-    data: JSON.stringify(comic),
-    success: function (n) { if (n == 'failure') {/*error*/return; } var back = JSON.parse(data); $(location).attr("href", "/comic/edit?id=" + back.id); }
-  });
+  $(location).attr("href", "/comic/edit?id=" + window.COMIC_ID);
 }
