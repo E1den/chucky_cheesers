@@ -98,6 +98,52 @@ window.getLayoutPos = function (num) {
                 }
             ];
             break;
+        case 1:
+        // 3 frames =? 3 300x1000 frames
+          return[
+            {
+                x: 93,
+                y: 146,
+                width: 1000,
+                height: 300
+            },
+            {
+                x: 93,
+                y: 451,
+                width: 1000,
+                height: 300
+            },
+            {
+                x: 93,
+                y: 756,
+                width: 1000,
+                height: 300
+            }
+          ];
+          break;
+      case 2:
+      // 3 frames => 3 1000x300 frames
+        return[
+          {
+              x: 93,
+              y: 146,
+              width: 300,
+              height: 1000
+          },
+          {
+              x: 93,
+              y: 451,
+              width: 300,
+              height: 1000
+          },
+          {
+              x: 93,
+              y: 756,
+              width: 300,
+              height: 1000
+          }
+        ];
+        break;
     }
 }
 
@@ -334,4 +380,15 @@ function animateSlides(np)
     $(slides[current]).addClass("next-slide");
     current = ((current - 1) + slides.length) % slides.length;
   }
+}
+
+function toEditor(){
+  $.ajax({
+    type: "POST",
+    datatype: 'json',
+    url: "/srv/comic/create",
+    contentType: 'application/json',
+    data: JSON.stringify(comic),
+    success: function (n) { if (n == 'failure') {/*error*/return; } var back = JSON.parse(data); $(location).attr("href", "/comic/edit?id=" + back.id); }
+  });
 }
