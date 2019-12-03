@@ -143,7 +143,7 @@ $(document).ready(function () {
 
         // var currentPage = window.comicData.page[window.leftPageNum]; // left page
         var pageXOffset = 0;
-        if (currentPageNumber%2!=0) {
+        if (currentPageNumber % 2 != 0) {
             //     currentPage = window.comicData.page[window.leftPageNum + 1]; // right page
             pageXOffset = (width / 2);
         }
@@ -270,20 +270,21 @@ $(document).ready(function () {
         }
 
         //each should be a plus sign until an image is added
-        currentPage.frames.forEach(function (frame, index) {
-            if ((x >= frame.x + pageXOffset) && (x <= frame.x + frame.width + pageXOffset) && (y >= frame.y) && (y <= frame.y + frame.height)) {
-                //selected this box at index
-                if (index == current_index) {
-                    showFrameEditor();
+        if (Math.abs(currentPageNumber - leftPageNum) < 2)
+            currentPage.frames.forEach(function (frame, index) {
+                if ((x >= frame.x + pageXOffset) && (x <= frame.x + frame.width + pageXOffset) && (y >= frame.y) && (y <= frame.y + frame.height)) {
+                    //selected this box at index
+                    if (index == current_index) {
+                        showFrameEditor();
 
-                    if (window.comicData.page[currentPageNumber].length <= current_index) {
-                        currentPageNumber++;
-                        current_index = 0;
-                        window.redrawPages();
+                        if (window.comicData.page[currentPageNumber].length <= current_index) {
+                            currentPageNumber++;
+                            current_index = 0;
+                            window.redrawPages();
+                        }
                     }
                 }
-            }
-        });
+            });
 
 
     });
