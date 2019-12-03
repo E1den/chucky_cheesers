@@ -112,6 +112,7 @@ window.getLayoutPos = function (num) {
                 height: 300
             }
           ];
+          break;
     }
 }
 
