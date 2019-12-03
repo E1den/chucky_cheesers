@@ -121,11 +121,14 @@ exports.getPages = function (req, res) {
     var data = { page: [] };
     res.contentType("json");
     mysql.accessComicPageList(req.body.id, function (err, rows) {
+        if(rows==undefined||rows.length==0)
+        {
+            res.end();
+        }
         rows.forEach(function (row, index) {
             mysql.accessPage(row.page_id, function (err, row) {
                 data.page.push(JSON.parse(row[0].layout));
                 if (index == rows.length - 1) {
-                    console.log(data);
                     res.write(JSON.stringify(data));
                     res.end();
                 }
