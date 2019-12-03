@@ -193,6 +193,7 @@ window.setupPages = function () {
 }
 
 window.redrawPages = function () {
+    grabData();
     window.ctx.clearRect(0, 0, width, height);
     window.ctx.lineWidth = 2;
     window.ctx.beginPath();
