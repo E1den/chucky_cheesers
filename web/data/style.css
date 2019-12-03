@@ -1397,7 +1397,7 @@ hr
 .choice-slide
 {
   width: 25%;
-  height:80%;
+  height:50%;
   display:none;
   transition: all 0.5s;
 }
