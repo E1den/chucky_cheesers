@@ -35,7 +35,7 @@ $(document).ready(function() {
     //       grabNextRows();
         $(".subnav").css("opacity", 1 - $(window).scrollTop() / 250);
     });
-    $(document).on('click', '.overlay', function() {  var id = $(this).attr('cid'); window.location.replace("/comic/view/?id="+id);});
+    $(document).on('click', '.overlay', function() {  var id = $(this).children().attr("cid")[0]; window.location.replace("/comic/view/?id="+id);});
 });
 
 function filter(filterType){
