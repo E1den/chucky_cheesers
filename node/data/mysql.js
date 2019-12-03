@@ -288,7 +288,6 @@ module.exports =
 					var sql2 = `UPADTE pages (layout) SET layout='${layout}' where page_id='${page_id}';`;
 					con.query(sql1, function (err, result) {
 						if (err) console.log(err, null);
-
 					});
 				});
 			})
@@ -335,7 +334,7 @@ module.exports =
 		},
 
 		accessComicPageListDESC: function (comic_id, callback) {
-			var sql = `SELECT page_number from comic_page_list WHERE comic_id = '${comic_id}' ORDER BY page_number DESC;`;
+			var sql = `SELECT * from comic_page_list WHERE comic_id = '${comic_id}' ORDER BY page_number DESC;`;
 			console.log(sql);
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {

@@ -362,7 +362,7 @@ exports.pushImg = function (req, res) {
         //add frame to page
         mysql.accessComicPageListDESC(comic + "", function (err, rows) {
             var page_id = rows[0].page_id;
-            console.log(rows);
+            console.log(page_id);
             mysql.updatePage(page_id, function (rows) {
                 var data = { frames: [] };
                 try {
@@ -371,8 +371,8 @@ exports.pushImg = function (req, res) {
                 data.frames[frame] = {
                     imageURL: "/imgs/" + image_id + ".png"
                 }
-                res.write(JSON.stringify(data));
                 res.end();
+                return JSON.stringify(data);
             });
         });
     });
