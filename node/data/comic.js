@@ -205,7 +205,7 @@ exports.search = function (req, res) {
                 return;
             }
 
-            console.log(thing);
+            console.log(thing[0].user_id);
 
 
             mysql.accessAllComicForUser(thing.user_id, function (err, rows) {
