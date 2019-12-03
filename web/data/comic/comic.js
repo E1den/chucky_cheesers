@@ -234,7 +234,13 @@ function deleteComic(confirm)
 
   if(confirm == "yes")
   {
-
+    $.ajax({
+      type: "POST",
+      url: "/srv/comic/delete",
+      datatype: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify({ "id": window.COMIC_ID })
+    });
   }
   else if(confirm == "no")
   {

@@ -56,7 +56,7 @@ exports.create = function (req, res) {
 
 exports.delete = function (req, res) {
     try {
-        mysql.deleteComic(req.body.id.value, req.body.user.value);
+        mysql.deleteComic(req.body.id.value, null);
     }
     catch (e) {
         req.query.e = 400;
