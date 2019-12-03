@@ -2094,3 +2094,21 @@ h3
   END MOBILE COMPATABILITY
   ************************
 */
+
+#toEditor
+{
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
+  border: none;
+  box-shadow: 2px 2px 4px grey;
+  font-family: 'Happy-Monkey', cursive;
+}
+
+#toEditor:hover {
+  background: #ddd;
+  transition-duration: 0.5s;
+}
