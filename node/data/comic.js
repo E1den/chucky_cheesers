@@ -92,28 +92,29 @@ exports.getComicData = function (req, res) {
     }
 
     //verify owner
-
-    mysql.accessUser(req.session.user, function (orows) {
-        if (orows == undefined || orows == null || orows.length == 0) {
-            res.write("failure")
-            res.end();
-            return;
-        }
-        mysql.accessComicByID(id, function (err, rows) {
-            console.log("loading: ");
-            console.log(rows[0]);
-            if (rows[0].user_id != orows[0].user_id) {
-                req.query.e = 400;
-                err.error(req, res);
+    try {
+        mysql.accessUser(req.session.user, function (orows) {
+            if (orows == undefined || orows == null || orows.length == 0) {
+                res.write("failure")
+                res.end();
                 return;
             }
-            else {
-                res.contentType("json");
-                res.write(JSON.stringify(rows[0]));
-                res.end();
-            }
+            mysql.accessComicByID(id, function (err, rows) {
+                console.log("loading: ");
+                console.log(rows[0]);
+                if (rows[0].user_id != orows[0].user_id) {
+                    req.query.e = 400;
+                    err.error(req, res);
+                    return;
+                }
+                else {
+                    res.contentType("json");
+                    res.write(JSON.stringify(rows[0]));
+                    res.end();
+                }
+            });
         });
-    });
+    } catch (e) { }
 }
 
 exports.getPages = function (req, res) {
@@ -370,7 +371,7 @@ exports.pushImg = function (req, res) {
                     data = JSON.parse(rows[0].layout);
                 } catch (e) { }
                 console.log(data)
-                data.frames[frame-1] = {
+                data.frames[frame - 1] = {
                     imageURL: image_id + ".png"
                 };
                 console.log(data);
