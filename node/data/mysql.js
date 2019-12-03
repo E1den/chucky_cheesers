@@ -358,10 +358,11 @@ module.exports =
 		},
 
 		appendImage: function (img_name, callback) {
-			var sql = `INSERT into images (image_loc,image_permission,is_private) VALUES (${img_name},0,0); SELECT last_insert_id();`;
+			var sql = `INSERT into images (image_loc,image_permission,is_private) VALUES (${img_name},0,0);`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
-					callback(result[0]);
+					con.query(`SELECT last_insert_id();`,callback);
+
 				});
 			});
 		},
