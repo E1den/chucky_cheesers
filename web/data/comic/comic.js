@@ -142,7 +142,7 @@ function grabData() {
     $.ajax({
         type: "POST",
         url: "/srv/comic/pages",
-        data: { "id": window.COMIC_ID },
+        data: JSON.stringify({ "id": window.COMIC_ID }),
         success: function (n) {
             if (n == 'failure') {
                 window.error();
