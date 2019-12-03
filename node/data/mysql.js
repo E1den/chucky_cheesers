@@ -325,6 +325,7 @@ module.exports =
 		*/
 		accessComicPageList: function (comic_id, callback) {
 			var sql = `SELECT * from comic_page_list WHERE comic_id = '${comic_id}';`;
+			console.log("acpl: "+sql);
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err) callback(err, null);
