@@ -356,7 +356,7 @@ module.exports =
 			});
 		},
 
-		accessAllComicForUser: function (callback, user_id) {
+		accessAllComicForUser: function (user_id, callback) {
 			var sql = `SELECT * FROM comics where user_id='user_id';`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
