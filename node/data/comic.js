@@ -353,7 +353,7 @@ exports.pushImg = function (req, res) {
     //save frame
     var base64Data = img.replace(/^data:image\/png;base64,/, "");
     mysql.appendImage("NULL", function (err, result) {
-        var image_id = result[0];
+        var image_id = result;
         console.log("id:" + image_id);
         fs.writeFile("../../web/data/imgs/" + image_id + ".png", base64Data, 'base64', function (err) {
             console.log(err);
