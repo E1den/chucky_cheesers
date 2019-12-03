@@ -338,9 +338,6 @@ exports.pushPage = function (req, res) {
 
 exports.pushImg = function (req, res) {
     //{ 'img': frameData, 'comic': window.COMIC_ID, 'frame': current_index, 'page': currentPageNumber })
-
-    console.log(req.body);
-
     try {
         img = req.body.img;
         comic = Number(req.body.comic);

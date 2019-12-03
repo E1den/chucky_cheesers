@@ -357,8 +357,7 @@ module.exports =
 		},
 
 		appendImage: function (img_name) {
-			var sql = `INSERT into images (image_loc,image_permission,is_private) VALUES (${img_name},0,0); SELECT image_id from images  where image_loc = '${img_name}';`;
-			console.log(sql);
+			var sql = `INSERT into images (image_loc,image_permission,is_private) VALUES (${img_name},0,0); SELECT last_insert_id()';`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					return result[0].image_id;
