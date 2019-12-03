@@ -107,8 +107,7 @@ function chooseTemplate() {
             'layout': layout
         }
     };
-    dat.layout.append(pos);
-
+    dat.layout.push(pos);
 
     $.ajax({
         type: "POST",
