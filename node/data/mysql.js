@@ -104,6 +104,7 @@ module.exports =
 						throw err;
 						return false;
 					}
+				connection.release();
 				});
 			});
 		},
@@ -124,6 +125,7 @@ module.exports =
 					else
 						return callback(result);
 				});
+				connection.release();
 			});
 		},
 
@@ -140,6 +142,7 @@ module.exports =
 				con.query(sql, function (err, result) {
 					if (err) throw err;
 				});
+				connection.release();
 			});
 		},
 
@@ -158,6 +161,7 @@ module.exports =
 						throw err;
 					return callback(result);
 				});
+				connection.release();
 			});
 		},
 
@@ -181,6 +185,7 @@ module.exports =
 					}
 					callback(err, result.insertId);
 				});
+				connection.release();
 			});
 		},
 
@@ -206,6 +211,7 @@ module.exports =
 					else
 						return callback(err, result);
 				});
+				connection.release();
 			});
 		},
 
@@ -225,6 +231,7 @@ module.exports =
 					}
 					return result[0].comic_id;
 				});
+				connection.release();
 			});
 		},
 
@@ -245,6 +252,7 @@ module.exports =
 					else
 						return callback(err, result);
 				});
+				connection.release();
 			});
 		},
 
@@ -275,6 +283,7 @@ module.exports =
 							throw err;
 					});
 				});
+				connection.release();
 			});
 		},
 
@@ -302,6 +311,7 @@ module.exports =
 						});
 					});
 				});
+				connection.release();
 			});
 		},
 
@@ -325,6 +335,7 @@ module.exports =
 						if (err) console.log(err, null);
 					});
 				});
+				connection.release();
 			})
 		},
 
@@ -346,6 +357,7 @@ module.exports =
 					if (err) callback(err, null);
 					callback(err, result);
 				});
+				connection.release();
 			});
 		},
 		/*
@@ -363,6 +375,7 @@ module.exports =
 					if (err) callback(err, null);
 					callback(err, result);
 				});
+				connection.release();
 			});
 		},
 
@@ -381,6 +394,7 @@ module.exports =
 					if (err) callback(err, null);
 					callback(err, result);
 				});
+				connection.release();
 			});
 		},
 
@@ -393,6 +407,7 @@ module.exports =
 					else
 						return callback(err, result);
 				});
+				connection.release();
 			});
 		},
 
@@ -405,6 +420,7 @@ module.exports =
 					else
 						return callback(err, result);
 				});
+				connection.release();
 			});
 		},
 
@@ -414,6 +430,7 @@ module.exports =
 				con.query(sql, function (err, result) {
 					callback(null, result.insertId);
 				});
+				connection.release();
 			});
 		},
 
@@ -449,6 +466,7 @@ module.exports =
 							});
 						});
 					});
+					connection.release();
 				});
 			});
 		}
