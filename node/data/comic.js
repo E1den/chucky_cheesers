@@ -122,7 +122,7 @@ exports.getPages = function (req, res) {
     mysql.accessComicPageList(req.body.id, function (err, rows) {
         rows.forEach(function (row,index) {
             mysql.accessPage(row.page_id,function(err,row){
-                console.log(row.layout);
+                console.log(row);
                 data.page.push(row.layout);
                 if(index==rows.length-1)
                 {
