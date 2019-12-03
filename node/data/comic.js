@@ -205,11 +205,8 @@ exports.search = function (req, res) {
                 return;
             }
 
-            console.log(thing[0].user_id);
-
-
-            mysql.accessAllComicForUser(thing.user_id, function (err, rows) {
-                if (rows == undefined || rows == null) {
+            mysql.accessAllComicForUser(thing[0].user_id, function (err, rows) {
+                if (rows == undefined || rows == null || rows.length==0) {
                     res.end();
                     return;
                 }
