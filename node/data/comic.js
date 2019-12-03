@@ -372,7 +372,9 @@ exports.pushImg = function (req, res) {
                 data.frames[frame] = {
                     imageURL: "/imgs/" + image_id + ".png"
                 }
+                console.log(JSON.stringify(data));
                 res.end();
+                console.log("after");
                 return JSON.stringify(data);
             });
         });
