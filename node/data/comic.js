@@ -208,7 +208,7 @@ exports.search = function (req, res) {
             console.log(thing);
 
 
-            mysql.accessAllComicForUser(thing[0].user_id, function (err, rows) {
+            mysql.accessAllComicForUser(thing.user_id, function (err, rows) {
                 if (rows == undefined || rows == null) {
                     res.end();
                     return;
