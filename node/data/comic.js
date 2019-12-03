@@ -124,14 +124,17 @@ exports.getPages = function (req, res) {
 
     mysql.accessComicPageList(req.body.id, function (err, rows) {
         console.log(rows);
-        rows.forEach(function (row) {
+        rows.forEach(function (row,index) {
             mysql.accessPage(row.page_id,function(err,row){
                 data.page.push(row.layout);
+                if(index==rows.length)
+                {
+                    console.log(data);
+                    res.write(JSON.stringify(data));
+                    res.end();
+                }
             })
         });
-        console.log(data);
-        res.write(JSON.stringify(data));
-        res.end();
     });
     /* example of data to send -->
     data = {
