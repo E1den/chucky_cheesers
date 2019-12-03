@@ -300,6 +300,8 @@ exports.pushPage = function (req, res) {
 
     // ({ 'comic': window.COMIC_ID, 'page': currentPageNumber, 'layout': layout })
 
+    console.log(req.body);
+
     try {
         comic = req.body.comic;
         page = req.body.page;
