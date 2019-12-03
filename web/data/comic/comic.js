@@ -1,4 +1,3 @@
-
 const width = 2560;
 const height = 1440
 
