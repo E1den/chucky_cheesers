@@ -155,6 +155,8 @@ $(document).ready(function () {
 
         $(".edit-frame").removeClass("popup-on");
 
+        current_index++;
+
         //save on server
         $.ajax({
             type: "POST",
@@ -273,7 +275,6 @@ $(document).ready(function () {
                 //selected this box at index
                 if (index == current_index) {
                     showFrameEditor();
-                    current_index++;
 
                     if (window.comicData.page[currentPageNumber].length <= current_index) {
                         currentPageNumber++;
