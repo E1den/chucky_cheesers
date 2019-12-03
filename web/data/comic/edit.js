@@ -149,6 +149,7 @@ $(document).ready(function () {
         }
 
 
+
         //draw on comic
         var curFrame = window.comicData.page[currentPageNumber].frames[current_index];
         window.ctx.putImageData(frameIMG, curFrame.x + pageXOffset, curFrame.y, 0, 0, curFrame.width, curFrame.height);
@@ -163,7 +164,8 @@ $(document).ready(function () {
             url: "/srv/comic/pushimg",
             datatype: 'json',
             contentType: 'application/json',
-            data: JSON.stringify({ 'img': frameData, 'comic': window.COMIC_ID, 'frame': current_index, 'page': currentPageNumber })
+            data: JSON.stringify({ 'img': frameData, 'comic': window.COMIC_ID, 'frame': current_index, 'page': currentPageNumber }),
+            success:function(n){ window.comicData.page[currentPageNumber].frames[current_index].imgURL=n+".png";}
         });
 
 

@@ -364,6 +364,7 @@ exports.pushImg = function (req, res) {
                     imageURL: image_id + ".png"
                 };
                 console.log(data);
+                res.write(page_id);
                 res.end();
                 return JSON.stringify(data);
             });
