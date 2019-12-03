@@ -143,6 +143,13 @@ module.exports =
 			});
 		},
 
+		/*
+		Pulls the user information from the database using the email instead of the username
+		Inputs:
+			emailAddress: Email address of the user that we want to access
+		Returns:
+			result: Contains the array of all of the user's information that was saved in the database;
+		*/
 		accessUserByEmail: function (emailAddress, callback) {
 			var sql = `SELECT * FROM users WHERE email_address = '${emailAddress}'`;
 			pool.getConnection(function (err, con) {
@@ -202,7 +209,13 @@ module.exports =
 			});
 		},
 
-		//passed a comics name and returns the id of the comic specified
+		/*
+		passed a comics name and returns the id of the comic specified
+		Inputs:
+			comic_name: name of the comic
+		Returns:
+			comic_id: the Id of the comic with the specificed username
+		*/
 		getComicIDByName: function (comic_name) {
 			var sql = `SELECT comic_id FROM comics WHERE comic_name = '${comic_name}'`;
 			pool.getConnection(function (err, con) {
@@ -215,6 +228,14 @@ module.exports =
 			});
 		},
 
+
+		/*
+		passed a comics name and returns the id of the comic specified
+		Inputs:
+			comic_name: name of the comic
+		Returns:
+			An array of the comic information
+		*/
 		accessComicByID: function (comic_id, callback) {
 			var sql = `SELECT * FROM comics WHERE comic_id = '${comic_id}'`;
 			pool.getConnection(function (err, con) {
@@ -227,11 +248,12 @@ module.exports =
 			});
 		},
 
-		//just removes the entry for the comic, no the actual comic, works for now : NEED TO ACTAULLY
+		//just removes the entry for the comic, not the actual comic, works for now : NEED TO ACTAULLY
 		deleteComic: function (comic_id, user_id) {
 			var sql1 = `SELECT user_id FROM  comics WHERE comic_id='${comic_id}'`;
 			var sql2 = `SELECT page_id FROM comic_page_list WHERE comic_id='${comic_id}'`;
 			var sql3 = `DELETE * FROM comics WHERE comic_id = '${comic_id}'`;
+			var sql4 = `DELETE * FROM comic_page_list WHERE comic_id = '${comic_id}'`;
 			pool.getConnection(function (err, con) {
 				con.query(sql1, function (err, result) {
 					if (err)
@@ -245,6 +267,10 @@ module.exports =
 							throw err;
 					});
 					con.query(sql3, function (err, result) {
+						if (err)
+							throw err;
+					});
+					con.query(sql4, function (err, result) {
 						if (err)
 							throw err;
 					});
@@ -279,6 +305,15 @@ module.exports =
 			});
 		},
 
+		/*
+		Inserts a new page to the database and adds it to the comics page list
+		Inputs:
+			comic_id: Comic_id of which comic this page is for
+			creator_user_id: the user_id of the user that is inserting the page
+			layout: layout of the page
+		Returns:
+			Nothing -> pageID
+		*/
 		updatePage: function (page_id, callback) {
 			var sql1 = `SELECT layout FROM pages where page_id='${page_id}';`;
 			pool.getConnection(function (err, con) {
@@ -314,13 +349,11 @@ module.exports =
 			});
 		},
 		/*
-		accesses the page of the provided id
+		accesses the page list of the provided comic id
 		Inputs:
-				page_id: page id that you want to access
+			comic_id: comic id that you want to access
 		Returns:
-			results: an array of the contents of the table for this page id
-				columns:
-					layout: the layout of the page
+			results: an array of the contents of the table for this comic id
 		*/
 		accessComicPageList: function (comic_id, callback) {
 			var sql = `SELECT * from comic_page_list WHERE comic_id = '${comic_id}';`;
@@ -333,6 +366,13 @@ module.exports =
 			});
 		},
 
+		/*
+		accesses the page list of the provided comic id
+		Inputs:
+				page_id: page id that you want to access
+		Returns:
+			results: an array of the contents of the table for this comic id sorted by the page number
+		*/
 		accessComicPageListDESC: function (comic_id, callback) {
 			var sql = `SELECT * from comic_page_list WHERE comic_id = '${comic_id}' ORDER BY page_number DESC;`;
 			console.log(sql);
