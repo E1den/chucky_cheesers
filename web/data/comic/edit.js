@@ -105,10 +105,10 @@ function chooseTemplate() {
     $.ajax({
         type: "POST",
         url: "/srv/comic/pushpage",
-        data: JSON.stringify({ 'comic': window.COMIC_ID, 'page': currentPageNumber, 'layout': JSON.stringify({
+        data: JSON.stringify({ 'comic': window.COMIC_ID, 'page': currentPageNumber, 'layout': {
             'layout':layout,
             frames:pos
-        }) })
+        } })
     });
 
     return;
