@@ -142,6 +142,8 @@ function grabData() {
     $.ajax({
         type: "POST",
         url: "/srv/comic/pages",
+        datatype: 'json',
+        contentType: 'application/json',
         data: JSON.stringify({ "id": window.COMIC_ID }),
         success: function (n) {
             if (n == 'failure') {
