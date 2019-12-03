@@ -107,7 +107,7 @@ function chooseTemplate() {
             'layout': layout
         }
     };
-    dat.layout.frames=pos;
+    dat.layout.frames = pos;
 
     $.ajax({
         type: "POST",
@@ -142,16 +142,16 @@ $(document).ready(function () {
         var frameIMG = $(".konvajs-content canvas")[0].getContext('2d').getImageData(0, 0, $(".konvajs-content canvas").width(), $(".konvajs-content canvas").height());
 
         // var currentPage = window.comicData.page[window.leftPageNum]; // left page
-        // var pageXOffset = 0;
-        // if (x > (width / 2)) {
-        //     currentPage = window.comicData.page[window.leftPageNum + 1]; // right page
-        //     pageXOffset = (width / 2);
-        // }
+        var pageXOffset = 0;
+        if (x > (width / 2)) {
+            //     currentPage = window.comicData.page[window.leftPageNum + 1]; // right page
+            pageXOffset = (width / 2);
+        }
 
 
         //draw on comic
         var curFrame = window.comicData.page[currentPageNumber].frames[current_index];
-        window.ctx.putImageData(frameIMG, curFrame.pageXOffset, curFrame.y, 0, 0, curFrame.width, curFrame.height);
+        window.ctx.putImageData(frameIMG, curFrame.x + pageXOffset, curFrame.y, 0, 0, curFrame.width, curFrame.height);
 
         $(".edit-frame").removeClass("popup-on");
 
