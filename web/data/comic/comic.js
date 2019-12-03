@@ -1,4 +1,3 @@
-
 const width = 2560;
 const height = 1440
 
@@ -280,7 +279,13 @@ function deleteComic(confirm)
 
   if(confirm == "yes")
   {
-
+    $.ajax({
+      type: "POST",
+      url: "/srv/comic/delete",
+      datatype: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify({ "id": window.COMIC_ID })
+    });
   }
   else if(confirm == "no")
   {
@@ -377,12 +382,5 @@ function animateSlides(np)
 }
 
 function toEditor(){
-  $.ajax({
-    type: "POST",
-    datatype: 'json',
-    url: "/srv/comic/create",
-    contentType: 'application/json',
-    data: JSON.stringify(comic),
-    success: function (n) { if (n == 'failure') {/*error*/return; } var back = JSON.parse(data); $(location).attr("href", "/comic/edit?id=" + back.id); }
-  });
+  $(location).attr("href", "/comic/editor/?id=" + window.COMIC_ID);
 }
