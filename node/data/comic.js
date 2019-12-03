@@ -78,12 +78,12 @@ exports.getComicData = function (req, res) {
 
     //verify owner
     try {
-        mysql.accessUser(req.session.user, function (orows) {
-            if (orows == undefined || orows == null || orows.length == 0) {
-                res.write("failure")
-                res.end();
-                return;
-            }
+        // mysql.accessUser(req.session.user, function (orows) {
+        //     if (orows == undefined || orows == null || orows.length == 0) {
+        //         res.write("failure")
+        //         res.end();
+        //         return;
+        //     }
             mysql.accessComicByID(id, function (err, rows) {
                 console.log("loading: ");
                 console.log(rows[0]);
@@ -98,7 +98,7 @@ exports.getComicData = function (req, res) {
                     res.end();
                 }
             });
-        });
+        // });
     } catch (e) { }
 }
 
@@ -205,12 +205,17 @@ exports.search = function (req, res) {
                 return;
             }
 
+            console.log(thing);
+
 
             mysql.accessAllComicForUser(thing[0].user_id, function (err, rows) {
                 if (rows == undefined || rows == null) {
                     res.end();
                     return;
                 }
+
+                console.log(rows);
+
                 res.write("</div>");
                 rows.forEach(function (row, index) {
                     if (index % 5 == 0) {
