@@ -143,6 +143,35 @@ window.getLayoutPos = function (num) {
           }
         ];
         break;
+      case 3:
+      // 4 frames => 2 300x1000 frames 2 500x500
+        return[
+          {
+              x: 93,
+              y: 146,
+              width: 1000,
+              height: 300
+          },
+          {
+              x: 93,
+              y: 451,
+              width: 1000,
+              height: 300
+          },
+          {
+              x: 93,
+              y: 756,
+              width: 500,
+              height: 500
+          },
+          {
+              x: 686,
+              y: 756,
+              width: 500,
+              height: 500
+          }
+        ];
+        break;
     }
 }
 
