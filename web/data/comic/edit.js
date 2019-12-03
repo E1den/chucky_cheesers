@@ -102,13 +102,19 @@ function chooseTemplate() {
         rightPageExists = true;
     currentLayoutFor = 0;
 
+    var dat = JSON.stringify({
+        'comic': window.COMIC_ID, 'page': currentPageNumber, 'layout': {
+            'layout': layout,
+            frames: pos
+        }
+    });
+
     $.ajax({
         type: "POST",
         url: "/srv/comic/pushpage",
-        data: JSON.stringify({ 'comic': window.COMIC_ID, 'page': currentPageNumber, 'layout': {
-            'layout':layout,
-            frames:pos
-        } })
+        datatype: 'json',
+        contentType: 'application/json',
+        data: dat
     });
 
     return;
@@ -133,7 +139,7 @@ $(document).ready(function () {
     window.commitFrame = function () {
         currentlyEditingFrame = false;
         var frameData = $(".konvajs-content canvas")[0].toDataURL("img/jpeg");
-        var frameIMG = $(".konvajs-content canvas")[0].getContext('2d').getImageData(0, 0,$(".konvajs-content canvas").width(),$(".konvajs-content canvas").height());
+        var frameIMG = $(".konvajs-content canvas")[0].getContext('2d').getImageData(0, 0, $(".konvajs-content canvas").width(), $(".konvajs-content canvas").height());
 
         // var currentPage = window.comicData.page[window.leftPageNum]; // left page
         // var pageXOffset = 0;
@@ -144,8 +150,8 @@ $(document).ready(function () {
 
 
         //draw on comic
-        var curFrame  = window.comicData.page[currentPageNumber].frames[current_index];
-        window.ctx.putImageData(frameIMG, curFrame.pageXOffset, curFrame.y,0,0,curFrame.width,curFrame.height);
+        var curFrame = window.comicData.page[currentPageNumber].frames[current_index];
+        window.ctx.putImageData(frameIMG, curFrame.pageXOffset, curFrame.y, 0, 0, curFrame.width, curFrame.height);
 
         $(".edit-frame").removeClass("popup-on");
 
@@ -153,6 +159,8 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "/srv/comic/pushimg",
+            datatype: 'json',
+            contentType: 'application/json',
             data: JSON.stringify({ 'img': frameData, 'comic': window.COMIC_ID, 'frame': current_index, 'page': currentPageNumber })
         });
 
