@@ -326,8 +326,7 @@ exports.pushPage = function (req, res) {
     //latest page on top
     mysql.accessUser(req.session.user, function (rows) {
         console.log(rows[0].user_id);
-        var id = mysql.createPage(comic, rows[0].user_id, JSON.stringify(layout));
-        res.write(id);
+        mysql.createPage(comic, rows[0].user_id, JSON.stringify(layout));
         res.end();
     });
     //}

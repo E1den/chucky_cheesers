@@ -275,7 +275,6 @@ module.exports =
 						console.log(sql2);
 						con.query(sql2, function (err, result) {
 							if (err) console.log(err);
-							return result.insertId;
 						});
 					});
 				});
