@@ -336,6 +336,7 @@ module.exports =
 
 		accessComicPageListDESC: function (comic_id, callback) {
 			var sql = `SELECT page_number from comic_page_list WHERE comic_id = '${comic_id}' ORDER BY page_number DESC;`;
+			console.log(sql);
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err) callback(err, null);
@@ -356,11 +357,11 @@ module.exports =
 			});
 		},
 
-		appendImage: function (img_name) {
+		appendImage: function (img_name, callback) {
 			var sql = `INSERT into images (image_loc,image_permission,is_private) VALUES (${img_name},0,0); SELECT last_insert_id();`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
-
+					callback(result[0]);
 				});
 			});
 		},

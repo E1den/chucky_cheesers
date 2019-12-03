@@ -120,11 +120,10 @@ exports.getPages = function (req, res) {
     var data = { page: [] };
     res.contentType("json");
     mysql.accessComicPageList(req.body.id, function (err, rows) {
-        rows.forEach(function (row,index) {
-            mysql.accessPage(row.page_id,function(err,row){
+        rows.forEach(function (row, index) {
+            mysql.accessPage(row.page_id, function (err, row) {
                 data.page.push(JSON.parse(row[0].layout));
-                if(index==rows.length-1)
-                {
+                if (index == rows.length - 1) {
                     console.log(data);
                     res.write(JSON.stringify(data));
                     res.end();
@@ -353,30 +352,27 @@ exports.pushImg = function (req, res) {
 
     //save frame
     var base64Data = img.replace(/^data:image\/png;base64,/, "");
-    var image_id = mysql.appendImage("NULL");
-    console.log("id:"+image_id);
-    fs.writeFile("../../web/data/imgs/" + image_id + ".png", base64Data, 'base64', function (err) {
-        console.log(err);
-    });
+    mysql.appendImage("NULL", function (image_id) {
+        console.log("id:" + image_id);
+        fs.writeFile("../../web/data/imgs/" + image_id + ".png", base64Data, 'base64', function (err) {
+            console.log(err);
+        });
 
-    //add frame to page
-    mysql.accessComicPageListDESC(comic+"", function (err, rows) {
-        var page_id = rows[0].page_id;
-        console.log("ROWS:");
-        console.log(rows);
-        console.log("pageid"+page_id);
-        mysql.updatePage(page_id, function (rows) {
-            var data = {frames:[]};
-            console.log("fd:");
+        //add frame to page
+        mysql.accessComicPageListDESC(comic + "", function (err, rows) {
+            var page_id = rows[0].page_id;
             console.log(rows);
-            try {
-                data = JSON.parse(rows[0].layout);
-            } catch (e) { }
-            data.frames[frame]={
-                imageURL:"/imgs/" + image_id + ".png"
-            }
-            res.write(JSON.stringify(data));
-            res.end();
+            mysql.updatePage(page_id, function (rows) {
+                var data = { frames: [] };
+                try {
+                    data = JSON.parse(rows[0].layout);
+                } catch (e) { }
+                data.frames[frame] = {
+                    imageURL: "/imgs/" + image_id + ".png"
+                }
+                res.write(JSON.stringify(data));
+                res.end();
+            });
         });
     });
 
