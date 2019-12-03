@@ -145,7 +145,6 @@ exports.search = function (req, res) {
 
     //con.connect(function (err) {
     res.contentType("html");
-    if (type == 0) {
         try {
 
             if (search == "" || search == undefined)
@@ -188,41 +187,41 @@ exports.search = function (req, res) {
                 });
         }
         catch (e) { res.end(); }
-    }
-    else {
+    // }
+    // else {
 
-        mysql.accessUser(req.session.user, function (thing) {
+    //     mysql.accessUser(req.session.user, function (thing) {
 
-            if(thing==undefined||thing.length==0)
-            {
-                res.end();
-                return;
-            }
+    //         if(thing==undefined||thing.length==0)
+    //         {
+    //             res.end();
+    //             return;
+    //         }
 
-            mysql.accessAllComicForUser(thing[0].user_id, function (err, rows) {
-                console.log("dsfgs");
-                if (rows == undefined || rows == null || rows.length==0) {
-                    res.end();
-                    return;
-                }
+    //         mysql.accessAllComicForUser(thing[0].user_id, function (err, rows) {
+    //             console.log("dsfgs");
+    //             if (rows == undefined || rows == null || rows.length==0) {
+    //                 res.end();
+    //                 return;
+    //             }
 
-                console.log(rows);
+    //             console.log(rows);
 
-                res.write("</div>");
-                rows.forEach(function (row, index) {
-                    if (index % 5 == 0) {
-                        if (index != 0)
-                            res.write("</div>");
-                        res.write("<div class='bookcontainer'>");
-                    }
-                    res.write("<div class='book'style=\"background:url('/covers/" + row.comic_id + ".jpg');background-size:cover;\"><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
-                });
-                res.write("</div>");
+    //             res.write("</div>");
+    //             rows.forEach(function (row, index) {
+    //                 if (index % 5 == 0) {
+    //                     if (index != 0)
+    //                         res.write("</div>");
+    //                     res.write("<div class='bookcontainer'>");
+    //                 }
+    //                 res.write("<div class='book'style=\"background:url('/covers/" + row.comic_id + ".jpg');background-size:cover;\"><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
+    //             });
+    //             res.write("</div>");
 
-                res.end();
-            });
-        });
-    }
+    //             res.end();
+    //         });
+    //     });
+    // }
 
 
 }
