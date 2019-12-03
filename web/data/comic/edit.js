@@ -163,7 +163,7 @@ $(document).ready(function () {
             url: "/srv/comic/pushimg",
             datatype: 'json',
             contentType: 'application/json',
-            data: JSON.stringify({ 'img': frameData, 'comic': window.COMIC_ID, 'frame': current_index, 'page': currentPageNumber })
+            data: JSON.stringify({ 'img': 'frameData', 'comic': window.COMIC_ID, 'frame': current_index, 'page': currentPageNumber })
         });
 
 
