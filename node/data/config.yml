@@ -7,7 +7,7 @@ mail:
 session:
   secret: "secret"
 credentials:
-  user: "user"
-  password: "password"
-  database: "database"
-  host: "127.0.0.1"
+  user: "coproject"
+  password: "VCV2eD++QLXoJu"
+  database: "coproject"
+  host: "sql"

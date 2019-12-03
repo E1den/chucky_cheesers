@@ -9,7 +9,7 @@ function grabNextRows() {
         url: "/srv/comic/search",
         contentType: 'application/json',
         data: JSON.stringify(data),
-        success: function (n) { if (n == "done") { full = true; return; } else { full = false; } $(".acc-content-pane").append(n); }
+        success: function (n) { if (n == "done") { full = true; return; } else { full = false; } $("#AccComics").append(n); }
     });
 };
 
