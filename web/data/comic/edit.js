@@ -171,6 +171,7 @@ $(document).ready(function () {
 
     function showFrameEditor() {
         $(".edit-frame").addClass("popup-on");
+        window.clear();
         window.fitStageIntoParentContainer();
         currentlyEditingFrame = true;
         return;

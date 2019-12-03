@@ -236,6 +236,12 @@ $(document).ready(function () {
     false
   )
 
+  window.clear = function ()
+  {
+    layer.destroyChildren();
+    layer.draw();
+  }
+
   document.getElementById('edit-frame-clear').addEventListener(
     "click",
     function () {
