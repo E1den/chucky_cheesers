@@ -127,7 +127,7 @@ exports.getPages = function (req, res) {
         rows.forEach(function (row,index) {
             mysql.accessPage(row.page_id,function(err,row){
                 data.page.push(row.layout);
-                if(index==rows.length)
+                if(index==rows.length-1)
                 {
                     console.log(data);
                     res.write(JSON.stringify(data));
