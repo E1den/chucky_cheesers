@@ -18,7 +18,7 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(busboy());
-app.use(express.json());
+app.use(express.json({limit: '25mb', extended: true}));
 
 //Handle account controls
 app.post('/srv/acct/login', accounts.login);
