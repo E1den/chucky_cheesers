@@ -102,19 +102,20 @@ function chooseTemplate() {
         rightPageExists = true;
     currentLayoutFor = 0;
 
-    var dat = JSON.stringify({
+    var dat = {
         'comic': window.COMIC_ID, 'page': currentPageNumber, 'layout': {
-            'layout': layout,
-            frames: pos
+            'layout': layout
         }
-    });
+    };
+    dat.layout.append(pos);
+
 
     $.ajax({
         type: "POST",
         url: "/srv/comic/pushpage",
         datatype: 'json',
         contentType: 'application/json',
-        data: dat
+        data: JSON.stringify(dat)
     });
 
     return;
