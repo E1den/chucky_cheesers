@@ -325,6 +325,7 @@ exports.pushPage = function (req, res) {
     //comic exists
     //latest page on top
     mysql.accessUser(req.session.user, function (rows) {
+        console.log(rows[0].user_id);
         res.write(mysql.createPage(comic, rows[0].user_id, JSON.stringify(layout)));
         res.end();
     });
