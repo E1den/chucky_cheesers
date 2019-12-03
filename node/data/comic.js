@@ -94,8 +94,7 @@ exports.getComicData = function (req, res) {
     //verify owner
 
     mysql.accessUser(req.session.user, function (orows) {
-        if(orows==undefined||orows==null||orows.length==0)
-        {
+        if (orows == undefined || orows == null || orows.length == 0) {
             res.write("failure")
             res.end();
             return;
@@ -108,8 +107,7 @@ exports.getComicData = function (req, res) {
                 err.error(req, res);
                 return;
             }
-            else
-            {
+            else {
                 res.contentType("json");
                 res.write(JSON.stringify(rows[0]));
                 res.end();
@@ -124,7 +122,9 @@ exports.getPages = function (req, res) {
 
     mysql.accessComicPageList(req.body.id, function (err, rows) {
         rows.forEach(function (row) {
-            data.page.push(JSON.parse(row.layout));
+            mysql.accessPage(row.page_id,function(err,row){
+                data.page.push(JSON.parse(row.layout));
+            })
         });
         res.write(JSON.stringify(data));
         res.end();
@@ -293,5 +293,79 @@ exports.search = function (req, res) {
     }
     catch (e) { res.end(); }
 
+
+}
+
+exports.pushPage = function (req, res) {
+
+    // ({ 'comic': window.COMIC_ID, 'page': currentPageNumber, 'layout': layout })
+
+    try {
+        comic = req.body.comic;
+        page = req.body.page;
+        layout = req, body.layout;
+    }
+    catch (e) {
+        req.query.e = 400;
+        err.error(req, res);
+        return;
+    }
+
+
+
+    // mysql.accessComicPageList(comic, function (err, rows) {
+    //     if(rows==undefined||rows.length==0)
+    //     {
+    //         //make new page and add to this list
+    //     }
+    //     else
+    //     {
+    //comic exists
+    //latest page on top
+    mysql.accessUser(req.session.user, function (rows) {
+        res.write(mysql.createPage(comic, rows[0].user_id, layout));
+        res.end();
+    });
+    //}
+    //});
+}
+
+exports.pushImg = function (res, req) {
+    //{ 'img': frameData, 'comic': window.COMIC_ID, 'frame': current_index, 'page': currentPageNumber })
+
+    try {
+        img = req.body.img;
+        comic = req.body.comic;
+        frame = req.body.frame;
+        page = req.body.page;
+    }
+    catch (e) {
+        req.query.e = 400;
+        err.error(req, res);
+        return;
+    }
+
+
+    //save frame
+    var base64Data = img.replace(/^data:image\/jpeg;base64,/, "");
+    var image_id = mysql.appendImage("NULL");
+    fs.writeFile("../../web/data/imgs/" + image_id + ".jpg", base64Data, 'base64', function (err) {
+        console.log(err);
+    });
+
+    //add frame to page
+    mysql.accessComicPageListDESC(comic, function (err, rows) {
+        var page_id = rows[0].page_id;
+        mysql.updatePage(page_id, function (rows) {
+            var data = "{frames:[]}";
+            try {
+                data = JSON.parse(rows[0].layout);
+            } catch (e) { }
+            data.frames[frame]={
+                imageURL:"../../web/data/imgs/" + image_id + ".jpg";
+            }
+            return JSON.stringify(data);
+        });
+    });
 
 }

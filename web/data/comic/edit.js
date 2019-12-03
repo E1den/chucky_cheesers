@@ -101,6 +101,16 @@ function chooseTemplate() {
     else if (currentLayoutFor == 2)
         rightPageExists = true;
     currentLayoutFor = 0;
+
+    $.ajax({
+        type: "POST",
+        url: "/srv/comic/pushpage",
+        data: JSON.stringify({ 'comic': window.COMIC_ID, 'page': currentPageNumber, 'layout': JSON.stringify({
+            'layout':layout,
+            frames:pos
+        }) })
+    });
+
     return;
 }
 
@@ -122,6 +132,31 @@ $(document).ready(function () {
 
     window.commitFrame = function () {
         currentlyEditingFrame = false;
+        var frameData = $(".konvajs-content canvas")[0].toDataURL("img/jpeg");
+        var frameIMG = $(".konvajs-content canvas")[0].getContext('2d').getImageData(0, 0,$(".konvajs-content canvas").width(),$(".konvajs-content canvas").height());
+
+        var currentPage = window.comicData.page[window.leftPageNum]; // left page
+        var pageXOffset = 0;
+        if (x > (width / 2)) {
+            currentPage = window.comicData.page[window.leftPageNum + 1]; // right page
+            pageXOffset = (width / 2);
+        }
+
+
+        //draw on comic
+        var curFrame  = window.comicData.page[currentPageNumber].frame[current_index];
+        window.ctx.putImageData(frameIMG, curFrame.pageXOffset, curFrame.y,0,0,curFrame.width,curFrame.height);
+
+        $(".edit-frame").removeClass("popup-on");
+
+        //save on server
+        $.ajax({
+            type: "POST",
+            url: "/srv/comic/pushimg",
+            data: JSON.stringify({ 'img': frameData, 'comic': window.COMIC_ID, 'frame': current_index, 'page': currentPageNumber })
+        });
+
+
     }
 
     function showFrameEditor() {

@@ -171,7 +171,7 @@ module.exports =
 				con.query(sql, function (err, result) {
 					if (err) {
 						throw err;
-						}
+					}
 					callback(err, result.insertId);
 				});
 			});
@@ -259,7 +259,7 @@ module.exports =
 			creator_user_id: the user_id of the user that is inserting the page
 			layout: layout of the page
 		Returns:
-			Nothing
+			Nothing -> pageID
 		*/
 		createPage: function (comic_id, creator_user_id, layout) {
 			var sql = `INSERT INTO pages (layout) VALUES ('${layout}')`;
@@ -271,10 +271,26 @@ module.exports =
 						var sql2 = `INSERT INTO comic_page_list (comic_id, page_number, creator_user_id, page_id) VALUES ('${comic_id}', '${page_number}', '${creator_user_id}', '${result.insertId}')`;
 						con.query(sql2, function (err, result) {
 							if (err) console.log(err);
+							return result.insertId;
 						});
 					});
 				});
 			});
+		},
+
+		updatePage: function (page_id, callback) {
+			var sql1 = `SELECT layout FROM pages where page_id='${page_id}';`;
+			pool.getConnection(function (err, con) {
+				con.query(sql1, function (err, result) {
+					if (err) console.log(err, null);
+					var layout = callback(result);
+					var sql2 = `UPADTE pages (layout) SET layout='${layout}' where page_id='${page_id}';`;
+					con.query(sql1, function (err, result) {
+						if (err) console.log(err, null);
+
+					});
+				});
+			})
 		},
 
 		/*
@@ -307,7 +323,17 @@ module.exports =
 					layout: the layout of the page
 		*/
 		accessComicPageList: function (comic_id, callback) {
-			var sql = `SELECT * from comic_page_list WHERE comic_id = '${comic_id}'`;
+			var sql = `SELECT * from comic_page_list WHERE comic_id = '${comic_id}';`;
+			pool.getConnection(function (err, con) {
+				con.query(sql, function (err, result) {
+					if (err) callback(err, null);
+					callback(err, result);
+				});
+			});
+		},
+
+		accessComicPageListDESC: function (comic_id, callback) {
+			var sql = `SELECT page_number from comic_page_list WHERE comic_id = '${comic_id}' ORDER BY page_number DESC;`;
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err) callback(err, null);
@@ -324,6 +350,15 @@ module.exports =
 						throw callback(err, null);
 					else
 						return callback(err, result);
+				});
+			});
+		},
+
+		appendImage: function (img_name) {
+			var sql = `INSERT into images (image_loc,image_permission,is_private) VALUES (${img_name},0,0); SELECT image_id from images  where image_loc = '${img_name}';`;
+			pool.getConnection(function (err, con) {
+				con.query(sql1, function (err, result) {
+					return result[0].image_id;
 				});
 			});
 		},

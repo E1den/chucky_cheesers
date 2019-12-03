@@ -37,6 +37,8 @@ app.post('/srv/comic/delete', comic.delete);
 app.post('/srv/comic/pages', comic.getPages);
 app.post('/srv/comic/update', comic.update);
 app.post('/srv/comic/getdata', comic.getComicData);
+app.post('/srv/comic/pushpage', comic.pushPage);
+app.post('/srv/comic/pushimg', comic.pushImg);
 
 //Handle bad status code error pages
 app.get('/srv/err', error_handler.error);
