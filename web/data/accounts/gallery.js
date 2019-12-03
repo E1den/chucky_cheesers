@@ -12,3 +12,7 @@ function grabNextRows() {
         success: function (n) { if (n == "done") { full = true; return; } else { full = false; } $(".acc-content-pane").append(n); }
     });
 };
+
+$(document).ready(function(){
+    grabNextRows();
+});
