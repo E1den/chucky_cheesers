@@ -362,6 +362,7 @@ exports.pushImg = function (req, res) {
     //add frame to page
     mysql.accessComicPageListDESC(comic, function (err, rows) {
         var page_id = rows[0].page_id;
+        console.log(page_id);
         mysql.updatePage(page_id, function (rows) {
             var data = {frames:[]};
             console.log(rows);
