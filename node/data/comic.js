@@ -305,7 +305,7 @@ exports.pushPage = function (req, res) {
     try {
         comic = req.body.comic;
         page = req.body.page;
-        layout = req, body.layout;
+        layout = req.body.layout;
     }
     catch (e) {
         req.query.e = 400;
