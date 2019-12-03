@@ -91,14 +91,17 @@
             <input type="file" id="image-file" accept="image/*" hidden="hidden">
             <input type="file" id="video-file" accept="video/*" hidden="hidden">
             <div class="pic-vid-btnwrapper">
-            <button class="confirm-edit" id="edit-frame-pic" style="margin-right:5px;">Add Picture</button>
-            <button class="confirm-edit" id="edit-frame-video">Add Video</button>
+              <button class="confirm-edit" id="edit-frame-pic" style="margin-right:5px;">Add Picture</button>
+              <button class="confirm-edit" id="edit-frame-video">Add Video</button>
             </div>
             <button class="confirm-edit" id="edit-frame-text">Add Text</button>
             <div class="text-box-container">
-              <button class="text-box-btn" onclick="addTextBox('../../assets/bubble.png')"><img src="../../assets/bubble.png"></button>
-              <button class="text-box-btn" onclick="addTextBox('../../assets/explosion.png')"><img src="../../assets/explosion.png"></button>
-              <button class="text-box-btn" onclick="addTextBox('../../assets/box.png')"><img src="../../assets/box.png"></button>
+              <button class="text-box-btn" onclick="addTextBox('/assets/bubble.png')"><img
+                  src="/assets/bubble.png"></button>
+              <button class="text-box-btn" onclick="addTextBox('/assets/explosion.png')"><img
+                  src="/assets/explosion.png"></button>
+              <button class="text-box-btn" onclick="addTextBox('/assets/box.png')"><img
+                  src="/assets/box.png"></button>
             </div>
             <button class="confirm-edit" id="edit-frame-clear" style="margin-top:5px;">Clear Frame</button>
           </div>
