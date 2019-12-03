@@ -269,7 +269,9 @@ module.exports =
 					if (err) console.log(err, null);
 					//Subfunction that is used to get the page number
 					getPageNumber(comic_id, function (err, page_number) {
+						console.log("here");
 						var sql2 = `INSERT INTO comic_page_list (comic_id, page_number, creator_user_id, page_id) VALUES ('${comic_id}', '${page_number}', '${creator_user_id}', '${result.insertId}');`;
+						console.log(sql2);
 						con.query(sql2, function (err, result) {
 							if (err) console.log(err);
 							return result.insertId;
