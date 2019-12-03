@@ -382,5 +382,8 @@ function animateSlides(np)
 }
 
 function toEditor(){
-  $(location).attr("href", "/comic/editor/?id=" + window.COMIC_ID);
+  if(!$(".nav-link").html().includes("/"))
+   $(location).attr("href", "/comic/editor/?id=" + window.COMIC_ID);
+  else
+    alert("You must be logged in to edit a comic.");
 }
