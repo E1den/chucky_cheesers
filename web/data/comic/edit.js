@@ -135,12 +135,12 @@ $(document).ready(function () {
         var frameData = $(".konvajs-content canvas")[0].toDataURL("img/jpeg");
         var frameIMG = $(".konvajs-content canvas")[0].getContext('2d').getImageData(0, 0,$(".konvajs-content canvas").width(),$(".konvajs-content canvas").height());
 
-        var currentPage = window.comicData.page[window.leftPageNum]; // left page
-        var pageXOffset = 0;
-        if (x > (width / 2)) {
-            currentPage = window.comicData.page[window.leftPageNum + 1]; // right page
-            pageXOffset = (width / 2);
-        }
+        // var currentPage = window.comicData.page[window.leftPageNum]; // left page
+        // var pageXOffset = 0;
+        // if (x > (width / 2)) {
+        //     currentPage = window.comicData.page[window.leftPageNum + 1]; // right page
+        //     pageXOffset = (width / 2);
+        // }
 
 
         //draw on comic
