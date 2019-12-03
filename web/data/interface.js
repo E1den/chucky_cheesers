@@ -16,6 +16,8 @@ function adjustPosterStyles() {
   }
 }
 
+
+
 $(document).ready(function () {
   $(".menu").click(function () {
     $(".sidenav").width(250);
@@ -23,25 +25,29 @@ $(document).ready(function () {
   $(".closebtn").click(function () {
     $(".sidenav").width(0);
   })
-})
+
+  $("#createComic").submit(function (n) {
+    n.preventDefault();
+
+    var file = $("#file-upload")[0].files[0];
+    var formData = new FormData();
+    formData.append("upload_file", true);
+    formData.append("title",$("#createComic input[name=comicname]").val());
+    formData.append("tags",$("#createComic input[name=comictags]").val());
+    formData.append("description",$("#comicdescription").val());
+    formData.append('file', file);
+
+    $.ajax({
+      type: "POST",
+      url: "/srv/comic/create",
+      processData: false,
+      contentType: false,
+      data: formData,
+      success: function (n) { if (n == 'failure') {return;} $(location).attr("href", "/comic/editor/?id="+n); }
+    });
+  });
+});
 
 function updateCover(event) {
   $("#Imgoutput").prop("src", URL.createObjectURL(event.target.files[0]));
 }
-
-$("#createComic").submit(function () {
-  var comic = {
-    cover: $("#createComic input[name=coverart]").val(),
-    title: $("#createComic input[name=comicname]").val(),
-    tags: $("#createComic input[name=comictags]").val(),
-    description: $("#createComic input[name=comicdescription]").val()
-  };
-  $.ajax({
-    type: "POST",
-    datatype: 'json',
-    url: "/srv/comic/create",
-    contentType: 'application/json',
-    data: JSON.stringify(comic),
-    success: function (n) { if (n == 'failure') {/*error*/return; } var back = JSON.parse(data); $(location).attr("href", "/comic/edit?id=" + back.id); }
-  });
-});

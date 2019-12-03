@@ -1,18 +1,19 @@
 <html>
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Vibur&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/konva@4.0.18/konva.min.js"></script>
-    <link href="../style.css" rel="stylesheet">
-    <script src="../konvaScript.js"></script>
-    <script src="../interface.js"></script>
-    <script src="../comic.js"></script>
-    <script src="../edit.js"></script>
-    <script src="../view.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Bangers|Happy+Monkey&display=swap" rel="stylesheet">
-    <title>Comicality</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Vibur&display=swap" rel="stylesheet">
+  <link href="/style.css" rel="stylesheet">
+  <link href="/comic/view.css" rel="stylesheet">
+  <script src="https://unpkg.com/konva@4.0.18/konva.min.js"></script>
+  <script src="/interface.js"></script>
+  <script src="/accounts.js"></script>
+  <script src="/comic/comic.js"></script>
+  <script src="/comic/edit.js"></script>
+  <script src="/comic/fill.js"></script>
+  <script src="/comic/konvaScript.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Bangers|Happy+Monkey&display=swap" rel="stylesheet">
+  <title>Comicality</title>
   </head>
   <body>
     <div class="main-content">
@@ -38,29 +39,46 @@
       <div id="acctSess" style="justify-self:end">
       </div>
     </div>
-    <div class="content-pane">
+
+    <div class="content-pane" style="background:#f4f4f4!important">
       <h2> ## Comic Name ## </h2>
-      <hr></hr>
+      <hr>
+      </hr>
       <div class="subnav-page">
-      <div class="create-btn">
-        <button class="createBtn" onclick="popUp('.edit-preferences')"><span class="create-top" style="color: black;">Edit Properties</span><span class="create-bottom" style="color: black;">Edit Properties</span></button>
-      </div>
-      <div style="width:33.3%">
-      </div>
-      <div class="create-btn" style="color: black;justify-content:flex-start;">
-        <button class="createBtn" onclick="deleteComic('open')"><span class="create-top" style="color: black;">Delete Comic</span><span class="create-bottom" style="color: black;">Delete Comic</span></button>
-      </div>
-    </div>
-      <div class="page-gallery">
-        <div class="page-container">
-          <div class="comic-page" id="page-1"><div class="overlay"></div></div>
-          <div class="comic-page"><div class="overlay"></div></div>
-          <div class="comic-page"><div class="overlay"></div></div>
-          <div class="comic-page"><div class="overlay"></div></div>
+        <div class="create-btn">
+          <button class="createBtn" onclick="popUp('.edit-preferences')"><span class="create-top"
+              style="color: black;">Edit Properties</span><span class="create-bottom" style="color: black;">Edit
+              Properties</span></button>
+        </div>
+        <div style="width:33.3%">
+        </div>
+        <div class="create-btn" style="color: black;justify-content:flex-start;">
+          <button class="createBtn" onclick="deleteComic('open')"><span class="create-top" style="color: black;">Delete
+              Comic</span><span class="create-bottom" style="color: black;">Delete Comic</span></button>
         </div>
       </div>
 
-      <div class="edit-frame popup-on">
+      <canvas id="comic-viewer" width="2560" height="1440"></canvas>
+
+      <div class="choose-template">
+        <button id="createComic-close" onclick="cancelTemplate()">X</button>
+        <h2>Choose Template</h2>
+        <div class="choice-wheel">
+          <div class="choice-slide current-slide" style="background: green" id="0">1</div>
+          <div class="choice-slide next-slide" style="background: red" id="1">2</div>
+          <div class="choice-slide" style="background: yellow" id="2">3</div>
+          <div class="choice-slide previous-slide" style="background: blue" id="3">4</div>
+        </div>
+        <button class="confirm-edit" onclick="chooseTemplate()">Confirm</button>
+      </div>
+
+      <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+      </div>
+
+      <div class="edit-frame">
         <button id="createComic-close" onclick="popUp('.edit-frame')">X</button>
         <h2>Add Media</h2>
         <div class="edit-frame-wrap">
@@ -70,103 +88,32 @@
             <input type="file" id="image-file" accept="image/*" hidden="hidden">
             <input type="file" id="video-file" accept="video/*" hidden="hidden">
             <div class="pic-vid-btnwrapper">
-            <button class="confirm-edit" id="edit-frame-pic" style="margin-right:5px;">Add Picture</button>
-            <button class="confirm-edit" id="edit-frame-video">Add Video</button>
+              <button class="confirm-edit" id="edit-frame-pic" style="margin-right:5px;">Add Picture</button>
+              <button class="confirm-edit" id="edit-frame-video">Add Video</button>
             </div>
             <button class="confirm-edit" id="edit-frame-text">Add Text</button>
             <div class="text-box-container">
-              <button class="text-box-btn" onclick="addTextBox('../../assets/bubble.png')"><img src="../../assets/bubble.png"></button>
-              <button class="text-box-btn" onclick="addTextBox('../../assets/explosion.png')"><img src="../../assets/explosion.png"></button>
-              <button class="text-box-btn" onclick="addTextBox('../../assets/box.png')"><img src="../../assets/box.png"></button>
+              <button class="text-box-btn" onclick="addTextBox('/assets/bubble.png')"><img
+                  src="/assets/bubble.png"></button>
+              <button class="text-box-btn" onclick="addTextBox('/assets/explosion.png')"><img
+                  src="/assets/explosion.png"></button>
+              <button class="text-box-btn" onclick="addTextBox('/assets/box.png')"><img
+                  src="/assets/box.png"></button>
             </div>
             <button class="confirm-edit" id="edit-frame-clear" style="margin-top:5px;">Clear Frame</button>
           </div>
         </div>
-        <button class="confirm-edit" onclick="confirmFrame()">Confirm</button>
+        <button class="confirm-edit" onclick="window.confirmFrame()">Confirm</button>
       </div>
-
-      <div class="choose-template">
-        <button id="createComic-close" onclick="popUp('.choose-template')">X</button>
-        <h2>Choose Template</h2>
-        <div class="choice-wheel">
-          <div class="choice-slide current-slide" style="background: green">1</div>
-          <div class="choice-slide next-slide" style="background: red">2</div>
-          <div class="choice-slide" style="background: yellow">3</div>
-          <div class="choice-slide previous-slide" style="background: blue">4</div>
-        </div>
-        <button class="confirm-edit">Confirm</button>
-      </div>
-
-      <div class="edit-preferences">
-          <button id="createComic-close" onclick="popUp('.edit-preferences')">X</button>
-        <h2>Edit Preferences</h2>
-        <div class="preference-wrapper">
-          <img id="Imgoutput"/><br>
-          <form id="createComic">
-            <label for="file-upload" class="custom-file-upload">
-              Cover Art
-            </label>
-            <input id="file-upload" type="file" name="coverart" accept="image/*" onchange="loadFile(event)"><br>
-            <script>
-              var loadFile = function(event) {
-                var output = document.getElementById('Imgoutput');
-                output.src = URL.createObjectURL(event.target.files[0]);
-              };
-            </script>
-            <input type="text" name="comicname" placeholder="Comic Name" class="login_text"><br>
-            <input type="text" name="comictags" placeholder="Comic Tags" class="login_text"><br>
-            <textarea name="comicdescription" placeholder="Comic Description" row="5" cols="10"></textarea><br>
-            <input type="submit" Value="Edit" class="submit">
-          </form>
-        </div>
-      </div>
-
-      <div id="myModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-        <div id="caption"></div>
-      </div>
-
-      <script>
-      // Get the modal
-      var modal = document.getElementById("myModal");
-
-      // Get the image and insert it inside the modal - use its "alt" text as a caption
-      var img = document.getElementById("Imgoutput");
-      var modalImg = document.getElementById("img01");
-      var captionText = document.getElementById("caption");
-      img.onclick = function(){
-        modal.style.display = "block";
-        modalImg.src = this.src;
-        captionText.innerHTML = this.alt;
-      }
-
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
-
-      // When the user clicks on <span> (x), close the modal
-      span.onclick = function() {
-        modal.style.display = "none";
-      }
-      </script>
       <div class="delete-confirm">
         <h3>Are You Sure?</h3>
         <div class="confirm-wrap">
-        <button class="confirm-btn" onclick="deleteComic('yes')">YES</button>
-        <button class="confirm-btn" onclick="deleteComic('no')">NO</button>
+          <button class="confirm-btn" onclick="deleteComic('yes')">YES</button>
+          <button class="confirm-btn" onclick="deleteComic('no')">NO</button>
         </div>
       </div>
-      <div class="page-open">
-        <span class="close">&times;</span>
-        <div class="page-wrap">
-        <span class="page-turn-left">&lt;</span>
-        <div class="page">
-          <canvas id="comic-viewer" style="width:100%; height:100%;"></canvas>
-        </div>
-        <span class="page-turn-right">&gt;</span>
-        </div>
-      </div>
+
     </div>
-    </div>
-  </body>
+</body>
+
 </html>

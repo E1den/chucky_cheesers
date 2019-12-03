@@ -1,3 +1,4 @@
 #Ignore the sql database, it shouldnt be hosted on github, can be large and clog it up
 sql/
 node/data/package-lock.json
+node/data/config.yml

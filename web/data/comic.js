@@ -1,91 +1,88 @@
-function deleteComic(confirm)
-{
-  if($(".delete-confirm").hasClass("delete-confirm-on"))
-  {
+function deleteComic(confirm) {
+  if ($(".delete-confirm").hasClass("delete-confirm-on")) {
     $(".delete-confirm").removeClass("delete-confirm-on")
   }
-  else{
+  else {
     $(".delete-confirm").addClass("delete-confirm-on")
   }
 
-  if(confirm == "yes")
-  {
+  if (confirm == "yes") {
+    var data = {
+      user_id: $("#AccName").html(),
+      comic_id: ""
+    };
 
+    $.ajax({
+      type: "POST",
+      datatype: 'json',
+      url: "/srv/comic/search",
+      contentType: 'application/json',
+      data: JSON.stringify(data)
+    });
   }
-  else if(confirm == "no")
-  {
+  else if (confirm == "no") {
     $(".delete-confirm").removeClass("delete-confirm-on")
   }
 }
 
-function editFrame()
-{
-  if($(".edit-frame").hasClass("edit-frame-on"))
-  {
+function editFrame() {
+  if ($(".edit-frame").hasClass("edit-frame-on")) {
     $(".edit-frame").removeClass("edit-frame-on")
   }
-  else{
+  else {
     $(".edit-frame").addClass("edit-frame-on")
   }
 }
 
-function chooseTemplate()
-{
-  if($(".choose-template").hasClass(".choose-template-on"))
-  {
+function chooseTemplate() {
+  if ($(".choose-template").hasClass(".choose-template-on")) {
     $(".choose-template").removeClass(".choose-template-on")
   }
-  else{
+  else {
     $(".choose-template").addClass(".choose-template-on")
   }
 }
 
-function editProperties()
-{
-  if($(".edit-preferences").hasClass("edit-preferences-on"))
-  {
+function editProperties() {
+  if ($(".edit-preferences").hasClass("edit-preferences-on")) {
     $(".edit-preferences").removeClass("edit-preferences-on")
   }
-  else{
+  else {
     $(".edit-preferences").addClass("edit-preferences-on")
   }
 }
 
-function popUp(givenClass)
-{
+function popUp(givenClass) {
   var popupClass = givenClass;
-  if($(popupClass).hasClass("popup-on"))
-  {
+  if ($(popupClass).hasClass("popup-on")) {
     $(popupClass).removeClass("popup-on")
   }
-  else{
+  else {
     $(popupClass).addClass("popup-on")
   }
 }
 
-$(document).ready(function() {
-$( ".comic-page" ).click(function() {
-  $(".page-open").addClass("page-open-on")
-});
+$(document).ready(function () {
+  $(".comic-page").click(function () {
+    $(".page-open").addClass("page-open-on")
+  });
 
-$( ".close" ).click(function() {
-  $(".page-open").removeClass("page-open-on")
-});
+  $(".close").click(function () {
+    $(".page-open").removeClass("page-open-on")
+  });
 });
 
 var slides
-$(document).ready(function(){
+$(document).ready(function () {
   slides = $(".choice-slide");
 });
 
- $(document).on('click','.previous-slide',function(){animateSlides(0)})
- $(document).on('click','.next-slide',function(){animateSlides(1)})
+$(document).on('click', '.previous-slide', function () { animateSlides(0) })
+$(document).on('click', '.next-slide', function () { animateSlides(1) })
 
 var current = 0;
-function animateSlides(np)
-{
-  if(np == 1)
-  {//do next
+function animateSlides(np) {
+  if (np == 1) {//do next
     $(slides[((current - 1) + slides.length) % slides.length]).removeClass("previous-slide");
     $(slides[current]).removeClass("current-slide");
     $(slides[current]).addClass("previous-slide");
@@ -94,8 +91,7 @@ function animateSlides(np)
     $(slides[((current + 2) + slides.length) % slides.length]).addClass("next-slide");
     current = ((current + 1) + slides.length) % slides.length;
   }
-  else
-  {//do prev
+  else {//do prev
     $(slides[((current - 1) + slides.length) % slides.length]).removeClass("previous-slide");
     $(slides[((current - 2) + slides.length) % slides.length]).addClass("previous-slide");
     $(slides[current]).removeClass("current-slide");
