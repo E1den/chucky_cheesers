@@ -285,7 +285,7 @@ module.exports =
 				con.query(sql1, function (err, result) {
 					if (err) console.log(err, null);
 					var layout = callback(result);
-					var sql2 = `UPDATE pages (layout) SET layout='${layout}' where page_id='${page_id}';`;
+					var sql2 = `UPDATE pages SET layout='${layout}' where page_id='${page_id}';`;
 					con.query(sql2, function (err, result) {
 						if (err) console.log(err, null);
 					});
