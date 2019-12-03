@@ -267,6 +267,7 @@ module.exports =
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err) console.log(err, null);
+					console.log("asdfgasdgfsdfg");
 					//Subfunction that is used to get the page number
 					getPageNumber(comic_id, function (err, page_number) {
 						console.log("here");
