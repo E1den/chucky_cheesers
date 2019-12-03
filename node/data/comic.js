@@ -120,6 +120,8 @@ exports.getPages = function (req, res) {
     var data = { page: [] };
     res.contentType("json");
 
+    console.log(req.body.id);
+
     mysql.accessComicPageList(req.body.id, function (err, rows) {
         console.log(rows);
         rows.forEach(function (row) {
