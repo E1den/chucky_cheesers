@@ -65,21 +65,6 @@ exports.delete = function (req, res) {
     }
 }
 
-//verify owner of comic
-function verifyOwner(callback) {
-    mysql.accessUser(req.session.user, function (orows) {
-        mysql.accessComicByID(id, function (err, rows) {
-            if (rows[0].user_id != orows[0].user_id) {
-                req.query.e = 400;
-                err.error(req, res);
-                return;
-            }
-            else
-                callback();
-        });
-    });
-}
-
 exports.getComicData = function (req, res) {
 
     try {
