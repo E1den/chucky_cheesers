@@ -354,17 +354,20 @@ exports.pushImg = function (req, res) {
     //save frame
     var base64Data = img.replace(/^data:image\/png;base64,/, "");
     var image_id = mysql.appendImage("NULL");
-    console.log(image_id);
+    console.log("id:"+image_id);
     fs.writeFile("../../web/data/imgs/" + image_id + ".png", base64Data, 'base64', function (err) {
         console.log(err);
     });
 
     //add frame to page
-    mysql.accessComicPageListDESC(comic, function (err, rows) {
+    mysql.accessComicPageListDESC(comic+"", function (err, rows) {
         var page_id = rows[0].page_id;
-        console.log(page_id);
+        console.log("ROWS:");
+        console.log(rows);
+        console.log("pageid"+page_id);
         mysql.updatePage(page_id, function (rows) {
             var data = {frames:[]};
+            console.log("fd:");
             console.log(rows);
             try {
                 data = JSON.parse(rows[0].layout);
