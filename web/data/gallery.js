@@ -35,12 +35,12 @@ $(document).ready(function() {
     //       grabNextRows();
         $(".subnav").css("opacity", 1 - $(window).scrollTop() / 250);
     });
-});
+    $(".bookDetails").click(function() {
+      $(this).attr('cid');
+      window.location.replace("/comic/");
+    })
 
-$(".bookDetails").click(function() {
-  $(this).attr('cid');
-  window.location.replace("/comic/");
-})
+});
 
 function filter(filterType){
   if(filterType == "filter")
