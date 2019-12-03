@@ -356,6 +356,7 @@ exports.pushImg = function (req, res) {
         var image_id = result;
         console.log("id:" + image_id);
         fs.writeFile("../../web/data/imgs/" + image_id + ".png", base64Data, 'base64', function (err) {
+            console.log("FILE ERROR");
             console.log(err);
         });
 
