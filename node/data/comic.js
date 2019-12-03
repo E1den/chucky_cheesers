@@ -106,8 +106,7 @@ exports.getPages = function (req, res) {
     var data = { page: [] };
     res.contentType("json");
     mysql.accessComicPageList(req.body.id, function (err, rows) {
-        if(rows==undefined||rows.length==0)
-        {
+        if (rows == undefined || rows.length == 0) {
             res.write(JSON.stringify(data));
             res.end();
         }
@@ -152,11 +151,62 @@ exports.search = function (req, res) {
 
     //con.connect(function (err) {
     res.contentType("html");
+    if (type == 0) {
+        try {
 
-    try {
+            if (search == "" || search == undefined)
+                mysql.accessAllComic(function (err, rows) {
+                    if (rows == undefined || rows == null) {
+                        res.end();
+                        return;
+                    }
+                    res.write("</div>");
+                    rows.forEach(function (row, index) {
+                        if (index % 5 == 0) {
+                            if (index != 0)
+                                res.write("</div>");
+                            res.write("<div class='bookcontainer'>");
+                        }
+                        res.write("<div class='book'style=\"background:url('/covers/" + row.comic_id + ".jpg');background-size:cover;\"><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
+                    });
+                    res.write("</div>");
 
-        if (search == "" || search == undefined)
-            mysql.accessAllComic(function (err, rows) {
+                    res.end();
+                });
+            else
+                mysql.accessComic(search, function (err, rows) {
+                    if (rows == undefined || rows == null) {
+                        res.end();
+                        return;
+                    }
+                    res.write("</div>");
+                    rows.forEach(function (row, index) {
+                        if (index % 5 == 0) {
+                            if (index != 0)
+                                res.write("</div>");
+                            res.write("<div class='bookcontainer'>");
+                        }
+                        res.write("<div class='book' style=\"background:url('/covers/" + row.comic_id + ".jpg');background-size:cover;\"><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
+                    });
+                    res.write("</div>");
+
+                    res.end();
+                });
+        }
+        catch (e) { res.end(); }
+    }
+    else {
+
+        mysql.accessUser(req.session.user, function (thing) {
+
+            if(thing==undefined||thing.length==0)
+            {
+                res.end();
+                return;
+            }
+
+
+            mysql.accessAllComicForUser(thing[0].user_id, function (err, rows) {
                 if (rows == undefined || rows == null) {
                     res.end();
                     return;
@@ -174,27 +224,8 @@ exports.search = function (req, res) {
 
                 res.end();
             });
-        else
-            mysql.accessComic(search, function (err, rows) {
-                if (rows == undefined || rows == null) {
-                    res.end();
-                    return;
-                }
-                res.write("</div>");
-                rows.forEach(function (row, index) {
-                    if (index % 5 == 0) {
-                        if (index != 0)
-                            res.write("</div>");
-                        res.write("<div class='bookcontainer'>");
-                    }
-                    res.write("<div class='book' style=\"background:url('/covers/" + row.comic_id + ".jpg');background-size:cover;\"><div class='overlay'><div class='bookDetails' cid='" + row.comic_id + "'><h2>" + row.comic_name + "</h2>" + row.descrip + "</div></div></div>");
-                });
-                res.write("</div>");
-
-                res.end();
-            });
+        });
     }
-    catch (e) { res.end(); }
 
 
 }
@@ -274,7 +305,7 @@ exports.pushImg = function (req, res) {
                 data.frames[frame - 1] = {
                     imageURL: image_id + ".png"
                 };
-                res.write(page_id+"");
+                res.write(page_id + "");
                 res.end();
                 return JSON.stringify(data);
             });

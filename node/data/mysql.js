@@ -356,6 +356,18 @@ module.exports =
 			});
 		},
 
+		accessAllComicForUser: function (callback, user_id) {
+			var sql = `SELECT * FROM comics where user_id='user_id';`;
+			pool.getConnection(function (err, con) {
+				con.query(sql, function (err, result) {
+					if (err)
+						throw callback(err, null);
+					else
+						return callback(err, result);
+				});
+			});
+		},
+
 		appendImage: function (img_name, callback) {
 			var sql = `INSERT into images (image_loc,image_permission,is_private) VALUES (${img_name},0,0);`;
 			pool.getConnection(function (err, con) {
