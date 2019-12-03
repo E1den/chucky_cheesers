@@ -51,7 +51,7 @@ $(document).ready(function () {
         }
 
         //right
-        if ((window.leftPageNum + 2 <= window.comicData.page.length) && (x >= rleft) && (x <= rleft + 90) && (y >= bheight) && (y <= bheight + 90)) {
+        if ((window.leftPageNum + 2 < window.comicData.page.length) && (x >= rleft) && (x <= rleft + 90) && (y >= bheight) && (y <= bheight + 90)) {
             //selected this box at index
             window.leftPageNum += 2;
 
