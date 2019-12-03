@@ -336,14 +336,14 @@ exports.pushPage = function (req, res) {
     //});
 }
 
-exports.pushImg = function (res, req) {
+exports.pushImg = function (req, res) {
     //{ 'img': frameData, 'comic': window.COMIC_ID, 'frame': current_index, 'page': currentPageNumber })
 
-    console.log(res.body);
+    console.log(req.body);
 
     try {
         img = req.body.img;
-        comic = req.body.comic;
+        comic = Number(req.body.comic);
         frame = req.body.frame;
         page = req.body.page;
     }
@@ -355,9 +355,9 @@ exports.pushImg = function (res, req) {
 
 
     //save frame
-    var base64Data = img.replace(/^data:image\/jpeg;base64,/, "");
+    var base64Data = img.replace(/^data:image\/png;base64,/, "");
     var image_id = mysql.appendImage("NULL");
-    fs.writeFile("../../web/data/imgs/" + image_id + ".jpg", base64Data, 'base64', function (err) {
+    fs.writeFile("../../web/data/imgs/" + image_id + ".png", base64Data, 'base64', function (err) {
         console.log(err);
     });
 
@@ -370,9 +370,10 @@ exports.pushImg = function (res, req) {
                 data = JSON.parse(rows[0].layout);
             } catch (e) { }
             data.frames[frame]={
-                imageURL:"../../web/data/imgs/" + image_id + ".jpg"
+                imageURL:"/imgs/" + image_id + ".png"
             }
-            return JSON.stringify(data);
+            res.write(JSON.stringify(data));
+            res.end();
         });
     });
 

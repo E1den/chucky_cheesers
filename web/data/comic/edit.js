@@ -138,7 +138,7 @@ $(document).ready(function () {
 
     window.commitFrame = function () {
         currentlyEditingFrame = false;
-        var frameData = $(".konvajs-content canvas")[0].toDataURL("img/jpeg");
+        var frameData = $(".konvajs-content canvas")[0].toDataURL("img/png");
         var frameIMG = $(".konvajs-content canvas")[0].getContext('2d').getImageData(0, 0, $(".konvajs-content canvas").width(), $(".konvajs-content canvas").height());
 
         // var currentPage = window.comicData.page[window.leftPageNum]; // left page
@@ -163,7 +163,7 @@ $(document).ready(function () {
             url: "/srv/comic/pushimg",
             datatype: 'json',
             contentType: 'application/json',
-            data: JSON.stringify({ 'img': 'frameData', 'comic': window.COMIC_ID, 'frame': current_index, 'page': currentPageNumber })
+            data: JSON.stringify({ 'img': frameData, 'comic': window.COMIC_ID, 'frame': current_index, 'page': currentPageNumber })
         });
 
 
