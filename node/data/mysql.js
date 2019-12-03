@@ -263,6 +263,7 @@ module.exports =
 		*/
 		createPage: function (comic_id, creator_user_id, layout) {
 			var sql = `INSERT INTO pages (layout) VALUES ('${layout}')`;
+			console.log(sql);
 			pool.getConnection(function (err, con) {
 				con.query(sql, function (err, result) {
 					if (err) console.log(err, null);
