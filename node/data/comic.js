@@ -372,8 +372,8 @@ exports.pushImg = function (req, res) {
                 console.log(data)
                 data.frames[frame] = {
                     imageURL: "/imgs/" + image_id + ".png"
-                }
-                console.log(JSON.stringify(data));
+                };
+                console.log(data);
                 res.end();
                 console.log("after");
                 return JSON.stringify(data);
