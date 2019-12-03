@@ -362,7 +362,7 @@ exports.pushImg = function (res, req) {
                 data = JSON.parse(rows[0].layout);
             } catch (e) { }
             data.frames[frame]={
-                imageURL:"../../web/data/imgs/" + image_id + ".jpg";
+                imageURL:"../../web/data/imgs/" + image_id + ".jpg"
             }
             return JSON.stringify(data);
         });
