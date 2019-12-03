@@ -286,7 +286,7 @@ module.exports =
 					if (err) console.log(err, null);
 					var layout = callback(result);
 					var sql2 = `UPADTE pages (layout) SET layout='${layout}' where page_id='${page_id}';`;
-					con.query(sql1, function (err, result) {
+					con.query(sql2, function (err, result) {
 						if (err) console.log(err, null);
 					});
 				});

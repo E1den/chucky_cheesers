@@ -370,12 +370,11 @@ exports.pushImg = function (req, res) {
                     data = JSON.parse(rows[0].layout);
                 } catch (e) { }
                 console.log(data)
-                data.frames[frame] = {
+                data.frames[frame-1] = {
                     imageURL: "/imgs/" + image_id + ".png"
                 };
                 console.log(data);
                 res.end();
-                console.log("after");
                 return JSON.stringify(data);
             });
         });
