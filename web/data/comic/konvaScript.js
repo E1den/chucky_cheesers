@@ -1,277 +1,281 @@
-$(document).ready(function(){
-      const imageFile = document.getElementById("image-file");
-      const videoFile = document.getElementById("video-file");
-      var width = $("#edit-canvas").width();
-      var height = $("#edit-canvas").height();
+$(document).ready(function () {
+  const imageFile = document.getElementById("image-file");
+  const videoFile = document.getElementById("video-file");
+  var width = $("#edit-canvas").width();
+  var height = $("#edit-canvas").height();
 
-      // Set anchor functions for resizing of images
-      // Base code from Konva tutorials
-      // https://konvajs.org/docs/sandbox/Image_Resize.html
-      function update(activeAnchor) {
-        var group = activeAnchor.getParent();
+  // Set anchor functions for resizing of images
+  // Base code from Konva tutorials
+  // https://konvajs.org/docs/sandbox/Image_Resize.html
+  function update(activeAnchor) {
+    var group = activeAnchor.getParent();
 
-        var topLeft = group.get('.topLeft')[0];
-        var topRight = group.get('.topRight')[0];
-        var bottomRight = group.get('.bottomRight')[0];
-        var bottomLeft = group.get('.bottomLeft')[0];
-        var image = group.get('Image')[0];
+    var topLeft = group.get('.topLeft')[0];
+    var topRight = group.get('.topRight')[0];
+    var bottomRight = group.get('.bottomRight')[0];
+    var bottomLeft = group.get('.bottomLeft')[0];
+    var image = group.get('Image')[0];
 
-        var anchorX = activeAnchor.getX();
-        var anchorY = activeAnchor.getY();
+    var anchorX = activeAnchor.getX();
+    var anchorY = activeAnchor.getY();
 
-        // update anchor positions
-        switch (activeAnchor.getName()) {
-          case 'topLeft':
-            topRight.y(anchorY);
-            bottomLeft.x(anchorX);
-            break;
-          case 'topRight':
-            topLeft.y(anchorY);
-            bottomRight.x(anchorX);
-            break;
-          case 'bottomRight':
-            bottomLeft.y(anchorY);
-            topRight.x(anchorX);
-            break;
-          case 'bottomLeft':
-            bottomRight.y(anchorY);
-            topLeft.x(anchorX);
-            break;
-        }
+    // update anchor positions
+    switch (activeAnchor.getName()) {
+      case 'topLeft':
+        topRight.y(anchorY);
+        bottomLeft.x(anchorX);
+        break;
+      case 'topRight':
+        topLeft.y(anchorY);
+        bottomRight.x(anchorX);
+        break;
+      case 'bottomRight':
+        bottomLeft.y(anchorY);
+        topRight.x(anchorX);
+        break;
+      case 'bottomLeft':
+        bottomRight.y(anchorY);
+        topLeft.x(anchorX);
+        break;
+    }
 
-        image.position(topLeft.position());
+    image.position(topLeft.position());
 
-        var width = topRight.getX() - topLeft.getX();
-        var height = bottomLeft.getY() - topLeft.getY();
-        if (width && height) {
-          image.width(width);
-          image.height(height);
-        }
-      }
-      function addAnchor(group, x, y, name) {
-        var stage = group.getStage();
-        var layer = group.getLayer();
+    var width = topRight.getX() - topLeft.getX();
+    var height = bottomLeft.getY() - topLeft.getY();
+    if (width && height) {
+      image.width(width);
+      image.height(height);
+    }
+  }
+  function addAnchor(group, x, y, name) {
+    var stage = group.getStage();
+    var layer = group.getLayer();
 
-        var anchor = new Konva.Circle({
-          x: x,
-          y: y,
-          stroke: '#666',
-          fill: '#ddd',
-          strokeWidth: 2,
-          radius: 8,
-          name: name,
-          draggable: true,
-          dragOnTop: false
-        });
+    var anchor = new Konva.Circle({
+      x: x,
+      y: y,
+      stroke: '#666',
+      fill: '#ddd',
+      strokeWidth: 2,
+      radius: 8,
+      name: name,
+      draggable: true,
+      dragOnTop: false
+    });
 
-        anchor.on('dragmove', function() {
-          update(this);
-          layer.draw();
-        });
-        anchor.on('mousedown touchstart', function() {
-          group.draggable(false);
-          this.moveToTop();
-        });
-        anchor.on('dragend', function() {
-          group.draggable(true);
-          layer.draw();
-        });
-        // add hover styling
-        anchor.on('mouseover', function() {
-          var layer = this.getLayer();
-          document.body.style.cursor = 'pointer';
-          this.strokeWidth(4);
-          layer.draw();
-        });
-        anchor.on('mouseout', function() {
-          var layer = this.getLayer();
-          document.body.style.cursor = 'default';
-          this.strokeWidth(2);
-          layer.draw();
-        });
+    anchor.on('dragmove', function () {
+      update(this);
+      layer.draw();
+    });
+    anchor.on('mousedown touchstart', function () {
+      group.draggable(false);
+      this.moveToTop();
+    });
+    anchor.on('dragend', function () {
+      group.draggable(true);
+      layer.draw();
+    });
+    // add hover styling
+    anchor.on('mouseover', function () {
+      var layer = this.getLayer();
+      document.body.style.cursor = 'pointer';
+      this.strokeWidth(4);
+      layer.draw();
+    });
+    anchor.on('mouseout', function () {
+      var layer = this.getLayer();
+      document.body.style.cursor = 'default';
+      this.strokeWidth(2);
+      layer.draw();
+    });
 
-        group.add(anchor);
-      }
+    group.add(anchor);
+  }
 
 
-      // Create stage
-      var stage = new Konva.Stage({
-        container: 'edit-canvas',
-        width: width,
-        height: height
+  // Create stage
+  var stage = new Konva.Stage({
+    container: 'edit-canvas',
+    width: width,
+    height: height
+  });
+  // Create layer
+  var layer = new Konva.Layer();
+  var offsetX = 0;
+  var offsetY = 0;
+
+  stage.add(layer);
+
+  var myVideo = document.createElement("video");
+  var anim = new Konva.Animation(function () {
+  }, layer);
+
+
+  // addImage button clicks on get imagefile
+  document.getElementById('edit-frame-pic').addEventListener(
+    'click',
+    function () {
+      imageFile.click();
+    },
+    false
+  );
+
+  // when imagefile is changed, create konva image from chosen file
+  imageFile.addEventListener(
+    "change",
+    function (event) {
+      // Create konva Image
+      var konvaImage = new Konva.Image({
+        width: 200,
+        height: 138,
       });
-      // Create layer
-      var layer = new Konva.Layer();
-      var offsetX = 0;
-      var offsetY = 0;
-
-      stage.add(layer);
-
-      var myVideo = document.createElement("video");
-      var anim = new Konva.Animation(function() {
-          }, layer);
-
-
-      // addImage button clicks on get imagefile
-      document.getElementById('edit-frame-pic').addEventListener(
-        'click',
-        function() {
-            imageFile.click();
-        },
-        false
-      );
-
-      // when imagefile is changed, create konva image from chosen file
-      imageFile.addEventListener(
-        "change",
-        function(event) {
-          // Create konva Image
-          var konvaImage = new Konva.Image({
-            width: 200,
-            height: 138,
-          });
-          // Create basic image and fill with file selected
-          var myImage = new Image();
-          myImage.onload = function() {
-            konvaImage.image(myImage);
-            layer.draw();
-          };
-          myImage.src = URL.createObjectURL(event.target.files[0]);
-          // Create group and add image for resizing purposes
-          var myImageGroup = new Konva.Group({
-          x: 0,
-          y: 0,
-          draggable: true
-          });
-          // Add group to layer and image to group
-          layer.add(myImageGroup);
-          myImageGroup.add(konvaImage);
-          addAnchor(myImageGroup, 0, 0, 'topLeft');
-          addAnchor(myImageGroup, 200, 0, 'topRight');
-          addAnchor(myImageGroup, 200, 138, 'bottomRight');
-          addAnchor(myImageGroup, 0, 138, 'bottomLeft');
-          },
-          false
-      )
-
-      window.confirmFrame = function() 
-      {
-        layer.find('Transformer').hide();
-        layer.find('Circle').hide();
+      // Create basic image and fill with file selected
+      var myImage = new Image();
+      myImage.onload = function () {
+        konvaImage.image(myImage);
         layer.draw();
       };
-
-      window.addTextBox = function(src)
-      {
-        var konvaImage = new Konva.Image({
-          width: 200,
-          height: 138,
-        });
-        // Create basic image and fill with file selected
-        var myImage = new Image();
-        myImage.onload = function() {
-          konvaImage.image(myImage);
-          layer.draw();
-        };
-        myImage.src = src;
-        // Create group and add image for resizing purposes
-        var myImageGroup = new Konva.Group({
+      myImage.src = URL.createObjectURL(event.target.files[0]);
+      // Create group and add image for resizing purposes
+      var myImageGroup = new Konva.Group({
         x: 0,
         y: 0,
         draggable: true
-        });
-        // Add group to layer and image to group
-        layer.add(myImageGroup);
-        myImageGroup.add(konvaImage);
-        addAnchor(myImageGroup, 0, 0, 'topLeft');
-        addAnchor(myImageGroup, 200, 0, 'topRight');
-        addAnchor(myImageGroup, 200, 138, 'bottomRight');
-        addAnchor(myImageGroup, 0, 138, 'bottomLeft');
+      });
+      // Add group to layer and image to group
+      layer.add(myImageGroup);
+      myImageGroup.add(konvaImage);
+      addAnchor(myImageGroup, 0, 0, 'topLeft');
+      addAnchor(myImageGroup, 200, 0, 'topRight');
+      addAnchor(myImageGroup, 200, 138, 'bottomRight');
+      addAnchor(myImageGroup, 0, 138, 'bottomLeft');
+    },
+    false
+  )
+
+  window.confirmFrame = function () {
+    layer.find('Transformer').hide();
+    layer.find('Circle').hide();
+    layer.draw();
+    window.commitFrame();
+  };
+
+  window.addTextBox = function (src) {
+    var konvaImage = new Konva.Image({
+      width: 200,
+      height: 138,
+    });
+    // Create basic image and fill with file selected
+    var myImage = new Image();
+    myImage.onload = function () {
+      konvaImage.image(myImage);
+      layer.draw();
+    };
+    myImage.src = src;
+    // Create group and add image for resizing purposes
+    var myImageGroup = new Konva.Group({
+      x: 0,
+      y: 0,
+      draggable: true
+    });
+    // Add group to layer and image to group
+    layer.add(myImageGroup);
+    myImageGroup.add(konvaImage);
+    addAnchor(myImageGroup, 0, 0, 'topLeft');
+    addAnchor(myImageGroup, 200, 0, 'topRight');
+    addAnchor(myImageGroup, 200, 138, 'bottomRight');
+    addAnchor(myImageGroup, 0, 138, 'bottomLeft');
+  };
+
+  // addVideo clicks on get videofile
+  document.getElementById('edit-frame-video').addEventListener(
+    'click',
+    function () {
+      videoFile.click();
+    },
+    false
+  );
+  // when videofile is changed, create video from chosen file
+  videoFile.addEventListener(
+    "change",
+    function (event) {
+      // Create konva image
+      var konvaVideo = new Konva.Image({
+        width: 200,
+        height: 138,
+      });
+      // Create animation
+      // Create basic video
+      myVideo = document.createElement("video");
+      konvaVideo.image(myVideo);
+      layer.add(konvaVideo);
+      // Load selected file into basic video and then into konva image
+      myVideo.onload = function () {
+        layer.draw();
       };
+      myVideo.src = URL.createObjectURL(event.target.files[0]);
 
-      // addVideo clicks on get videofile
-      document.getElementById('edit-frame-video').addEventListener(
-        'click',
-        function() {
-          videoFile.click();
-        },
-        false
-      );
-      // when videofile is changed, create video from chosen file
-      videoFile.addEventListener(
-        "change",
-        function(event) {
-          // Create konva image
-          var konvaVideo = new Konva.Image({
-            width: 200,
-            height: 138,
-          });
-          // Create animation
-          // Create basic video
-          myVideo = document.createElement("video");
-          konvaVideo.image(myVideo);
-          layer.add(konvaVideo);
-          // Load selected file into basic video and then into konva image
-          myVideo.onload = function() {
-            layer.draw();
-          };
-          myVideo.src = URL.createObjectURL(event.target.files[0]);
+      // Create konva group for resizing purposes
+      var myVideoGroup = new Konva.Group({
+        x: 0,
+        y: 0,
+        draggable: true
+      });
+      // Add group to layer and video to group
+      layer.add(myVideoGroup);
+      myVideoGroup.add(konvaVideo);
+      addAnchor(myVideoGroup, 0, 0, 'topLeft');
+      addAnchor(myVideoGroup, 200, 0, 'topRight');
+      addAnchor(myVideoGroup, 200, 138, 'bottomRight');
+      addAnchor(myVideoGroup, 0, 138, 'bottomLeft');
+      // start video and animation
+      myVideo.play();
+      anim.start();
+    },
+    false
+  )
 
-          // Create konva group for resizing purposes
-          var myVideoGroup = new Konva.Group({
-          x: 0,
-          y: 0,
-          draggable: true
-          });
-          // Add group to layer and video to group
-          layer.add(myVideoGroup);
-          myVideoGroup.add(konvaVideo);
-          addAnchor(myVideoGroup, 0, 0, 'topLeft');
-          addAnchor(myVideoGroup, 200, 0, 'topRight');
-          addAnchor(myVideoGroup, 200, 138, 'bottomRight');
-          addAnchor(myVideoGroup, 0, 138, 'bottomLeft');
-          // start video and animation
-          myVideo.play();
-          anim.start();
-          },
-          false
-      )
+  window.clear = function ()
+  {
+    layer.destroyChildren();
+    layer.draw();
+  }
 
-      document.getElementById('edit-frame-clear').addEventListener(
-        "click",
-        function()
-        {
-          layer.destroyChildren();
-          layer.draw();
-        }
-      )
+  document.getElementById('edit-frame-clear').addEventListener(
+    "click",
+    function () {
+      layer.destroyChildren();
+      layer.draw();
+    }
+  )
 
-      // add button event bindings
-      //document.getElementById('play').addEventListener('click', function() {
-        //myVideo.play();
-        //anim.start();
-      //});
-      //document.getElementById('pause').addEventListener('click', function() {
-        //myVideo.pause();
-        //anim.stop();
-      //});
+  // add button event bindings
+  //document.getElementById('play').addEventListener('click', function() {
+  //myVideo.play();
+  //anim.start();
+  //});
+  //document.getElementById('pause').addEventListener('click', function() {
+  //myVideo.pause();
+  //anim.stop();
+  //});
 
-      // addText adds drag and drop resizable txt
-      // Base code from konva tutorials on how to make text editable
-      // https://konvajs.org/docs/sandbox/Editable_Text.html
-      document.getElementById('edit-frame-text').addEventListener(
-        'click',
-        function() {
-          // Create konva text
-          var textNode = new Konva.Text({
-            text: 'Some text here',
-            x: 0,
-            y: 0,
-            fontSize: 20,
-            draggable: true,
-            width: 100,
-            fontFamily: 'Happy Monkey, cursive'
-          });
+  // addText adds drag and drop resizable txt
+  // Base code from konva tutorials on how to make text editable
+  // https://konvajs.org/docs/sandbox/Editable_Text.html
+  document.getElementById('edit-frame-text').addEventListener(
+    'click',
+    function () {
+      // Create konva text
+      var textNode = new Konva.Text({
+        text: 'Some text here',
+        x: 0,
+        y: 0,
+        fontSize: 20,
+        draggable: true,
+        width: 100,
+        fontFamily: 'Happy Monkey, cursive'
+      });
 
       layer.add(textNode);
 
@@ -280,13 +284,13 @@ $(document).ready(function(){
         node: textNode,
         enabledAnchors: ['middle-left', 'middle-right'],
         // set minimum width of text
-        boundBoxFunc: function(oldBox, newBox) {
+        boundBoxFunc: function (oldBox, newBox) {
           newBox.width = Math.max(30, newBox.width);
           return newBox;
         }
       });
 
-      textNode.on('transform', function() {
+      textNode.on('transform', function () {
         // reset scale, so only with is changing by transformer
         textNode.setAttrs({
           width: textNode.width() * textNode.scaleX(),
@@ -405,7 +409,7 @@ $(document).ready(function(){
           textarea.style.width = newWidth + 'px';
         }
 
-        textarea.addEventListener('keydown', function(e) {
+        textarea.addEventListener('keydown', function (e) {
           // hide on enter
           // but don't hide on shift + enter
           if (e.keyCode === 13 && !e.shiftKey) {
@@ -418,7 +422,7 @@ $(document).ready(function(){
           }
         });
 
-        textarea.addEventListener('keydown', function(e) {
+        textarea.addEventListener('keydown', function (e) {
           scale = textNode.getAbsoluteScale().x;
           setTextareaWidth(textNode.width() * scale);
           textarea.style.height = 'auto';
@@ -436,25 +440,31 @@ $(document).ready(function(){
           window.addEventListener('click', handleOutsideClick);
         });
       });
-        },
-        false
-      );
+    },
+    false
+  );
 
-      function fitStageIntoParentContainer() {
-        var container = document.querySelector('#edit-canvas');
+  function fitStageIntoParentContainer() {
+    var container = document.querySelector('#edit-canvas');
 
-        // now we need to fit stage into parent
-        var containerWidth = container.offsetWidth;
-        // to do this we need to scale the stage
-        var scale = containerWidth / stageWidth;
+    var stageWidth = 500;//$(".edit-canvas").width();
+    var stageHeight = 500;// $(".edit-canvas").height();
 
-        stage.width(stageWidth * scale);
-        stage.height(stageHeight * scale);
-        stage.scale({ x: scale, y: scale });
-        stage.draw();
-      }
+    // now we need to fit stage into parent
+    var containerWidth = container.offsetWidth;
+    var containerHeight = container.offsetHeight;
+    // to do this we need to scale the stage
+    var scaleX = containerWidth / stageWidth;
+    var scaleY = containerHeight / stageHeight;
 
-      fitStageIntoParentContainer();
-      // adapt the stage on any window resize
-      window.addEventListener('resize', fitStageIntoParentContainer);
+    stage.width(stageWidth * scaleX);
+    stage.height(stageHeight * scaleY);
+    stage.scale({ x: scaleX, y: scaleY });
+    stage.draw();
+  }
+  window.fitStageIntoParentContainer = fitStageIntoParentContainer;
+
+  fitStageIntoParentContainer();
+  // adapt the stage on any window resize
+  window.addEventListener('resize', fitStageIntoParentContainer);
 });

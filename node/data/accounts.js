@@ -4,6 +4,7 @@ const config = require('./config.js');
 const mailer = require('nodemailer');
 const crypto = require('crypto');
 const fs = require('fs');
+const err = require('./error.js')
 
 const sender = mailer.createTransport({
     service: 'gmail',
@@ -230,6 +231,14 @@ exports.update = function (req, res) {
         err.error(req, res);
         return;
     }
+}
+
+exports.deleteAcct = function (req, res)
+{
+    var user = req.session.user;
+    mysql.deleteUser(user);
+    res.write("done");
+    res.end();
 }
 
 //Gets the current data to display about login state for a given user

@@ -1,3 +1,17 @@
+
+window.dataLoaded = function () {
+
+};
+
+window.pageError = function(offset) {
+
+}
+
+window.frameError = function() {
+
+}
+
+
 $(document).ready(function () {
 
     const width = 2560;
@@ -19,10 +33,6 @@ $(document).ready(function () {
         x = (x / $("#comic-viewer").width()) * width;
         y = (y / $("#comic-viewer").height()) * height;
 
-        var currentPage = window.comicData.page[window.leftPageNum]; // left page
-        if (x > (width / 2)) {
-            currentPage = window.comicData.page[window.leftPageNum + 1]; // right page
-        }
 
         //left => width:90,height:90,left: width * 0.05,top: height * 0.92
 
@@ -37,17 +47,17 @@ $(document).ready(function () {
 
             var page = window.getLeftPage();
 
-            window.setupPages();
+            window.redrawPages();
         }
 
         //right
-        if ((window.leftPageNum + 2 <= window.comicData.page.length) && (x >= rleft) && (x <= rleft + 90) && (y >= bheight) && (y <= bheight + 90)) {
+        if ((window.leftPageNum + 2 < window.comicData.page.length) && (x >= rleft) && (x <= rleft + 90) && (y >= bheight) && (y <= bheight + 90)) {
             //selected this box at index
             window.leftPageNum += 2;
 
             var page = window.getRightPage();
 
-            window.setupPages();
+            window.redrawPages();
         }
 
     });

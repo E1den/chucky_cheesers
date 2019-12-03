@@ -1,51 +1,48 @@
 $.ajax({
-    type: "GET",
-    url: "/srv/acct/getSess",
-    success: function (n) { $("#acctSess").html(n) }
+  type: "GET",
+  url: "/srv/acct/getSess",
+  success: function (n) { $("#acctSess").html(n) }
 }).fail(function () { $("#acctSess").html("<a href='/login' class='nav-link'>Login/Signup</a>") })
 
 $(document).ready(function () {
-    $("#defaultOpen").click();
+  $("#defaultOpen").click();
 });
 
 function signOut() {
-    $.ajax({
-        type: "POST",
-        url: "/srv/acct/logout",
-        success: function (n) { $(location).attr("href", "/"); }
-    })
+  $.ajax({
+    type: "POST",
+    url: "/srv/acct/logout",
+    success: function (n) { $(location).attr("href", "/"); }
+  })
 }
 
 function openPage(pageName, elmnt, btnName) {
-    // Hide all elements with class="tabcontent" by default */
+  // Hide all elements with class="tabcontent" by default */
 
-    $(".tabcontent").hide();
-    $(".AcPageBtn").css("background", "inherit").css("color", "white");
+  $(".tabcontent").hide();
+  $(".AcPageBtn").css("background", "inherit").css("color", "white");
 
-    // Show the specific tab content
-    $(pageName).css("display", "block");
-    $(btnName).css("background", "white").css("color", "black");
+  // Show the specific tab content
+  $(pageName).css("display", "block");
+  $(btnName).css("background", "white").css("color", "black");
 
-    $(".accsidebar").height($(".acc-content-pane").height());
+  $(".accsidebar").height($(".acc-content-pane").height());
 }
 
 function accMenuFunction(x) {
-    $(".accsidebar").addClass("accsidebar-on")
-    $(".accsidebar").css("position","fixed");
+  $(".accsidebar").addClass("accsidebar-on")
+  $(".accsidebar").css("position", "fixed");
 }
 
 function acccloseNav() {
-    $(".accsidebar").removeClass("accsidebar-on");
-    $(".acc-content-pane").width("100%");
+  $(".accsidebar").removeClass("accsidebar-on");
+  $(".acc-content-pane").width("100%");
 }
 
-function filter(filterType){
-  if(filterType == "filter")
-  {
-    if(window.screen.availWidth > 768)
-    {
-      if($("#filter-accounts").hasClass("filter-type"))
-      {
+function filter(filterType) {
+  if (filterType == "filter") {
+    if (window.screen.availWidth > 768) {
+      if ($("#filter-accounts").hasClass("filter-type")) {
         $("#filter-relevant").removeClass("filter-type")
         $("#filter-recent").removeClass("filter-type")
         $("#filter-accounts").removeClass("filter-type")
@@ -56,22 +53,18 @@ function filter(filterType){
         $("#filter-accounts").addClass("filter-type")
       }
     }
-    else
-    {
+    else {
       $("#filter-dropdown").addClass("show-dropdown");
       $("#filter-dropdown-btn").addClass("filter-type")
     }
   }
-  else if(filterType == "relevant" || filterType == "recent" || filterType ==  "accounts")
-  {
-    if(window.screen.availWidth > 768)
-    {
+  else if (filterType == "relevant" || filterType == "recent" || filterType == "accounts") {
+    if (window.screen.availWidth > 768) {
       $("#filter-relevant").removeClass("filter-type")
       $("#filter-recent").removeClass("filter-type")
       $("#filter-accounts").removeClass("filter-type")
     }
-    else
-    {
+    else {
       $("#filter-dropdown").removeClass("show-dropdown");
       $("#filter-dropdown-btn").removeClass("filter-type")
     }
@@ -79,35 +72,33 @@ function filter(filterType){
 
 };
 
-function createComic()
-{
-  if($("#acctSess").html().includes("Login/Signup"))
+function createComic() {
+  if ($("#acctSess").html().includes("Login/Signup"))
     window.location.replace("/login");
-  if($(".createComic").hasClass("createComic-on"))
-  {
+  if ($(".createComic").hasClass("createComic-on")) {
     $(".createComic").removeClass("createComic-on")
   }
-  else{
+  else {
     $(".createComic").addClass("createComic-on")
   }
 }
 
-function deleteAccount(confirm)
-{
-  if($(".delete-confirm").hasClass("delete-confirm-on"))
-  {
+function deleteAccount(confirm) {
+  if ($(".delete-confirm").hasClass("delete-confirm-on")) {
     $(".delete-confirm").removeClass("delete-confirm-on")
   }
-  else{
+  else {
     $(".delete-confirm").addClass("delete-confirm-on")
   }
 
-  if(confirm == "yes")
-  {
-
+  if (confirm == "yes") {
+    $.ajax({
+      type: "GET",
+      url: "/srv/acct/delete",
+      success: function () { window.location.replace("/login"); }
+    })
   }
-  else if(confirm == "no")
-  {
+  else if (confirm == "no") {
     $(".delete-confirm").removeClass("delete-confirm-on")
   }
 }
