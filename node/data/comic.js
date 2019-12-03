@@ -371,7 +371,7 @@ exports.pushImg = function (req, res) {
                 } catch (e) { }
                 console.log(data)
                 data.frames[frame-1] = {
-                    imageURL: "/imgs/" + image_id + ".png"
+                    imageURL: image_id + ".png"
                 };
                 console.log(data);
                 res.end();
