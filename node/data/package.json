@@ -19,6 +19,6 @@
     "js-yaml": "^3.13.1",
     "multer": "^1.4.2",
     "mysql": "^2.17.1",
-    "nodemailer": "^6.3.1"
+    "nodemailer": "^6.4.16"
   }
 }
